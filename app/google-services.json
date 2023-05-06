@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "880662468711",
+    "project_id": "proyecto-final-oty",
+    "storage_bucket": "proyecto-final-oty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880662468711:android:f36859fed88741c4cf5cc2",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_final_oty_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880662468711-2dbrsvn7vsa09blsunrbsotv7ofqakht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_BiNXCbB3llkXU09gIwEVzXtRuSpMX9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880662468711-2dbrsvn7vsa09blsunrbsotv7ofqakht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

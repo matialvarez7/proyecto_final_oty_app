@@ -28,9 +28,8 @@ class NewPersonal : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onStart() {
+        super.onStart()
         abm = PersonalABM() // Inicializar la instancia de PersonalABM
 
         val dniEditText: EditText = view.findViewById(R.id.dniEditText)
@@ -38,10 +37,11 @@ class NewPersonal : Fragment() {
         val apellidoEditText: EditText = view.findViewById(R.id.apellidoEditText)
         val areaEditText: EditText = view.findViewById(R.id.areaEditText)
         val confirmarCargaButton: Button = view.findViewById(R.id.confirmarCargaButton)
-        Log.d("NewPersonalFragment", "Evento de clic configurado")
 
-        confirmarCargaButton.setOnClickListener {
-            Log.d("NewPersonalFragment", "BOTON CONFIMAR PRESIONADO")
+
+        confirmarCargaButton.setOnClickListener() {
+
+
             Snackbar.make(view, "Personal agregado correctamente.", Snackbar.LENGTH_SHORT).show()
 
             val personal = Personal(
@@ -55,7 +55,7 @@ class NewPersonal : Fragment() {
                 abm.agregarPersonal(personal)
 
                 // Mostrar Snackbar de confirmación en el hilo principal (UI)
-
+                Snackbar.make(view, "Personal agregado correctamente.", Snackbar.LENGTH_SHORT).show()
             }
 
 

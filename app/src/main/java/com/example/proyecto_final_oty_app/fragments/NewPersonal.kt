@@ -38,32 +38,56 @@ class NewPersonal : Fragment() {
         val areaEditText: EditText = view.findViewById(R.id.areaEditText)
         val confirmarCargaButton: Button = view.findViewById(R.id.confirmarCargaButton)
 
-
-        confirmarCargaButton.setOnClickListener() {
-
-
-            Snackbar.make(view, "Personal agregado correctamente.", Snackbar.LENGTH_SHORT).show()
-
-            val personal = Personal(
-                dni = dniEditText.text.toString(),
-                nombre = nombreEditText.text.toString(),
-                apellido = apellidoEditText.text.toString(),
-                area = areaEditText.text.toString()
-            )
-
-            viewLifecycleOwner.lifecycleScope.launch {
-                abm.agregarPersonal(personal)
-
-                // Mostrar Snackbar de confirmación en el hilo principal (UI)
-                Snackbar.make(view, "Personal agregado correctamente.", Snackbar.LENGTH_SHORT).show()
+        fun camposValidos(): Boolean {
+            if (dniEditText.text.toString().trim().isEmpty()) {
+                dniEditText.error = "DNI requerido"
+                return false
             }
 
+            if (nombreEditText.text.toString().trim().isEmpty()) {
+                nombreEditText.error = "Nombre requerido"
+                return false
+            }
 
-            // Limpiar los campos de texto
-            dniEditText.text.clear()
-            nombreEditText.text.clear()
-            apellidoEditText.text.clear()
-            areaEditText.text.clear()
+            if (apellidoEditText.text.toString().trim().isEmpty()) {
+                apellidoEditText.error = "Apellido requerido"
+                return false
+            }
+
+            if (areaEditText.text.toString().trim().isEmpty()) {
+                areaEditText.error = "Área requerida"
+                return false
+            }
+
+            return true
         }
+
+
+
+        confirmarCargaButton.setOnClickListener() {
+            if (camposValidos()) {
+                val personal = Personal(
+                    dni = dniEditText.text.toString(),
+                    nombre = nombreEditText.text.toString(),
+                    apellido = apellidoEditText.text.toString(),
+                    area = areaEditText.text.toString()
+                )
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    abm.agregarPersonal(personal)
+
+                    // Mostrar Snackbar de confirmación en el hilo principal (UI)
+                    Snackbar.make(view, "Personal agregado correctamente.", Snackbar.LENGTH_SHORT).show()
+                }
+
+
+                // Limpiar los campos de texto
+                dniEditText.text.clear()
+                nombreEditText.text.clear()
+                apellidoEditText.text.clear()
+                areaEditText.text.clear()
+            }
+        }
+
     }
 }

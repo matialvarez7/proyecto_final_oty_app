@@ -66,26 +66,37 @@ class NewPersonal : Fragment() {
 
         confirmarCargaButton.setOnClickListener() {
             if (camposValidos()) {
-                val personal = Personal(
-                    dni = dniEditText.text.toString(),
-                    nombre = nombreEditText.text.toString(),
-                    apellido = apellidoEditText.text.toString(),
-                    area = areaEditText.text.toString()
-                )
+                val dni = dniEditText.text.toString()
+                abm.existeDni(dni) { existe ->
+                    if (!existe) {
+                        val personal = Personal(
+                            dni = dniEditText.text.toString(),
+                            nombre = nombreEditText.text.toString(),
+                            apellido = apellidoEditText.text.toString(),
+                            area = areaEditText.text.toString()
+                        )
 
-                viewLifecycleOwner.lifecycleScope.launch {
-                    abm.agregarPersonal(personal)
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            abm.agregarPersonal(personal)
 
-                    // Mostrar Snackbar de confirmación en el hilo principal (UI)
-                    Snackbar.make(view, "Personal agregado correctamente.", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(
+                                view,
+                                "Personal agregado correctamente.",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+
+
+                        // Limpiar los campos de texto
+                        dniEditText.text.clear()
+                        nombreEditText.text.clear()
+                        apellidoEditText.text.clear()
+                        areaEditText.text.clear()
+
+                    } else {
+                        Snackbar.make(view, "El DNI ya existe", Snackbar.LENGTH_LONG).show()
+                    }
                 }
-
-
-                // Limpiar los campos de texto
-                dniEditText.text.clear()
-                nombreEditText.text.clear()
-                apellidoEditText.text.clear()
-                areaEditText.text.clear()
             }
         }
 

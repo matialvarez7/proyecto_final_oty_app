@@ -18,6 +18,18 @@ class PersonalABM {
         }
     }
 
+    fun existeDni(dni: String, callback: (Boolean) -> Unit) {
+        val personalRef = firestore.collection("personal")
+        personalRef.whereEqualTo("dni", dni).get()
+            .addOnSuccessListener { result ->
+                callback(result.documents.isNotEmpty())
+            }
+            .addOnFailureListener { exception ->
+                Log.e("PersonalABM", "Error al verificar si el DNI existe", exception)
+                callback(false)
+            }
+    }
+
     suspend fun editarPersonal(personalId: String, personal: Personal) {
         personalCollection.document(personalId).set(personal).await()
     }

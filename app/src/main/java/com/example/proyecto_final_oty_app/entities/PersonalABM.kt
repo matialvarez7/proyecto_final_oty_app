@@ -10,24 +10,19 @@ class PersonalABM {
     private val firestore = FirebaseFirestore.getInstance()
     private val personalCollection = firestore.collection("personal")
 
-    suspend fun agregarPersonal(personal: Personal) {
-        try {
-            personalCollection.add(personal).await()
-        } catch (e: Exception) {
-            Log.e("PersonalABM", "Error al agregar personal", e)
-        }
+    suspend fun agregarPersonal(personal: Personal): String? {
+        val newDocumentRef = personalCollection.document()
+
+        val personalWithId = personal.copy(id = newDocumentRef.id)
+
+        newDocumentRef.set(personalWithId).await()
+
+        return newDocumentRef.id
     }
 
-    fun existeDni(dni: String, callback: (Boolean) -> Unit) {
-        val personalRef = firestore.collection("personal")
-        personalRef.whereEqualTo("dni", dni).get()
-            .addOnSuccessListener { result ->
-                callback(result.documents.isNotEmpty())
-            }
-            .addOnFailureListener { exception ->
-                Log.e("PersonalABM", "Error al verificar si el DNI existe", exception)
-                callback(false)
-            }
+    suspend fun existeDni(dni: String): Boolean {
+        val querySnapshot = personalCollection.whereEqualTo("dni", dni).get().await()
+        return !querySnapshot.isEmpty
     }
 
     suspend fun editarPersonal(personalId: String, personal: Personal) {

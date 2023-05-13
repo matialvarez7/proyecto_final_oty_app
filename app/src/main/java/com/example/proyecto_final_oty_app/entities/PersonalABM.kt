@@ -11,18 +11,18 @@ class PersonalABM {
     private val personalCollection = firestore.collection("personal")
 
     suspend fun agregarPersonal(personal: Personal): String? {
-        val newDocumentRef = personalCollection.document()
+        val listaPersonal = personalCollection.document()
 
-        val personalWithId = personal.copy(id = newDocumentRef.id)
+        val personalWithId = personal.copy(id = listaPersonal.id)
 
-        newDocumentRef.set(personalWithId).await()
+        listaPersonal.set(personalWithId).await()
 
-        return newDocumentRef.id
+        return listaPersonal.id
     }
 
     suspend fun existeDni(dni: String): Boolean {
-        val querySnapshot = personalCollection.whereEqualTo("dni", dni).get().await()
-        return !querySnapshot.isEmpty
+        val dataPersonal = personalCollection.whereEqualTo("dni", dni).get().await()
+        return !dataPersonal.isEmpty
     }
 
     suspend fun editarPersonal(personalId: String, personal: Personal) {

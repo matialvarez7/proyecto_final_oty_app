@@ -6,27 +6,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.proyecto_final_oty_app.R
 
 class DetalleEquipo : Fragment() {
 
-    companion object {
-        fun newInstance() = DetalleEquipo()
-    }
 
-    private lateinit var viewModel: DetalleEquipoViewModel
+    lateinit var v : View
+    lateinit var nombreEquipo : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detalle_equipo, container, false)
+
+
+        v =  inflater.inflate(R.layout.fragment_detalle_equipo, container, false)
+        nombreEquipo = v.findViewById(R.id.nombreEquipo)
+
+
+        return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetalleEquipoViewModel::class.java)
-        // TODO: Use the ViewModel
+
+    override fun onStart() {
+        super.onStart()
+        val equipo = DetalleEquipoArgs.fromBundle(requireArguments()).equipo
+        nombreEquipo.text = equipo.nombre
+
     }
 
 }

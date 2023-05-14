@@ -9,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class NewEquipo : Fragment() {
 
@@ -26,6 +30,7 @@ class NewEquipo : Fragment() {
     lateinit var nroInventario : EditText // recibe el número de inventario de la vista
     lateinit var nroEquipo : EditText // recibe el número de equipo de la vista
     lateinit var nroAnet : EditText // recibe el número de A-NET de la vista
+    lateinit var titulo : TextView // recibe el titulo del fragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +43,8 @@ class NewEquipo : Fragment() {
         nroEquipo = v.findViewById(R.id.nroEquipo)
         nroAnet = v.findViewById(R.id.nroAnet)
         btnConfirmar = v.findViewById(R.id.btnConfirmar)
+        titulo = v.findViewById(R.id.titulo)
+        titulo.text = "Alta equipo"
 
         return v
     }
@@ -52,21 +59,26 @@ class NewEquipo : Fragment() {
         super.onStart()
 
         btnConfirmar.setOnClickListener {
-            if(nroInventario.text.isEmpty()){
-                Snackbar.make(v, "Completar el número de inventario", Snackbar.LENGTH_LONG).show()
-            }
-            if(nroEquipo.text.isEmpty()){
-                Snackbar.make(v, "Completar el número de equipo", Snackbar.LENGTH_LONG).show()
-            }
-            if(nroAnet.text.isEmpty()){
-                Snackbar.make(v, "Completar el número de A-NET", Snackbar.LENGTH_LONG).show()
+            if(!viewModel.formularioValido(nroInventario.text.toString(), nroEquipo.text.toString(), nroAnet.text.toString())){
+                Snackbar.make(v, "Debe completar todos los campos", Snackbar.LENGTH_LONG).show()
+            }else{
+                lifecycleScope.launch {
+                    if (viewModel.equipoExistente(nroInventario.text.toString())) {
+                        Toast.makeText(requireContext(), "El equipo ya existe.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        viewModel.altaNuevoEquipo(
+                            nroInventario.text.toString(),
+                            nroEquipo.text.toString(),
+                            nroAnet.text.toString()
+                        )
+
+                        nroInventario.text.clear()
+                        nroEquipo.text.clear()
+                        nroAnet.text.clear()
+                    }
+                }
             }
 
-            viewModel.altaNuevoEquipo(nroInventario.text.toString(), nroEquipo.text.toString(), nroAnet.text.toString())
-
-            nroInventario.text.clear()
-            nroEquipo.text.clear()
-            nroAnet.text.clear()
         }
     }
 

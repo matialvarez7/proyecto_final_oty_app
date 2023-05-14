@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/newEquipo">
-
+    app:startDestination="@id/lolo">
     <fragment
-        android:id="@+id/newEquipo"
-        android:name="com.example.proyecto_final_oty_app.fragments.NewEquipo"
-        android:label="fragment_new_equipo"
-        tools:layout="@layout/fragment_new_equipo" />
+        android:id="@+id/lolo"
+        android:name="com.example.proyecto_final_oty_app.fragments.lolo"
+        android:label="fragment_lolo"
+        tools:layout="@layout/fragment_lolo" />
 </navigation>

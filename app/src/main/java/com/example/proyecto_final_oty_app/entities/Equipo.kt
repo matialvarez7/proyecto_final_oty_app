@@ -6,4 +6,6 @@ data class Equipo(
     var nombre : String,
     var anet : String,
     var estado : String
-)
+) {
+    constructor() : this("", "", "", "", "")
+}

@@ -5,42 +5,51 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.NewEquipo"
-    tools:visibility="visible">
+    tools:context=".fragments.EditDetalleEquipo">
 
     <EditText
-        android:id="@+id/nroInventario"
+        android:id="@+id/nro_inv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginEnd="116dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/nroEquipo"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"/>
+        tools:layout_editor_absoluteY="135dp" />
 
     <EditText
-        android:id="@+id/nroEquipo"
+        android:id="@+id/nro_inv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginEnd="116dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/nroAnet"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nroInventario" />
+        tools:layout_editor_absoluteY="76dp" />
 
     <EditText
-        android:id="@+id/nroAnet"
+        android:id="@+id/nro_inv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginEnd="116dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editar1"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nroEquipo" />
+        tools:layout_editor_absoluteY="24dp" />
 
     <Button
         android:id="@+id/editar1"
@@ -53,29 +62,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nroAnet"
+
         app:cornerRadius="10dp"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+    <EditText
+        android:id="@+id/estado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="161dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.22"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alta Equipo"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.427"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/nro_inv2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

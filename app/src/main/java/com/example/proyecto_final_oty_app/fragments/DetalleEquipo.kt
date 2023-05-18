@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.google.firebase.firestore.ktx.firestore
@@ -25,7 +27,7 @@ class DetalleEquipo : Fragment() {
     lateinit var nomEquipo: TextView
     lateinit var numAnet: TextView
     lateinit var estado: TextView
-
+    lateinit var editar:Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,7 @@ class DetalleEquipo : Fragment() {
         nomEquipo = v.findViewById((R.id.baseNombreEquipo))
         numAnet = v.findViewById(R.id.baseNumeroAnet)
         estado = v.findViewById(R.id.baseEstado)
-
+        editar=v.findViewById(R.id.editar)
         return v
     }
 
@@ -47,6 +49,11 @@ class DetalleEquipo : Fragment() {
         nomEquipo.text = equipo.nombre
         numAnet.text = equipo.anet
         estado.text = equipo.estado
+        editar.setOnClickListener(){
+            val action =DetalleEquipoDirections.actionDetalleEquipoToEditDetalleEquipo(equipo)
+            findNavController().navigate(action)
+
+        }
 
             }
 

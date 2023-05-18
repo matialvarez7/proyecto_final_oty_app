@@ -2,7 +2,6 @@ package com.example.proyecto_final_oty_app.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -42,7 +40,7 @@ class NewEquipo : Fragment() {
         nroInventario = v.findViewById(R.id.nroInventario)
         nroEquipo = v.findViewById(R.id.nroEquipo)
         nroAnet = v.findViewById(R.id.nroAnet)
-        btnConfirmar = v.findViewById(R.id.btnConfirmar)
+        btnConfirmar = v.findViewById(R.id.editar1)
         titulo = v.findViewById(R.id.titulo)
         titulo.text = "Alta equipo"
 

@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Equipo
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.runBlocking
-
 class EditDetalleEquipo : Fragment() {
 
     companion object {
@@ -28,7 +27,13 @@ class EditDetalleEquipo : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_edit_detalle_equipo, container, false)
+        vista= inflater.inflate(R.layout.fragment_edit_detalle_equipo, container, false)
+        bot=vista.findViewById(R.id.editar1)
+        anet=vista.findViewById(R.id.nro_inv2)
+        inventario=vista.findViewById(R.id.nro_inv)
+        nombre=vista.findViewById(R.id.nro_inv3)
+        texto=vista.findViewById(R.id.texto)
+        return vista
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -40,7 +45,7 @@ class EditDetalleEquipo : Fragment() {
     lateinit var bot: Button
     lateinit var vista:View
     lateinit var anet: EditText
-    lateinit var inv: TextView
+    lateinit var texto:TextView
     lateinit var inventario: EditText
     lateinit var nombre: EditText
 
@@ -51,7 +56,7 @@ class EditDetalleEquipo : Fragment() {
             equipo= viewModel.obtenerEquipoAleatorio()
         }
         if(equipo!=null) {
-            inv.setText("")
+    texto.text=equipo.id
             bot.setOnClickListener {
                 var eq = Equipo(equipo.id, inventario.text.toString(), nombre.text.toString(), anet.text.toString(), equipo.estado)
                 viewModel.actualizarEquipo(eq)

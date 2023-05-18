@@ -31,3 +31,6 @@
         android:label="fragment_new_equipo"
         tools:layout="@layout/fragment_new_equipo" />
 </navigation>
+
+
+

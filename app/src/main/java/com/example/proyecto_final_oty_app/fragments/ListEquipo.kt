@@ -48,8 +48,8 @@ class ListEquipo : Fragment() {
         db = FirebaseFirestore.getInstance()
         equipos = mutableListOf()
         adapter = AdapterEquipo(equipos){
-                position -> val action =ListEquipoDirections.actionListEquipoToDetalleEquipo(equipos[position])
-            findNavController().navigate(action)
+                position -> val action = ListEquipoDirections.actionListEquipoToDetalleEquipo(equipos[position])
+                findNavController().navigate(action)
         }
 
 

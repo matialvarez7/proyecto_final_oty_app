@@ -52,10 +52,7 @@ class ListEquipo : Fragment() {
                 findNavController().navigate(action)
         }
 
-
-
         recyclerEquipos.layoutManager = LinearLayoutManager(context)
-
 
         db.collection("equipos")
             .get()
@@ -64,7 +61,6 @@ class ListEquipo : Fragment() {
                     for (equipo in snapshot) {
                         equipos.add(equipo.toObject())
                     }
-
                     recyclerEquipos.adapter = adapter //Va aca porque equipos esta vacio, entonces aca le paso el adaptador con los equipos agregados.
                 }
             }

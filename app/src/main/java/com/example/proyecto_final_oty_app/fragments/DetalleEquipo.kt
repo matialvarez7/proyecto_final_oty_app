@@ -49,13 +49,12 @@ class DetalleEquipo : Fragment() {
         nomEquipo.text = equipo.nombre
         numAnet.text = equipo.anet
         estado.text = equipo.estado
+
         editar.setOnClickListener(){
             val action =DetalleEquipoDirections.actionDetalleEquipoToEditDetalleEquipo(equipo)
             findNavController().navigate(action)
-
         }
-
-            }
-
     }
+
+}
 

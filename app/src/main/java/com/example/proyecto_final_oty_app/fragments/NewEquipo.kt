@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -73,6 +74,8 @@ class NewEquipo : Fragment() {
                         nroInventario.text.clear()
                         nroEquipo.text.clear()
                         nroAnet.text.clear()
+
+                        findNavController().popBackStack()
                     }
                 }
             }

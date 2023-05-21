@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.google.android.material.snackbar.Snackbar
@@ -62,8 +63,9 @@ class EditDetalleEquipo : Fragment() {
             bot.setOnClickListener {
                 var eq = Equipo(equipo.id, inventario.text.toString(), nombre.text.toString(), anet.text.toString(), estado.text.toString())
                 viewModel.actualizarEquipo(eq)
-                Snackbar.make(vista,"exite",1000).show()
-                }
+                Snackbar.make(vista,"Se edito correctamente",1000).show()
+                findNavController().popBackStack()
+            }
             }
         }
     }

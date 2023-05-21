@@ -89,6 +89,7 @@ class DetalleEquipo : Fragment() {
                 viewModel.eliminarEquipo(idEquipo)
                 Toast.makeText(context, "Equipo $idEquipo eliminado correctamente", Toast.LENGTH_SHORT).show()
 
+                findNavController().popBackStack()
             }catch(e:Exception){
                 Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
             }

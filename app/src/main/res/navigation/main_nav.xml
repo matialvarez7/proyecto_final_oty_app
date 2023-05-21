@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/listPersonal">
 
+    <fragment
+        android:id="@+id/newPersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewPersonal"
+        android:label="fragment_new_personal"
+        tools:layout="@layout/fragment_new_personal" />
+    <fragment
+        android:id="@+id/listPersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.ListPersonal"
+        android:label="fragment_list_personal"
+        tools:layout="@layout/fragment_list_personal">
+        <action
+            android:id="@+id/action_listPersonal_to_detallePersonal"
+            app:destination="@id/detallePersonal" />
+        <action
+            android:id="@+id/action_listPersonal_to_newPersonal"
+            app:destination="@id/newPersonal" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetallePersonal"
+        android:label="fragment_detalle_personal"
+        tools:layout="@layout/fragment_detalle_personal">
+        <argument
+            android:name="personal"
+            app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
+    </fragment>
 </navigation>

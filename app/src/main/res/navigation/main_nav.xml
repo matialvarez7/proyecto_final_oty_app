@@ -42,7 +42,14 @@
             android:name="equipo"
             app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
     </fragment>
+    <fragment
+        android:id="@+id/detallePersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetallePersonal"
+        android:label="fragment_detalle_personal"
+        tools:layout="@layout/fragment_detalle_personal" >
+        <argument
+            android:name="personal"
+            app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
+    </fragment>
 </navigation>
-
-
 

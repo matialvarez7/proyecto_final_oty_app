@@ -30,5 +30,19 @@
         <argument
             android:name="personal"
             app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
+        <action
+            android:id="@+id/action_detallePersonal_to_editarDetallePersonal"
+            app:destination="@id/editarDetallePersonal"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/listPersonal" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarDetallePersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.EditarDetallePersonal"
+        android:label="fragment_editar_detalle_personal"
+        tools:layout="@layout/fragment_editar_detalle_personal" >
+        <argument
+            android:name="personal"
+            app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
     </fragment>
 </navigation>

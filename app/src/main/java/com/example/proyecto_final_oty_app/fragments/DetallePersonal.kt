@@ -22,7 +22,7 @@ class DetallePersonal : Fragment() {
     lateinit var baseNombre : TextView
     lateinit var baseApellido : TextView
     lateinit var baseArea : TextView
-    lateinit var editar: Button
+    lateinit var editarBtn: Button
     lateinit var eliminarBtn: Button
     lateinit var viewModel: DetallePersonalViewModel
 
@@ -36,7 +36,7 @@ class DetallePersonal : Fragment() {
         baseNombre = v.findViewById(R.id.baseNombre)
         baseApellido = v.findViewById(R.id.baseApellido)
         baseArea = v.findViewById(R.id.baseArea)
-        editar=v.findViewById(R.id.editar)
+        editarBtn=v.findViewById(R.id.editarBtn)
         eliminarBtn = v.findViewById(R.id.eliminarBtn)
 
         return v
@@ -55,6 +55,10 @@ class DetallePersonal : Fragment() {
         baseApellido.text = personal.apellido
         baseArea.text = personal.area
 
+        editarBtn.setOnClickListener(){
+            val action = DetallePersonalDirections.actionDetallePersonalToEditarDetallePersonal(personal)
+            findNavController().navigate(action)
+        }
         eliminarBtn.setOnClickListener {
             val idPersonal = personal.id // Aquí deberías obtener el id que quieres eliminar.
             CoroutineScope(Dispatchers.Main).launch {
@@ -68,6 +72,7 @@ class DetallePersonal : Fragment() {
                 }
             }
         }
+
     }
 
 }

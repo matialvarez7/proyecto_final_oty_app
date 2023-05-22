@@ -1,6 +1,9 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.proyecto_final_oty_app.entities.Personal
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -17,4 +20,5 @@ class DetallePersonalViewModel : ViewModel() {
             personalDocument.delete().await()
         }
     }
+
 }

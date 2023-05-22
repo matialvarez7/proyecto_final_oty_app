@@ -18,8 +18,12 @@ import kotlinx.coroutines.launch
 class DetallePersonal : Fragment() {
 
     lateinit var v : View
-    lateinit var nombrePersonal : TextView
-    lateinit var eliminarBtn : Button
+    lateinit var baseDNI : TextView
+    lateinit var baseNombre : TextView
+    lateinit var baseApellido : TextView
+    lateinit var baseArea : TextView
+    lateinit var editar: Button
+    lateinit var eliminarBtn: Button
     lateinit var viewModel: DetallePersonalViewModel
 
     override fun onCreateView(
@@ -27,9 +31,12 @@ class DetallePersonal : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
         v =  inflater.inflate(R.layout.fragment_detalle_personal, container, false)
-        nombrePersonal = v.findViewById(R.id.nombrePersonalDetalle)
+        baseDNI = v.findViewById(R.id.baseDNI)
+        baseNombre = v.findViewById(R.id.baseNombre)
+        baseApellido = v.findViewById(R.id.baseApellido)
+        baseArea = v.findViewById(R.id.baseArea)
+        editar=v.findViewById(R.id.editar)
         eliminarBtn = v.findViewById(R.id.eliminarBtn)
 
         return v
@@ -43,7 +50,10 @@ class DetallePersonal : Fragment() {
     override fun onStart() {
         super.onStart()
         val personal = DetallePersonalArgs.fromBundle(requireArguments()).personal
-        nombrePersonal.text = personal.nombre
+        baseDNI.text = personal.dni
+        baseNombre.text = personal.nombre
+        baseApellido.text = personal.apellido
+        baseArea.text = personal.area
 
         eliminarBtn.setOnClickListener {
             val idPersonal = personal.id // Aquí deberías obtener el id que quieres eliminar.

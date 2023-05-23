@@ -15,8 +15,8 @@
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/editDNI"
-        app:layout_constraintEnd_toStartOf="@+id/buscarInventarioBtn"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
@@ -28,17 +28,17 @@
         android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/buscarDNIBtn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editInventario" />
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <Button
         android:id="@+id/confirmarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="114dp"
-        android:text="CONFIRMAR"
         android:backgroundTint="#146517"
+        android:text="CONFIRMAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,9 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BUSCAR EQUIPO"
-        app:layout_constraintBottom_toTopOf="@+id/buscarDNIBtn"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
@@ -76,9 +75,10 @@
         android:text="BUSCAR PERSONAL"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/buscarInventarioBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/buscarInventarioBtn"
+        app:layout_constraintVertical_bias="0.544" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -86,5 +86,47 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="258dp" />
+
+    <TextView
+        android:id="@+id/nombreCompletoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/editDNI" />
+
+    <TextView
+        android:id="@+id/areaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/nombreCompletoText" />
+
+    <TextView
+        android:id="@+id/nombreEquipoText"
+        android:layout_width="61dp"
+        android:layout_height="20dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/estadoEquipoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/nombreEquipoText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="170dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="21dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

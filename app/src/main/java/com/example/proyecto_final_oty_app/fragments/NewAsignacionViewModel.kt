@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -65,15 +66,42 @@ class NewAsignacionViewModel : ViewModel() {
 
     }
 
-    suspend fun elEquipoFueAsignado(idEquipo: String): Boolean {
-        var ok = false
-        val dataAsignacionesActivas = asignacionesCollection.whereEqualTo("fechaDevolucion", null)
-            .whereEqualTo("idEquipo", idEquipo).get().await()
-        if (dataAsignacionesActivas.size() > 0) {
-            ok = true
+    /*suspend fun elEquipoEstaDisponible(idEquipo: String): Boolean {
+        var ok: Boolean
+        val listaEquipos: MutableList<Equipo> = mutableListOf()
+        val dataEquipo = equiposCollection.whereEqualTo("id", idEquipo).get().await()
+        if (dataEquipo != null) {
+            for (equipo in dataEquipo) {
+                listaEquipos.add(equipo.toObject())// OBTENGO LA EQUIPO LIST
+            }
+        }
+        when (listaEquipos.size) {//INTERPRETO EL RESULTADO
+            1 -> {
+                ok = listaEquipos[0].estado == "Disponible"
+            }
+
+            0 -> {
+                ok = false
+                //throw NoSuchElementException("No encontramos ningun equipo con el id: $idEquipo")
+            }
+
+            else -> {
+                ok = false
+                //throw IllegalStateException("Se encontraron mas de 1 registro con el id: $idEquipo por favor revise el apartado de equipos")
+            }
         }
         return ok
-    }
+
+    }*/
+    /* suspend fun elEquipoFueAsignado(idEquipo: String): Boolean {
+         var ok = false
+         val dataAsignacionesActivas = asignacionesCollection.whereEqualTo("fechaDevolucion", null)
+             .whereEqualTo("idEquipo", idEquipo).get().await()
+         if (dataAsignacionesActivas.size() > 0) {
+             ok = true
+         }
+         return ok
+     }*/
 
     fun camposValidos(inventario: String, dni: String): Boolean {
         return inventario.isNotEmpty() && dni.isNotEmpty()
@@ -96,7 +124,18 @@ class NewAsignacionViewModel : ViewModel() {
 
         asignacionesCollection.document(id.id)
             .set(nuevaAsignacion)
-
+        actualizarEstadoDelEquipo(idEquipoAsignar, "Asignado")
         return true
+    }
+
+    private fun actualizarEstadoDelEquipo(idEquipo: String, nuevoEstado: String) {
+
+        equiposCollection.document(idEquipo).update("estado",nuevoEstado)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "Equipo actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error al actualizar equipo", e)
+            }
     }
 }

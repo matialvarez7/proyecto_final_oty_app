@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/listPersonal">
+    app:startDestination="@id/newAsignacion">
 
     <fragment
         android:id="@+id/newPersonal"
@@ -45,4 +45,9 @@
             android:name="personal"
             app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
     </fragment>
+    <fragment
+        android:id="@+id/newAsignacion"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewAsignacion"
+        android:label="fragment_new_asignacion"
+        tools:layout="@layout/fragment_new_asignacion" />
 </navigation>

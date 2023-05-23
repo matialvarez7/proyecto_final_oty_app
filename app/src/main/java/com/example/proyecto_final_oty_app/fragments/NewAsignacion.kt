@@ -24,10 +24,10 @@ class NewAsignacion : Fragment() {
     lateinit var confirmarBtn: Button
     lateinit var buscarInventarioBtn: Button
     lateinit var buscarDNIBtn: Button
-    lateinit var nombreCompletoText:TextView
-    lateinit var areaText:TextView
-    lateinit var nombreEquipoText:TextView
-    lateinit var estadoEquipoText:TextView
+    lateinit var nombreCompletoText: TextView
+    lateinit var areaText: TextView
+    lateinit var nombreEquipoText: TextView
+    lateinit var estadoEquipoText: TextView
 
     companion object {
         fun newInstance() = NewAsignacion()
@@ -62,15 +62,16 @@ class NewAsignacion : Fragment() {
         super.onStart()
 
         //"placeholders"
-        editDNI.hint = "DNI"
-        editInventario.hint = "Nro. Inventario"
+        //editDNI.hint = "DNI"
+        //editInventario.hint = "Nro. Inventario"
 
         buscarDNIBtn.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     val personalEncontrado = viewModel.buscarPersonalByDNI(editDNI.text.toString())
-                    nombreCompletoText.text=personalEncontrado.nombre+" "+personalEncontrado.apellido
-                    areaText.text=personalEncontrado.area
+                    nombreCompletoText.text =
+                        personalEncontrado.nombre + " " + personalEncontrado.apellido
+                    areaText.text = personalEncontrado.area
 
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
@@ -82,9 +83,8 @@ class NewAsignacion : Fragment() {
                 try {
                     val equipoEncontrado =
                         viewModel.buscarEquipoByInventario(editInventario.text.toString())
-
-                        nombreEquipoText.text=equipoEncontrado.nombre
-                        estadoEquipoText.text="Estado: "+equipoEncontrado.estado
+                    nombreEquipoText.text = equipoEncontrado.nombre
+                    estadoEquipoText.text = "Estado: " + equipoEncontrado.estado
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }
@@ -107,31 +107,23 @@ class NewAsignacion : Fragment() {
                 CoroutineScope(Dispatchers.Main).launch {
                     try {
                         val personalEncontrado = viewModel.buscarPersonalByDNI(dniIngresado)
-                        val equipoEncontrado = viewModel.buscarEquipoByInventario(invenatrioIngresado)
+                        val equipoEncontrado =
+                            viewModel.buscarEquipoByInventario(invenatrioIngresado)
                         val idPersonalAsignar = personalEncontrado.id
                         val idEquipoAsignar = equipoEncontrado.id
                         val fechaDeCreacion = Calendar.getInstance().time
-                        if (equipoEncontrado.estado=="Disponible") {
+                        if (equipoEncontrado.estado == "Disponible") {
                             if (idPersonalAsignar != null) {
-                                val ok = viewModel.registrarAsignacion(
+                                viewModel.registrarAsignacion(
                                     idPersonalAsignar,
                                     idEquipoAsignar,
                                     fechaDeCreacion
                                 )
-                                if (ok) {
-
-                                    Toast.makeText(
-                                        context,
-                                        "Asignacion registrada con éxito",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    Toast.makeText(
-                                        context,
-                                        "Lo sentimos, se produjo un error al conectarse al servidor.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                                Toast.makeText(
+                                    context,
+                                    "Asignacion registrada con éxito",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } else {
                             Toast.makeText(

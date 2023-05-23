@@ -45,6 +45,7 @@ class NewAsignacionViewModel : ViewModel() {
     suspend fun buscarEquipoByInventario(inventario: String): Equipo {
         val listaEquipoConInventario: MutableList<Equipo> = mutableListOf()
         val dataEquipo = equiposCollection.whereEqualTo("inventario", inventario).get().await()
+
         if (dataEquipo != null) {
             for (equipo in dataEquipo) {
                 listaEquipoConInventario.add(equipo.toObject())// OBTENGO LA EQUIPO LIST
@@ -104,28 +105,26 @@ class NewAsignacionViewModel : ViewModel() {
      }*/
 
     fun camposValidos(inventario: String, dni: String): Boolean {
-        return inventario.isNotEmpty() && dni.isNotEmpty()
+        return !(inventario.isBlank() && dni.isBlank())
     }
 
     fun registrarAsignacion(
         idPersonalAsignar: String,
         idEquipoAsignar: String,
         fechaDeCreacion: Date
-    ): Boolean {
-
-        val id = asignacionesCollection.document()
+    ) {
+        val documentParaId = asignacionesCollection.document()
         val nuevaAsignacion = AsignacionDocente(
-            id = id.id,
+            id = documentParaId.id,
             idPersonal = idPersonalAsignar,
             idEquipo = idEquipoAsignar,
             fechaAsignacion = fechaDeCreacion,
             fechaDevolucion = null
         )
-
-        asignacionesCollection.document(id.id)
+        asignacionesCollection.document(documentParaId.id)
             .set(nuevaAsignacion)
         actualizarEstadoDelEquipo(idEquipoAsignar, "Asignado")
-        return true
+
     }
 
     private fun actualizarEstadoDelEquipo(idEquipo: String, nuevoEstado: String) {

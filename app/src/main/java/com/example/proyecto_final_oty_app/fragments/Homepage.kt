@@ -6,27 +6,66 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 
 class Homepage : Fragment() {
 
-    companion object {
-        fun newInstance() = Homepage()
-    }
+     lateinit var v : View
+    lateinit var txtTitle : TextView
+    lateinit var btnAsigDocent : Button
+    lateinit var btnPrestamos : Button
+    lateinit var btnPersonal : Button
+    lateinit var btnEquipos : Button
+    //lateinit var btnCerrarSesion: Button - IMPLEMENTAR
 
-    private lateinit var viewModel: HomepageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_homepage, container, false)
+        v = inflater.inflate(R.layout.fragment_homepage, container, false)
+        txtTitle = v.findViewById(R.id.titleMenu)
+        btnAsigDocent = v.findViewById(R.id.buttonAsigDoc)
+        btnPrestamos = v.findViewById(R.id.buttonPrestamos)
+        btnPersonal = v.findViewById(R.id.buttonPersonal)
+        btnEquipos = v.findViewById(R.id.buttonEquipos)
+        //btnCerrarSesion = v.findViewById(R.id.buttonCS)
+
+
+        return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomepageViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onStart() {
+        super.onStart()
+
+        btnAsigDocent.setOnClickListener(){
+            val action = HomepageDirections.actionHomepageToListAsignacionesDocentes()
+            findNavController().navigate(action)
+        }
+
+        btnPrestamos.setOnClickListener(){
+            val action = HomepageDirections.actionHomepageToListPrestamos()
+            findNavController().navigate(action)
+        }
+
+        btnPersonal.setOnClickListener(){
+            val action = HomepageDirections.actionHomepageToListPersonal()
+            findNavController().navigate(action)
+        }
+
+        btnEquipos.setOnClickListener(){
+            val action = HomepageDirections.actionHomepageToListEquipo2()
+            findNavController().navigate(action)
+        }
+
+
+
+
     }
 
 }
+
+

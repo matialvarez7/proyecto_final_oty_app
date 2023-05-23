@@ -16,6 +16,7 @@
         android:autoSizeMaxTextSize="35dp"
         android:text="Personal"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/bottonAregarPersonal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/listPersonal">
+    app:startDestination="@id/homepage">
 
     <fragment
         android:id="@+id/newPersonal"
@@ -40,13 +40,30 @@
         android:id="@+id/editarDetallePersonal"
         android:name="com.example.proyecto_final_oty_app.fragments.EditarDetallePersonal"
         android:label="fragment_editar_detalle_personal"
-        tools:layout="@layout/fragment_editar_detalle_personal" >
+        tools:layout="@layout/fragment_editar_detalle_personal">
         <argument
             android:name="personal"
             app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
     </fragment>
+    <fragment
+        android:id="@+id/homepage"
+        android:name="com.example.proyecto_final_oty_app.fragments.Homepage"
+        android:label="fragment_homepage"
+        tools:layout="@layout/fragment_homepage">
+        <action
+            android:id="@+id/action_homepage_to_listPersonal"
+            app:destination="@id/listPersonal" />
+        <action
+            android:id="@+id/action_homepage_to_listAsignacionesDocentes"
+            app:destination="@id/listAsignacionesDocentes" />
+        <action
+            android:id="@+id/action_homepage_to_listEquipo2"
+            app:destination="@id/listEquipo" />
+        <action
+            android:id="@+id/action_homepage_to_listPrestamos"
+            app:destination="@id/listPrestamos" />
+    </fragment>
 
-     <!-- app:startDestination="@id/listEquipo"> -->
     <fragment
         android:id="@+id/listEquipo"
         android:name="com.example.proyecto_final_oty_app.fragments.ListEquipo"
@@ -85,7 +102,17 @@
             android:name="equipo"
             app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
     </fragment>
-
+    <fragment
+        android:id="@+id/listAsignacionesDocentes"
+        android:name="com.example.proyecto_final_oty_app.fragments.ListAsignacionesDocentes"
+        android:label="fragment_list_asignaciones_docentes"
+        tools:layout="@layout/fragment_list_asignaciones_docentes" />
+    <fragment
+        android:id="@+id/listPrestamos"
+        android:name="com.example.proyecto_final_oty_app.fragments.ListPrestamos"
+        android:label="fragment_list_prestamos"
+        tools:layout="@layout/fragment_list_prestamos" />
 
 </navigation>
+
 

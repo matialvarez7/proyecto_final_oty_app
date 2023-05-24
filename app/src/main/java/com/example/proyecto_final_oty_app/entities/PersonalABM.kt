@@ -1,10 +1,14 @@
 package com.example.proyecto_final_oty_app.entities
 
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class PersonalABM {
     private val firestore = FirebaseFirestore.getInstance()
@@ -29,8 +33,9 @@ class PersonalABM {
         personalCollection.document(personalId).set(personal).await()
     }
 
-    suspend fun eliminarPersonal(personalId: String) {
-        personalCollection.document(personalId).delete().await()
+    suspend fun eliminarPersonal(idPersonal: String) = withContext(Dispatchers.IO) {
+        val personalDocument = personalCollection.document(idPersonal)
+        personalDocument.delete().await()
     }
 
     suspend fun listarPersonal(): List<Personal> {

@@ -1,14 +1,13 @@
-package com.example.proyecto_final_oty_app.fragments
+package com.example.proyecto_final_oty_app.entities
 
-import androidx.lifecycle.ViewModel
-import com.example.proyecto_final_oty_app.entities.EquipoABM
-import com.example.proyecto_final_oty_app.entities.PersonalABM
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-class DetalleEquipoViewModel : ViewModel() {
+class EquipoABM {
     private val firestore = FirebaseFirestore.getInstance()
     private val equiposCollection = firestore.collection("equipos")
 

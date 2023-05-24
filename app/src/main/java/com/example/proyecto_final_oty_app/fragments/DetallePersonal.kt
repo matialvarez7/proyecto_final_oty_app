@@ -11,11 +11,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
+import android.widget.EditText
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.proyecto_final_oty_app.entities.Personal
+import com.example.proyecto_final_oty_app.entities.PersonalABM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DetallePersonal : Fragment() {
+
 
     lateinit var v : View
     lateinit var baseDNI : TextView
@@ -25,6 +31,11 @@ class DetallePersonal : Fragment() {
     lateinit var editarBtn: Button
     lateinit var eliminarBtn: Button
     lateinit var viewModel: DetallePersonalViewModel
+    private lateinit var abm: PersonalABM
+
+    companion object {
+        fun newInstance() = DetallePersonal()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,4 +87,5 @@ class DetallePersonal : Fragment() {
     }
 
 }
+
 

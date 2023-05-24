@@ -45,4 +45,47 @@
             android:name="personal"
             app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
     </fragment>
+
+     <!-- app:startDestination="@id/listEquipo"> -->
+    <fragment
+        android:id="@+id/listEquipo"
+        android:name="com.example.proyecto_final_oty_app.fragments.ListEquipo"
+        android:label="fragment_list_equipo"
+        tools:layout="@layout/fragment_list_equipo" >
+        <action
+            android:id="@+id/action_listEquipo_to_detalleEquipo"
+            app:destination="@id/detalleEquipo" />
+        <action
+            android:id="@+id/action_listEquipo_to_newEquipo"
+            app:destination="@id/newEquipo" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleEquipo"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetalleEquipo"
+        android:label="fragment_detalle_equipo"
+        tools:layout="@layout/fragment_detalle_equipo" >
+        <argument
+            android:name="equipo"
+            app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
+        <action
+            android:id="@+id/action_detalleEquipo_to_editDetalleEquipo"
+            app:destination="@id/editDetalleEquipo" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEquipo"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewEquipo"
+        android:label="fragment_new_equipo"
+        tools:layout="@layout/fragment_new_equipo" />
+    <fragment
+        android:id="@+id/editDetalleEquipo"
+        android:name="com.example.proyecto_final_oty_app.fragments.EditDetalleEquipo"
+        android:label="fragment_edit_detalle_equipo"
+        tools:layout="@layout/fragment_edit_detalle_equipo" >
+        <argument
+            android:name="equipo"
+            app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
+    </fragment>
+
+
 </navigation>
+

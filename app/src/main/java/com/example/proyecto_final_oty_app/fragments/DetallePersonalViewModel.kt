@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import com.example.proyecto_final_oty_app.entities.PersonalABM
 
 class DetallePersonalViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
@@ -15,10 +16,9 @@ class DetallePersonalViewModel : ViewModel() {
 
 
     suspend fun eliminarPersonal(idPersonal: String?) = withContext(Dispatchers.IO) {
-        if(idPersonal!=null){
+        if (idPersonal != null) {
             val personalDocument = personalCollection.document(idPersonal)
             personalDocument.delete().await()
         }
     }
-
 }

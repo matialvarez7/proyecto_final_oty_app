@@ -8,13 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import kotlinx.coroutines.launch
+
+/*
+import com.google.zxing.integration.android.IntentIntegrator
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.example.proyecto_final_oty_app.MainActivity
+import com.journeyapps.barcodescanner.ScanOptions */
 
 class NewEquipo : Fragment() {
 
@@ -30,6 +41,9 @@ class NewEquipo : Fragment() {
     lateinit var nroEquipo : EditText // recibe el número de equipo de la vista
     lateinit var nroAnet : EditText // recibe el número de A-NET de la vista
     lateinit var titulo : TextView // recibe el titulo del fragment
+    lateinit var scanInventario : ImageButton
+    lateinit var scanNombre : ImageButton
+    lateinit var scanAnet : ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +58,9 @@ class NewEquipo : Fragment() {
         btnConfirmar = v.findViewById(R.id.editar1)
         titulo = v.findViewById(R.id.titulo)
         titulo.text = "Alta equipo"
-
+        scanInventario = v.findViewById(R.id.btnEscInventario)
+        scanNombre = v.findViewById(R.id.btnEscEquipo)
+        scanAnet = v.findViewById(R.id.btnEscAnet)
         return v
     }
 
@@ -56,6 +72,61 @@ class NewEquipo : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        //Configuracion de escaner
+        val options = GmsBarcodeScannerOptions.Builder()
+            .setBarcodeFormats(
+                Barcode.FORMAT_CODE_128,
+                Barcode.FORMAT_CODE_93,
+                Barcode.FORMAT_CODE_39
+                        ).build()
+        val scanner = GmsBarcodeScanning.getClient (requireContext(), options)
+
+
+        //Boton escaneo de inventario
+        scanInventario.setOnClickListener{
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    val rawValue: String? = barcode.rawValue
+                    nroInventario.setText(rawValue)
+                }
+                .addOnCanceledListener {
+                    Toast.makeText(requireContext(), "Scanner cancelado", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Error: $e.toString()", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        //Boton escaneo de nombre de equipo
+        scanNombre.setOnClickListener{
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    val rawValue: String? = barcode.rawValue
+                    nroEquipo.setText(rawValue)
+                }
+                .addOnCanceledListener {
+                    Toast.makeText(requireContext(), "Scanner cancelado", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Error: $e.toString()", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        //Boton escaneo de anet
+        scanAnet.setOnClickListener{
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    val rawValue: String? = barcode.rawValue
+                    nroAnet.setText(rawValue)
+                }
+                .addOnCanceledListener {
+                    Toast.makeText(requireContext(), "Scanner cancelado", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Error: $e.toString()", Toast.LENGTH_SHORT).show()
+                }
+        }
 
         btnConfirmar.setOnClickListener {
             if(!viewModel.formularioValido(nroInventario.text.toString(), nroEquipo.text.toString(), nroAnet.text.toString())){

@@ -8,6 +8,33 @@
     tools:context=".fragments.NewEquipo"
     tools:visibility="visible">
 
+    <ImageButton
+        android:id="@+id/btnEscEquipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="38dp"
+        android:paddingTop="20px"
+        android:src="?attr/actionModeSelectAllDrawable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nroInventario"
+        app:layout_constraintTop_toBottomOf="@+id/btnEscInventario" />
+
+    <ImageButton
+        android:id="@+id/btnEscAnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="38dp"
+        android:paddingTop="20px"
+        android:src="?attr/actionModeSelectAllDrawable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nroAnet"
+        app:layout_constraintTop_toBottomOf="@+id/btnEscEquipo" />
+
     <EditText
         android:id="@+id/nroInventario"
         android:layout_width="wrap_content"
@@ -80,5 +107,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnEscInventario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="38dp"
+        android:paddingTop="20px"
+        android:src="?attr/actionModeSelectAllDrawable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nroInventario"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

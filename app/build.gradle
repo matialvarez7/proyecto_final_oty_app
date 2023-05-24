@@ -57,4 +57,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
     implementation 'com.firebaseui:firebase-ui-storage:8.0.2'
+    implementation 'com.google.android.gms:play-services-code-scanner:16.0.0'
 }

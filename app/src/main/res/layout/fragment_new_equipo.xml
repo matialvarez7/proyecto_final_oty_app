@@ -10,65 +10,66 @@
 
     <ImageButton
         android:id="@+id/btnEscEquipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="38dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
         android:paddingTop="20px"
-        android:src="?attr/actionModeSelectAllDrawable"
+        android:scaleType="center"
+        android:src="@drawable/barcode3"
+        app:layout_constraintBottom_toTopOf="@+id/btnEscAnet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/nroInventario"
+        app:layout_constraintStart_toEndOf="@+id/nroEquipo"
         app:layout_constraintTop_toBottomOf="@+id/btnEscInventario" />
 
     <ImageButton
         android:id="@+id/btnEscAnet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="38dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
         android:paddingTop="20px"
-        android:src="?attr/actionModeSelectAllDrawable"
+        android:src="@drawable/barcode3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nroAnet"
         app:layout_constraintTop_toBottomOf="@+id/btnEscEquipo" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/nroInventario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_background"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Numero Inventario"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/nroEquipo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEscInventario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/nroEquipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_background"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Nombre Equipo"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/nroAnet"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEscEquipo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nroInventario" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/nroAnet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:background="@drawable/custom_background"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Numero ANET"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editar1"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEscAnet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nroEquipo" />
 
@@ -99,27 +100,38 @@
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:text="Alta Equipo"
         android:textColor="#000000"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnEscInventario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="38dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
         android:paddingTop="20px"
-        android:src="?attr/actionModeSelectAllDrawable"
+        android:src="@drawable/barcode3"
+        app:layout_constraintBottom_toTopOf="@+id/btnEscEquipo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/nroInventario"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="100dp"
+        android:src="@drawable/monitor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/titulo"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

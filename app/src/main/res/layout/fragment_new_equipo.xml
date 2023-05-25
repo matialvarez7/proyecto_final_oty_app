@@ -49,15 +49,13 @@
         android:id="@+id/editar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="282dp"
         android:backgroundTint="#146517"
         android:text="Confirmar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nroAnet"
-        app:cornerRadius="10dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/nroAnet" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -80,5 +78,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Scan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editar1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

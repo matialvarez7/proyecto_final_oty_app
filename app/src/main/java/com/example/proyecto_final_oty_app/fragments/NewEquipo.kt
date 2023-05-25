@@ -12,8 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.proyecto_final_oty_app.MainActivity
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
+import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.coroutines.launch
 
 class NewEquipo : Fragment() {
@@ -26,10 +28,12 @@ class NewEquipo : Fragment() {
     lateinit var v : View
     private lateinit var viewModel: NewEquipoViewModel
     lateinit var btnConfirmar : Button
+    lateinit var btnScan : Button
     lateinit var nroInventario : EditText // recibe el número de inventario de la vista
     lateinit var nroEquipo : EditText // recibe el número de equipo de la vista
     lateinit var nroAnet : EditText // recibe el número de A-NET de la vista
     lateinit var titulo : TextView // recibe el titulo del fragment
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,7 @@ class NewEquipo : Fragment() {
         nroEquipo = v.findViewById(R.id.nroEquipo)
         nroAnet = v.findViewById(R.id.nroAnet)
         btnConfirmar = v.findViewById(R.id.editar1)
+        btnScan = v.findViewById(R.id.btnScan)
         titulo = v.findViewById(R.id.titulo)
         titulo.text = "Alta equipo"
 
@@ -56,6 +61,8 @@ class NewEquipo : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        btnScan.setOnClickListener{ initScanner()}
 
         btnConfirmar.setOnClickListener {
             if(!viewModel.formularioValido(nroInventario.text.toString(), nroEquipo.text.toString(), nroAnet.text.toString())){
@@ -81,6 +88,10 @@ class NewEquipo : Fragment() {
             }
 
         }
+    }
+
+    private fun initScanner() {
+        IntentIntegrator(MainActivity).initiateScan()
     }
 
 }

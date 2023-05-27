@@ -11,14 +11,15 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
-import com.google.mlkit.vision.barcode.common.Barcode
-import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
-import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
+
 import kotlinx.coroutines.launch
+
 
 /*
 import com.google.zxing.integration.android.IntentIntegrator
@@ -36,6 +37,8 @@ class NewEquipo : Fragment() {
 
     lateinit var v : View
     private lateinit var viewModel: NewEquipoViewModel
+    private val sharedViewModel : LectorViewModel by activityViewModels()
+
     lateinit var btnConfirmar : Button
     lateinit var nroInventario : EditText // recibe el número de inventario de la vista
     lateinit var nroEquipo : EditText // recibe el número de equipo de la vista
@@ -44,6 +47,7 @@ class NewEquipo : Fragment() {
     lateinit var scanInventario : ImageButton
     lateinit var scanNombre : ImageButton
     lateinit var scanAnet : ImageButton
+    var lector = Lector()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,60 +77,33 @@ class NewEquipo : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //Configuracion de escaner
-        val options = GmsBarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.FORMAT_CODE_128,
-                Barcode.FORMAT_CODE_93,
-                Barcode.FORMAT_CODE_39
-                        ).build()
-        val scanner = GmsBarcodeScanning.getClient (requireContext(), options)
-
-
         //Boton escaneo de inventario
         scanInventario.setOnClickListener{
-            scanner.startScan()
-                .addOnSuccessListener { barcode ->
-                    val rawValue: String? = barcode.rawValue
-                    nroInventario.setText(rawValue)
-                }
-                .addOnCanceledListener {
-                    Toast.makeText(requireContext(), "Scanner cancelado", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error: $e.toString()", Toast.LENGTH_SHORT).show()
-                }
+            val action = NewEquipoDirections.actionNewEquipoToLector("0".toInt())
+            findNavController().navigate(action)
         }
+        sharedViewModel.valorEscaneadoInventario.observe(viewLifecycleOwner, Observer { valor ->
+            nroInventario.setText(valor)
+        })
+
 
         //Boton escaneo de nombre de equipo
         scanNombre.setOnClickListener{
-            scanner.startScan()
-                .addOnSuccessListener { barcode ->
-                    val rawValue: String? = barcode.rawValue
-                    nroEquipo.setText(rawValue)
-                }
-                .addOnCanceledListener {
-                    Toast.makeText(requireContext(), "Scanner cancelado", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error: $e.toString()", Toast.LENGTH_SHORT).show()
-                }
+            val action = NewEquipoDirections.actionNewEquipoToLector("1".toInt())
+            findNavController().navigate(action)
         }
+        sharedViewModel.valorEscaneadoNombre.observe(viewLifecycleOwner, Observer { valor ->
+            nroEquipo.setText(valor)
+        })
 
         //Boton escaneo de anet
         scanAnet.setOnClickListener{
-            scanner.startScan()
-                .addOnSuccessListener { barcode ->
-                    val rawValue: String? = barcode.rawValue
-                    nroAnet.setText(rawValue)
-                }
-                .addOnCanceledListener {
-                    Toast.makeText(requireContext(), "Scanner cancelado", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error: $e.toString()", Toast.LENGTH_SHORT).show()
-                }
+            val action = NewEquipoDirections.actionNewEquipoToLector("2".toInt())
+            findNavController().navigate(action)
         }
+        sharedViewModel.valorEscaneadoAnet.observe(viewLifecycleOwner, Observer { valor ->
+            nroAnet.setText(valor)
+        })
 
         btnConfirmar.setOnClickListener {
             if(!viewModel.formularioValido(nroInventario.text.toString(), nroEquipo.text.toString(), nroAnet.text.toString())){
@@ -142,9 +119,11 @@ class NewEquipo : Fragment() {
                             nroAnet.text.toString()
                         )
 
-                        nroInventario.text.clear()
-                        nroEquipo.text.clear()
-                        nroAnet.text.clear()
+                        //nroInventario.text.clear()
+                        //nroEquipo.text.clear()
+                        //nroAnet.text.clear()
+
+                        sharedViewModel.clearValor()
 
                         findNavController().popBackStack()
                     }

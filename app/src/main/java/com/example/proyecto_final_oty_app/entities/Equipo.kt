@@ -10,7 +10,7 @@ data class Equipo(
     var inventario : String,
     var nombre : String,
     var anet : String,
-    var estado : String
+    var estado : String,
 ): Parcelable {
     constructor() : this("","","","","")
 }

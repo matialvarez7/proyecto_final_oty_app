@@ -111,7 +111,16 @@
         android:id="@+id/listPrestamos"
         android:name="com.example.proyecto_final_oty_app.fragments.ListPrestamos"
         android:label="fragment_list_prestamos"
-        tools:layout="@layout/fragment_list_prestamos" />
+        tools:layout="@layout/fragment_list_prestamos" >
+        <action
+            android:id="@+id/action_listPrestamos_to_newPrestamo"
+            app:destination="@id/newPrestamo" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPrestamo"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewPrestamo"
+        android:label="fragment_new_prestamo"
+        tools:layout="@layout/fragment_new_prestamo" />
 
 </navigation>
 

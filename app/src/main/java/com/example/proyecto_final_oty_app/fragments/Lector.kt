@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.proyecto_final_oty_app.R
 import com.google.zxing.integration.android.IntentIntegrator
 
+@Suppress("DEPRECATION")
 class Lector : Fragment() {
 
     companion object {
@@ -53,9 +54,7 @@ class Lector : Fragment() {
             if (result.contents == null) {
                 Toast.makeText(requireContext(), "Cancelado", Toast.LENGTH_LONG).show()
             } else {
-                //viewModel.setValor("pepito")
                 viewModel.setValor(result.contents,tipoCampo.campo)
-                //viewModel.valorEscaneado.value?.let { Log.d("El resultado es ", it) }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

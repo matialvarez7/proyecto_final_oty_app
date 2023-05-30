@@ -25,7 +25,7 @@ class ListPrestamos : Fragment() {
     lateinit var recyclerPrestamos : RecyclerView
     lateinit var adapter : AdapterPrestamo
     lateinit var db : FirebaseFirestore
-    lateinit var prestamos : MutableList<Prestamo>
+    lateinit var prestamosFinal : MutableList<Prestamo>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +45,9 @@ class ListPrestamos : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        prestamosFinal = mutableListOf()
+        viewModel.inicializarColecciones()
+        viewModel.armarListaFinal()
         //adapter = AdapterPrestamo()
         recyclerPrestamos.layoutManager = LinearLayoutManager(context)
         recyclerPrestamos.adapter = adapter

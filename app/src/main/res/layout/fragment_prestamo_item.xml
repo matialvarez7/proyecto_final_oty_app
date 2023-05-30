@@ -10,7 +10,7 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
     app:cardMaxElevation="1dp">
-    >
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,14 +51,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
 
-    <TextView
-        android:id="@+id/EstadoPrestamo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Estado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        tools:layout_editor_absoluteY="24dp" />
+        <TextView
+            android:id="@+id/EstadoPrestamo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Estado"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.469"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

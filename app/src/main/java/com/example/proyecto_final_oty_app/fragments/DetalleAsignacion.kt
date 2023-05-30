@@ -46,20 +46,21 @@ class DetalleAsignacion : Fragment() {
     override fun onStart() {
         super.onStart()
         texto.text = personal.nombre
+        boton.setOnClickListener {
+            val elementoId = DetalleAsignacionArgs.fromBundle(requireArguments()).idAsignacion
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    viewModel.eliminarAsignacion(elementoId)
+                    Toast.makeText(
+                        context,
+                        "Equipo $elementoId eliminado correctamente",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-        val elementoId = DetalleAsignacionArgs.fromBundle(requireArguments()).idAsignacion
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                viewModel.eliminarAsignacion(elementoId)
-                Toast.makeText(
-                    context,
-                    "Equipo $elementoId eliminado correctamente",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-            } catch (e: Exception) {
-                Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT)
-                    .show()
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
     }

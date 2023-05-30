@@ -44,7 +44,7 @@ class DetallePersonal : Fragment() {
         // TODO: Use the ViewModel
     }
 
-
+/*
     override fun onStart() {
         super.onStart()
         abm = PersonalABM() // Inicializar la instancia de PersonalABM
@@ -64,4 +64,4 @@ class DetallePersonal : Fragment() {
             }
         }
     }
-}
+*/}

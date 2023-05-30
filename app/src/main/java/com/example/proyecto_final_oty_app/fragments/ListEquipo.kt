@@ -47,11 +47,11 @@ class ListEquipo : Fragment() {
         super.onStart()
         db = FirebaseFirestore.getInstance()
         equipos = mutableListOf()
-        adapter = AdapterEquipo(equipos){
+       /* adapter = AdapterEquipo(equipos){
                 position -> val action = ListEquipoDirections.actionListEquipoToDetalleEquipo(equipos[position])
                 findNavController().navigate(action)
         }
-
+*/
         recyclerEquipos.layoutManager = LinearLayoutManager(context)
 
         db.collection("equipos")
@@ -68,11 +68,11 @@ class ListEquipo : Fragment() {
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
 
-        btnAlta.setOnClickListener(){
+      /*  btnAlta.setOnClickListener(){
             val action = ListEquipoDirections.actionListEquipoToNewEquipo()
             findNavController().navigate(action)
         }
-
+*/
 
     }
 

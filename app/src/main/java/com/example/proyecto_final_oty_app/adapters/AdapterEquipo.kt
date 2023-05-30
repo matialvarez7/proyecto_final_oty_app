@@ -44,7 +44,7 @@ class AdapterEquipo(var equipos: MutableList<Equipo>, var onClick : (Int) -> Uni
             }
 
             fun setEquipoInventario (inventario : String){
-                val txtInventario : TextView = view.findViewById(R.id.InventarioEquipo)
+                val txtInventario : TextView = view.findViewById(R.id.NombreEquipos)
                 txtInventario.text = inventario
 
             }
@@ -56,7 +56,7 @@ class AdapterEquipo(var equipos: MutableList<Equipo>, var onClick : (Int) -> Uni
             }
 
             fun getCard() : CardView {
-                return view.findViewById(R.id.cardEquipo)
+                return view.findViewById(R.id.cardAsignacion)
             }
 
 

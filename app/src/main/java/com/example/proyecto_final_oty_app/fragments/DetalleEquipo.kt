@@ -66,7 +66,7 @@ class DetalleEquipo : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    override fun onStart() {
+   /* override fun onStart() {
         super.onStart()
         abm = EquipoABM() // Inicializar la instancia de EquipoABM
 
@@ -97,6 +97,8 @@ class DetalleEquipo : Fragment() {
         }
     }
     //Fin OnStart
+
+    */
 }
 
 

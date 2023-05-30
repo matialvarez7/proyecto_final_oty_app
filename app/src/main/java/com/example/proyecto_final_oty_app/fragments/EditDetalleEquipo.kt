@@ -49,7 +49,7 @@ class EditDetalleEquipo : Fragment() {
     lateinit var anet: EditText
 
     lateinit var estado:EditText
-
+/*
     override fun onStart() {
         super.onStart()
          var equipo = DetalleEquipoArgs.fromBundle(requireArguments()).equipo
@@ -66,5 +66,5 @@ class EditDetalleEquipo : Fragment() {
                 }
             }
         }
-    }
+*/    }
 

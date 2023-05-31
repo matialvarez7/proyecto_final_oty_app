@@ -28,14 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Equipos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Equipos"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        <TextView
+            android:id="@+id/tituloEquipos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipos:"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -52,14 +52,39 @@
         app:layout_constraintGuide_begin="205dp" />
 
         <TextView
-            android:id="@+id/EstadoPrestamo"
+            android:id="@+id/tituloEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="Estado"
+            android:text="Estado:"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.469"
+            app:layout_constraintHorizontal_bias="0.346"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cantEquipos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="1dp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toEndOf="@+id/tituloEquipos"
+            app:layout_constraintTop_toBottomOf="@+id/Responsable" />
+
+        <TextView
+            android:id="@+id/EstadoFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="2dp"
+            android:text="En curso"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tituloEstado"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

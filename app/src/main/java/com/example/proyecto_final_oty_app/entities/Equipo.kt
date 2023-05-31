@@ -16,16 +16,5 @@ data class Equipo(
 ): Parcelable {
     constructor() : this("","","","","")
 
-    override fun describeContents(): Int {
-        TODO("Not yet implemented")
-    }
-
-    companion object : Parceler<Equipo> {
-        override fun Equipo.write(p0: Parcel, p1: Int) {
-            TODO("Not yet implemented")
-        }
-
-        override fun create(parcel: Parcel): Equipo = TODO()
-    }
 }
 

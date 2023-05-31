@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
-import com.example.proyecto_final_oty_app.entities.Prestamo
+import com.example.proyecto_final_oty_app.entities.PrestamoFinal
 
-class AdapterPrestamo(var prestamos : MutableList<Prestamo>, var onClick : (Int) -> Unit) : RecyclerView.Adapter<AdapterPrestamo.PrestamoHolder>(){
+class AdapterPrestamo(var prestamos : MutableList<PrestamoFinal>/*, var onClick : (Int) -> Unit*/) : RecyclerView.Adapter<AdapterPrestamo.PrestamoHolder>(){
 
     class PrestamoHolder(v : View) : RecyclerView.ViewHolder(v)
     {
@@ -24,12 +24,12 @@ class AdapterPrestamo(var prestamos : MutableList<Prestamo>, var onClick : (Int)
         }
 
         fun setEquipos (equipos : String){
-            val txtEquipos : TextView = view.findViewById(R.id.Equipos)
+            val txtEquipos : TextView = view.findViewById(R.id.cantEquipos)
             txtEquipos.text = equipos
         }
 
         fun setEstadoPrestamo (estadoPrestamo : String){
-            val txtEstadoPrestamo : TextView = view.findViewById(R.id.EstadoPrestamo)
+            val txtEstadoPrestamo : TextView = view.findViewById(R.id.EstadoFinal)
             txtEstadoPrestamo.text = estadoPrestamo
         }
 
@@ -41,7 +41,7 @@ class AdapterPrestamo(var prestamos : MutableList<Prestamo>, var onClick : (Int)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrestamoHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_prestamo_item,parent, false)
-        return (PrestamoHolder(view))
+        return PrestamoHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -49,11 +49,13 @@ class AdapterPrestamo(var prestamos : MutableList<Prestamo>, var onClick : (Int)
     }
 
     override fun onBindViewHolder(holder: PrestamoHolder, position: Int) {
-        //holder.setResponsable(prestamos[position].)
-
-        holder.getCard().setOnClickListener{
+        val nombreCompleto = prestamos[position].nombre + " " + prestamos[position].apellido
+        holder.setResponsable(nombreCompleto)
+        holder.setEstadoPrestamo(prestamos[position].estadoPrestamo)
+        holder.setEquipos((prestamos[position].itemsPrestamo.size).toString())
+        /*holder.getCard().setOnClickListener {
             onClick(position)
-        }
+        }*/
     }
 
 }

@@ -3,7 +3,7 @@
 
   <item
       android:id="@+id/newPrestamo"
-      android:icon="@drawable/prestamos"
+      android:icon="@drawable/file"
       android:title="PRESTAMO"/>
 
   <item

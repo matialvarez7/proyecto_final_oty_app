@@ -16,12 +16,12 @@ import java.time.LocalDate
 
 class ListPrestamosViewModel : ViewModel() {
     private var db = Firebase.firestore
-    var prestamos : MutableList<Personal>  = mutableListOf()
-    var personal : MutableList <Personal> = mutableListOf()
-    var itemsPrestamo : MutableList <ItemPrestamo> = mutableListOf()
-    var prestamoFinal : MutableList <PrestamoFinal> = mutableListOf()
+    var prestamos: MutableList<Personal> = mutableListOf()
+    var personal: MutableList<Personal> = mutableListOf()
+    var itemsPrestamo: MutableList<ItemPrestamo> = mutableListOf()
+    var prestamoFinal: MutableList<PrestamoFinal> = mutableListOf()
 
-    fun inicializarColecciones () {
+    fun inicializarColecciones() {
 
         //Obtener toda la coleccion de préstamos
         db.collection("prestamos")
@@ -62,19 +62,22 @@ class ListPrestamosViewModel : ViewModel() {
     }
 
     fun armarListaFinal() {
-        var prestamoAux : Prestamo
-        var personalAux : Personal
-        var itemPrestamoAux : ItemPrestamo
+        var prestamoAux: Prestamo
+        var personalAux: Personal
+        var itemPrestamoAux: MutableList<ItemPrestamo> = mutableListOf()
 
         if (prestamos.isNotEmpty()) {
-            for (prestamo in prestamos){
-                var equiposAux : MutableList<Equipo> = mutableListOf()
-                val pFinalAux : PrestamoFinal = PrestamoFinal("",
-                    Date(2024, 1, 1),"","","","","",equiposAux)
+            for (prestamo in prestamos) {
+                var equiposAux: MutableList<Equipo> = mutableListOf()
+                val pFinalAux: PrestamoFinal = PrestamoFinal(
+                    "",
+                    Date(2024, 1, 1), "", "", "", "", "", itemPrestamoAux
+                )
+
+
             }
+
         }
-
     }
-
 
 }

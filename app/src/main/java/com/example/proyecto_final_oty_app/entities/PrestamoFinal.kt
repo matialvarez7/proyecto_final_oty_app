@@ -14,5 +14,5 @@ data class PrestamoFinal(
     var apellido : String,
     var area : String,
     //Listado de equipos asignados al prestamo
-    var equipos : MutableList<Equipo>
+    var itemsPrestamo : MutableList<ItemPrestamo>
 )

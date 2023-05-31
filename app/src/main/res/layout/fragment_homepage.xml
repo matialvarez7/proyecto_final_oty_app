@@ -7,35 +7,182 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Homepage">
 
-    <Button
-        android:id="@+id/buttonPersonal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="71dp"
-        android:layout_marginBottom="128dp"
-        android:backgroundTint="#004A8B"
-        android:text="Personal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/botonAsignacionesDocentes"
+        android:layout_width="360dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#FFFFFF"
+        android:outlineProvider="background"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleMenu">
 
-    <Button
-        android:id="@+id/buttonEquipos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="128dp"
-        android:backgroundTint="#004A8B"
-        android:text="Equipos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonPersonal"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorAsignacionesDocentes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tittleAsignaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                android:text="ASIGNACIONES DOCENTES"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBarAsig"
+                android:layout_width="320dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="10dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFCFC"
+                android:elevation="6dp"
+                android:progressTint="#FFFFFF"
+                app:indicatorColor="#004A8B"
+                app:layout_constraintBottom_toTopOf="@+id/cantidadAsignaciones"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.55"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tittleAsignaciones"
+                app:trackColor="#FDFAFA"
+                app:trackCornerRadius="5dp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/cantidadAsignaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="8dp"
+                android:text="0 / 0"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/porcentajeAsignaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="8dp"
+                android:text="0 %"
+                android:textAlignment="textEnd"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/botonPrestamos"
+        android:layout_width="360dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:outlineProvider="background"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonAsignacionesDocentes">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorPrestamos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tittlePrestamos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                android:text="PRESTAMOS"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBarPrestamos"
+                android:layout_width="320dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="10dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFCFC"
+                android:elevation="6dp"
+                android:progressTint="#FFFFFF"
+                app:indicatorColor="#004A8B"
+                app:layout_constraintBottom_toTopOf="@+id/cantidadPrestamos"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.55"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tittlePrestamos"
+                app:trackColor="#FDFAFA"
+                app:trackCornerRadius="5dp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/cantidadPrestamos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="8dp"
+                android:text="0 / 0"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/porcentajePrestamos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="8dp"
+                android:text="0 %"
+                android:textAlignment="textEnd"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/titleMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="130dp"
         android:text="OTY APP"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
@@ -43,25 +190,159 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonAsigDoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="69dp"
-        android:text="Asignaciones"
-        app:layout_constraintEnd_toEndOf="parent"
+    <FrameLayout
+        android:id="@+id/iconOrt"
+        android:layout_width="104dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:elevation="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleMenu" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/buttonPrestamos"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/Ort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:elevation="500dp"
+            android:src="@mipmap/ort"
+            tools:layout_conversion_absoluteHeight="73dp"
+            tools:layout_conversion_absoluteWidth="113dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/User"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:text="Prestamos"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="sans-serif-thin"
+        android:lineSpacingExtra="48sp"
+        android:text="Nombre Apellido "
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCS"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonCS"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="28dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="25dp"
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:scaleType="centerInside"
+        android:src="@mipmap/cerrarsesion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/botonPersonal"
+        android:layout_width="126dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="35dp"
+        android:backgroundTint="#FFFFFF"
+        android:outlineProvider="background"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonPrestamos">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imagePersonal"
+                android:layout_width="100dp"
+                android:layout_height="63dp"
+                android:layout_marginTop="8dp"
+                android:src="@mipmap/personal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#004A8B" />
+
+            <TextView
+                android:id="@+id/tittleIPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="10dp"
+                android:text="PERSONAL"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.468"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/botonEquipos"
+        android:layout_width="126dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:outlineProvider="background"
+        app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAsigDoc" />
+        app:layout_constraintTop_toBottomOf="@+id/botonPrestamos">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedorEquipos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageEquipos"
+                android:layout_width="80dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:src="@mipmap/monitor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#004A8B" />
+
+            <TextView
+                android:id="@+id/tittleEquipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="10dp"
+                android:text="EQUIPOS"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

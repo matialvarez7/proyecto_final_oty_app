@@ -78,4 +78,14 @@
         android:name="com.example.proyecto_final_oty_app.fragments.ListPrestamos"
         android:label="fragment_list_prestamos"
         tools:layout="@layout/fragment_list_prestamos" />
+    <fragment
+        android:id="@+id/newasignacion"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewAsignacion"
+        android:label="fragment_new_asignacion"
+        tools:layout="@layout/fragment_new_asignacion" />
+    <fragment
+        android:id="@+id/newPrestamo"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewPrestamo"
+        android:label="fragment_new_prestamo"
+        tools:layout="@layout/fragment_new_prestamo" />
 </navigation>

@@ -20,12 +20,9 @@ data class Personal(
         TODO("Not yet implemented")
     }
 
-    companion object : Parceler<Personal> {
-        override fun Personal.write(p0: Parcel, p1: Int) {
-            TODO("Not yet implemented")
-        }
-
-        override fun create(parcel: Parcel): Personal = TODO()
+    override fun writeToParcel(p0: Parcel, p1: Int) {
+        TODO("Not yet implemented")
     }
+
 }
 

@@ -16,9 +16,10 @@ import java.time.LocalDate
 
 class ListPrestamosViewModel : ViewModel() {
     private var db = Firebase.firestore
-    var prestamos : MutableList<Personal>  = mutableListOf()
+    var prestamos : MutableList<Prestamo>  = mutableListOf()
     var personal : MutableList <Personal> = mutableListOf()
     var itemsPrestamo : MutableList <ItemPrestamo> = mutableListOf()
+    var equipos : MutableList <Equipo> = mutableListOf()
     var prestamoFinal : MutableList <PrestamoFinal> = mutableListOf()
 
     fun inicializarColecciones () {
@@ -63,14 +64,25 @@ class ListPrestamosViewModel : ViewModel() {
 
     fun armarListaFinal() {
         var prestamoAux : Prestamo
-        var personalAux : Personal
+        var personalAux : Personal?
         var itemPrestamoAux : ItemPrestamo
 
+        //Si la lista de prestamos no esta vacia, armo la lista final entregable para el adapter
         if (prestamos.isNotEmpty()) {
             for (prestamo in prestamos){
+                //se tiene que crear por cada prestamo una lista auxiliar de equipos y el prestamoFinal que contendra todos los datos
                 var equiposAux : MutableList<Equipo> = mutableListOf()
-                val pFinalAux : PrestamoFinal = PrestamoFinal("",
+                val prestamoFinalAux : PrestamoFinal = PrestamoFinal("",
                     Date(2024, 1, 1),"","","","","",equiposAux)
+
+                //Busco y obtengo el personal correspondiente al idPersonal del prestamo
+                personalAux = personal.find { personal -> personal.id == prestamo.idPersonal}
+
+                //Iterar los itemsPrestamo para guardar los equipos asociados al prestamo
+                for (itemPrestamo in itemsPrestamo) {
+
+                }
+
             }
         }
 

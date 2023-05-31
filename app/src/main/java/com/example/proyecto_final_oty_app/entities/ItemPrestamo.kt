@@ -1,8 +1,8 @@
 package com.example.proyecto_final_oty_app.entities
 
 data class ItemPrestamo(
-    private var id : String,
-    private var idEquipo : String,
-    private var idPrestamo : String,
-    private var estadoItem : String
+     var id : String,
+     var idEquipo : String,
+     var idPrestamo : String,
+     var estadoItem : String
 )

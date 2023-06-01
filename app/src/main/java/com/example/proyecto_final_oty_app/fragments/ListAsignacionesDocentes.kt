@@ -32,6 +32,7 @@ class ListAsignacionesDocentes : Fragment() {
     lateinit var equipos : MutableList<Equipo>
     lateinit var asignaciones : MutableList<AsignacionDocente>
     lateinit var personales : MutableList<Personal>
+    lateinit var btnAltaAsignacion : Button
 
 
     companion object {
@@ -45,6 +46,7 @@ class ListAsignacionesDocentes : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v= inflater.inflate(R.layout.fragment_list_asignaciones_docentes, container, false)
+        btnAltaAsignacion = v.findViewById(R.id.bottonAgregarAsignacion)
         recyclerAsignacionDocente = v.findViewById(R.id.listaAsignaciones)
 
     return v
@@ -116,12 +118,10 @@ class ListAsignacionesDocentes : Fragment() {
         registro()
         recyclerAsignacionDocente.layoutManager = LinearLayoutManager(context)
 
-
-
-
-
-
-
+        btnAltaAsignacion.setOnClickListener(){
+            val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToNewAsignacion()
+            findNavController().navigate(action)
+        }
     }
 
     fun buscarEquipoPos( equipoId: String): Int {

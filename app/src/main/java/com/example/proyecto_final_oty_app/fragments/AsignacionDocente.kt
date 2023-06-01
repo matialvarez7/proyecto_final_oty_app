@@ -25,7 +25,7 @@ lateinit var v:View
         savedInstanceState: Bundle?
     ): View? {
         v= inflater.inflate(R.layout.fragment_asignacion_docente, container, false)
-    v=v.findViewById(R.id.nombreYapellido)
+    v=v.findViewById(R.id.nombreResponsable)
     return v
     }
 

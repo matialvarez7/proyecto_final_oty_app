@@ -7,13 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ListAsignacionesDocentes">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaAsignaciones"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/titleListaAsignacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="35dp"
+        android:text="Asignaciones"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        app:layout_constraintBottom_toTopOf="@+id/bottonAgregarAsignacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bottonAgregarAsignacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#004A8B"
+        android:text="Alta Personal"
+        app:layout_constraintBottom_toTopOf="@+id/listaAsignaciones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleListaAsignacion" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaAsignaciones"
+        android:layout_width="410dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottonAgregarAsignacion"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

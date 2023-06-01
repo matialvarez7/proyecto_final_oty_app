@@ -9,11 +9,13 @@ import java.util.Date
 @Parcelize
 
 data class AsignacionDocente(
+
     var id : String,
     var idPersonal : String,
     var idEquipo : String,
     var fechaAsignacion : Date,
     var fechaDevolucion : Date? = null
+
 ): Parcelable {
     constructor() : this("","","", Calendar.getInstance().time,null)
 }

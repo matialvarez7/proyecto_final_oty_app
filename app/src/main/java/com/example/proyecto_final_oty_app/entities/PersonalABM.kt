@@ -13,20 +13,19 @@ import kotlinx.coroutines.withContext
 class PersonalABM {
     private val firestore = FirebaseFirestore.getInstance()
     private val personalCollection = firestore.collection("personal")
+suspend fun agregarPersonal(personal: Personal): String {
+        val listaPersonal = personalCollection.document()
 
-    suspend fun agregarPersonal(personal: Personal): String {
-        val newDocumentRef = personalCollection.document()
+        val personalWithId = personal.copy(id = listaPersonal.id)
 
-        val personalWithId = personal.copy(id = newDocumentRef.id)
+        listaPersonal.set(personalWithId).await()
 
-        newDocumentRef.set(personalWithId).await()
-
-        return newDocumentRef.id
+        return listaPersonal.id
     }
 
     suspend fun existeDni(dni: String): Boolean {
-        val querySnapshot = personalCollection.whereEqualTo("dni", dni).get().await()
-        return !querySnapshot.isEmpty
+        val dataPersonal = personalCollection.whereEqualTo("dni", dni).get().await()
+        return !dataPersonal.isEmpty
     }
 
     suspend fun editarPersonal(personalId: String, personal: Personal) {

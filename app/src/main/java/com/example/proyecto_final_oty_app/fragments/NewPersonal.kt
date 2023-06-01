@@ -1,7 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Personal
 import com.example.proyecto_final_oty_app.entities.PersonalABM
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class NewPersonal : Fragment() {
@@ -35,7 +32,7 @@ class NewPersonal : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        abm = PersonalABM() // Inicializar la instancia de PersonalABM
+        abm = PersonalABM()
 
         val nombreEditText = view.findViewById<EditText>(R.id.nombreEditText)
         val apellidoEditText = view.findViewById<EditText>(R.id.apellidoEditText)
@@ -48,33 +45,34 @@ class NewPersonal : Fragment() {
         }
 
         confirmarCargaButton.setOnClickListener {
-                val nombre = nombreEditText.text.toString()
-                val apellido = apellidoEditText.text.toString()
-                val dni = dniEditText.text.toString()
-                val area = areaEditText.text.toString()
+            val nombre = nombreEditText.text.toString()
+            val apellido = apellidoEditText.text.toString()
+            val dni = dniEditText.text.toString()
+            val area = areaEditText.text.toString()
 
-                if (camposValidos(nombre, apellido, dni, area)) {
-                    val nuevoPersonal = Personal(id = "", dni = dni, nombre = nombre, apellido = apellido, area = area)
+            if (camposValidos(nombre, apellido, dni, area)) {
+                val nuevoPersonal = Personal(id = "", dni = dni, nombre = nombre, apellido = apellido, area = area)
 
-                    lifecycleScope.launch {
-                        if (!viewModel.existeDni(dni)) {
-                            val id = viewModel.agregarPersonal(nuevoPersonal)
-                            nuevoPersonal.id = id
 
-                            Toast.makeText(requireContext(), "Personal agregado correctamente.", Toast.LENGTH_SHORT).show()
+                lifecycleScope.launch {
+                    if (!viewModel.existeDni(dni)) {
+                        val id = viewModel.agregarPersonal(nuevoPersonal)
+                        nuevoPersonal.id = id
+                        Toast.makeText(requireContext(), "Personal agregado correctamente.", Toast.LENGTH_SHORT).show()
 
-                            nombreEditText.text.clear()
-                            apellidoEditText.text.clear()
-                            dniEditText.text.clear()
-                            areaEditText.text.clear()
 
-                        } else {
-                            Toast.makeText(requireContext(), "Ya existe un registro con ese DNI.", Toast.LENGTH_SHORT).show()
-                        }
+                        nombreEditText.text.clear()
+                        apellidoEditText.text.clear()
+                        dniEditText.text.clear()
+                        areaEditText.text.clear()
+
+                    } else {
+                        Toast.makeText(requireContext(), "Ya existe un registro con ese DNI.", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(requireContext(), "Es obligatorio completar todos los campos", Toast.LENGTH_SHORT).show()
                 }
+            } else {
+                Toast.makeText(requireContext(), "Es obligatorio completar todos los campos", Toast.LENGTH_SHORT).show()
+            }
 
         }
 

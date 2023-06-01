@@ -1,40 +1,45 @@
 package com.example.proyecto_final_oty_app.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.proyecto_final_oty_app.R
 import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.proyecto_final_oty_app.entities.PersonalABM
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.proyecto_final_oty_app.R
 
 class DetallePersonal : Fragment() {
 
-    lateinit var v : View
-    lateinit var eliminarBtn:Button
-    lateinit var abm: PersonalABM
-    lateinit var viewModel : DetallePersonalViewModel
 
 
     companion object {
         fun newInstance() = DetallePersonal()
     }
+    lateinit var v : View
+    lateinit var viewModel : DetallePersonalViewModel
+    lateinit var baseDNI : TextView
+    lateinit var baseNombre : TextView
+    lateinit var baseApellido : TextView
+    lateinit var baseArea : TextView
+    lateinit var editarBtn: Button
+    lateinit var eliminarBtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_detalle_personal, container, false)
-        eliminarBtn=v.findViewById(R.id.EliminarBtn)
+
+
+        v =  inflater.inflate(R.layout.fragment_detalle_personal, container, false)
+        baseDNI = v.findViewById(R.id.baseDNI)
+        baseNombre = v.findViewById(R.id.baseNombre)
+        baseApellido = v.findViewById(R.id.baseApellido)
+        baseArea = v.findViewById(R.id.baseArea)
+        editarBtn=v.findViewById(R.id.editarBtn)
+        eliminarBtn = v.findViewById(R.id.eliminarBtn)
+
         return v
     }
 
@@ -51,6 +56,20 @@ class DetallePersonal : Fragment() {
 
         val personal = DetallePersonalArgs.fromBundle(requireArguments()).personal
 
+=======
+    override fun onStart() {
+        super.onStart()
+        val personal = DetallePersonalArgs.fromBundle(requireArguments()).personal
+        baseDNI.text = personal.dni
+        baseNombre.text = personal.nombre
+        baseApellido.text = personal.apellido
+        baseArea.text = personal.area
+
+        editarBtn.setOnClickListener(){
+            val action = DetallePersonalDirections.actionDetallePersonalToEditarDetallePersonal(personal)
+            findNavController().navigate(action)
+        }
+>>>>>>> origin/us-48-altaAsignacion
         eliminarBtn.setOnClickListener {
             val idPersonal = personal.id // Aquí deberías obtener el id que quieres eliminar.
             CoroutineScope(Dispatchers.Main).launch {
@@ -58,10 +77,17 @@ class DetallePersonal : Fragment() {
                     viewModel.eliminarPersonal(idPersonal)
                     Toast.makeText(context, "Personal $idPersonal eliminado correctamente", Toast.LENGTH_SHORT).show()
 
+<<<<<<< HEAD
+=======
+                    findNavController().popBackStack()
+>>>>>>> origin/us-48-altaAsignacion
                 }catch(e:Exception){
                     Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+<<<<<<< HEAD
     }
 */}
+
+

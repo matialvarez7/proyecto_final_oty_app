@@ -14,4 +14,3 @@ data class Equipo(
 ): Parcelable {
     constructor() : this("","","","","")
 }
-

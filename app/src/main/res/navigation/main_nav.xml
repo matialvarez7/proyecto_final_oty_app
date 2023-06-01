@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_listAsignacionesDocentes_to_detalleAsignacion"
             app:destination="@id/detalleAsignacion" />
+        <action
+            android:id="@+id/action_listAsignacionesDocentes_to_newAsignacion"
+            app:destination="@id/newAsignacion" />
     </fragment>
     <fragment
         android:id="@+id/detalleAsignacion"
@@ -28,5 +31,51 @@
             android:name="Personal"
             app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
     </fragment>
-</navigation>
 
+    <fragment
+        android:id="@+id/newAsignacion"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewAsignacion"
+        android:label="fragment_new_asignacion"
+        tools:layout="@layout/fragment_new_asignacion" />
+
+    <fragment
+        android:id="@+id/newPersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewPersonal"
+        android:label="fragment_new_personal"
+        tools:layout="@layout/fragment_new_personal" />
+    <fragment
+        android:id="@+id/listPersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.ListPersonal"
+        android:label="fragment_list_personal"
+        tools:layout="@layout/fragment_list_personal">
+        <action
+            android:id="@+id/action_listPersonal_to_detallePersonal"
+            app:destination="@id/detallePersonal" />
+        <action
+            android:id="@+id/action_listPersonal_to_newPersonal"
+            app:destination="@id/newPersonal" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetallePersonal"
+        android:label="fragment_detalle_personal"
+        tools:layout="@layout/fragment_detalle_personal">
+        <argument
+            android:name="personal"
+            app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
+        <action
+            android:id="@+id/action_detallePersonal_to_editarDetallePersonal"
+            app:destination="@id/editarDetallePersonal"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/listPersonal" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarDetallePersonal"
+        android:name="com.example.proyecto_final_oty_app.fragments.EditarDetallePersonal"
+        android:label="fragment_editar_detalle_personal"
+        tools:layout="@layout/fragment_editar_detalle_personal" >
+        <argument
+            android:name="personal"
+            app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
+    </fragment>
+</navigation>

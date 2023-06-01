@@ -10,6 +10,6 @@ data class Personal(
     var nombre : String,
     var apellido : String,
     var area : String
-) : Parcelable {
+): Parcelable {
     constructor() : this("","","","","")
 }

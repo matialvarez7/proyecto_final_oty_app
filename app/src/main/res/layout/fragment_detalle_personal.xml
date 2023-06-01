@@ -8,126 +8,181 @@
     tools:context=".fragments.DetalleEquipo">
 
     <TextView
-        android:id="@+id/txtDni"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView"
+        android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="DNI"
-        android:textSize="30sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        android:text="Personal"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/baseDNI"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_background"
         android:text="124123414"
-        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDni" />
 
     <TextView
         android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/blue_custom_background"
         android:text="Nombre"
-        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/baseDNI" />
 
     <TextView
-        android:id="@+id/baseNombre"
-        android:layout_width="wrap_content"
+        android:id="@+id/baseArea"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Ricardo"
-        android:textSize="20sp"
+        android:background="@drawable/custom_background"
+        android:text="Actor"
+        android:textAlignment="center"
+        android:textColor="#FF000000"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtArea" />
+
+    <TextView
+        android:id="@+id/baseNombre"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_background"
+        android:text="Ricardo"
+        android:textAlignment="center"
+        android:textColor="#FF000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
     <TextView
-        android:id="@+id/txtApellido"
-        android:layout_width="wrap_content"
+        android:id="@+id/baseApellido"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Apellido"
+        android:background="@drawable/custom_background"
+        android:text="Darin"
+        android:textAlignment="center"
+        android:textColor="#FF000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/baseNombre" />
-
-    <TextView
-        android:id="@+id/baseApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Darin"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtApellido" />
 
     <TextView
-        android:id="@+id/txtArea"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtApellido"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Area de trabajo"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/blue_custom_background"
+        android:text="Apellido"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/baseApellido" />
+        app:layout_constraintTop_toBottomOf="@+id/baseNombre" />
 
     <TextView
-        android:id="@+id/baseArea"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtDni"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Actor"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/blue_custom_background"
+        android:text="DNI"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtArea" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/txtArea"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/blue_custom_background"
+        android:text="Area de trabajo"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/baseApellido" />
 
     <Button
         android:id="@+id/editarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#4CAF50"
         android:text="editar"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/eliminarBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/eliminarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#E91E63"
         android:text="Eliminar"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editarBtn"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6607387" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.83" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.74" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

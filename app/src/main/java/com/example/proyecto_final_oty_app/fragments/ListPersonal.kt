@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,13 +22,18 @@ import com.google.firebase.firestore.ktx.toObject
 
 class ListPersonal : Fragment() {
 
+
+    companion object {
+        fun newInstance() = ListPrestamos()
+    }
+
     lateinit var v : View
     lateinit var recyclerPersonal : RecyclerView
     lateinit var adapter : AdapterPersonal
-    lateinit var db : FirebaseFirestore
     lateinit var personales : MutableList<Personal>
     lateinit var txtTitle : TextView
     lateinit var btnAlta : Button
+    lateinit var viewModel: ListPersonalViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,42 +47,30 @@ class ListPersonal : Fragment() {
         return v
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ListPersonalViewModel::class.java)
+        // TODO: Use the ViewModel
+    }
+
     override fun onStart() {
         super.onStart()
-        db = FirebaseFirestore.getInstance()
         personales = mutableListOf()
+
         adapter = AdapterPersonal(personales){
                 position -> val action =ListPersonalDirections.actionListPersonalToDetallePersonal(personales[position])
             findNavController().navigate(action)
         }
 
-
-
         recyclerPersonal.layoutManager = LinearLayoutManager(context)
 
-
-        db.collection("personal")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (personal in snapshot) {
-                        personales.add(personal.toObject())
-                    }
-
-                    recyclerPersonal.adapter = adapter
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
+        viewModel.mostrarColeccion(personales,recyclerPersonal,adapter)
 
         btnAlta.setOnClickListener(){
             val action = ListPersonalDirections.actionListPersonalToNewPersonal()
             findNavController().navigate(action)
         }
 
-
     }
-
 
 }

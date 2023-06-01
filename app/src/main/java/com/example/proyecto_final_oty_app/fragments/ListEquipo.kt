@@ -24,11 +24,10 @@ class ListEquipo : Fragment() {
     lateinit var v : View
     lateinit var recyclerEquipos : RecyclerView
     lateinit var adapter : AdapterEquipo
-    lateinit var db : FirebaseFirestore
     lateinit var equipos : MutableList<Equipo>
     lateinit var txtTitle : TextView
     lateinit var btnAlta : Button
-
+    lateinit var viewModel: ListEquipoViewModel
 
 
     override fun onCreateView(
@@ -43,34 +42,23 @@ class ListEquipo : Fragment() {
         return v
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ListEquipoViewModel::class.java)
+        // TODO: Use the ViewModel
+    }
+
     override fun onStart() {
         super.onStart()
-        db = FirebaseFirestore.getInstance()
         equipos = mutableListOf()
         adapter = AdapterEquipo(equipos){
                 position -> val action = ListEquipoDirections.actionListEquipoToDetalleEquipo(equipos[position])
                 findNavController().navigate(action)
         }
 
-
-
         recyclerEquipos.layoutManager = LinearLayoutManager(context)
 
-
-        db.collection("equipos")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (equipo in snapshot) {
-                        equipos.add(equipo.toObject())
-                    }
-
-                    recyclerEquipos.adapter = adapter //Va aca porque equipos esta vacio, entonces aca le paso el adaptador con los equipos agregados.
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
+        viewModel.mostrarColeccion(equipos,recyclerEquipos,adapter)
 
         btnAlta.setOnClickListener(){
             val action = ListEquipoDirections.actionListEquipoToNewEquipo()

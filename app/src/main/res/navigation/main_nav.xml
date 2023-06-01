@@ -125,6 +125,16 @@
             android:name="campo"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/newAsignacion"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewAsignacion"
+        android:label="fragment_new_asignacion"
+        tools:layout="@layout/fragment_new_asignacion" />
+    <fragment
+        android:id="@+id/newPrestamo2"
+        android:name="com.example.proyecto_final_oty_app.fragments.NewPrestamo"
+        android:label="fragment_new_prestamo"
+        tools:layout="@layout/fragment_new_prestamo" />
 
 </navigation>
 

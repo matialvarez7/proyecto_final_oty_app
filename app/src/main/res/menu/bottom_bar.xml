@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/newPrestamo2"
+      android:icon="@drawable/file"
+      android:title="PRESTAMO"/>
+
+  <item
+      android:id="@+id/homepage"
+      android:icon="@drawable/home"
+      android:title="HOME"/>
+
+  <item
+      android:id="@+id/newAsignacion"
+      android:icon="@drawable/asignacion"
+      android:title="ASIGNACION"/>
+
+
+  </menu>
+

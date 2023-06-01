@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.entities
 
+import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -11,4 +12,5 @@ data class ItemPrestamo(
      var estadoItem : String
 ) : Parcelable {
      constructor() : this("","","","")
+
 }

@@ -9,7 +9,9 @@ import com.example.proyecto_final_oty_app.entities.Prestamo
 import com.example.proyecto_final_oty_app.entities.PrestamoFinal
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import java.sql.Date
 
 
@@ -17,15 +19,21 @@ import java.sql.Date
 class ListPrestamosViewModel : ViewModel() {
     private var db = Firebase.firestore
 
-    var prestamos: MutableList<Prestamo> = mutableListOf()
+    lateinit var prestamos: MutableList<Prestamo>
     var personal: MutableList<Personal> = mutableListOf()
     var itemsPrestamo: MutableList<ItemPrestamo> = mutableListOf()
     var prestamoFinal: MutableList<PrestamoFinal> = mutableListOf()
 
 
-    fun inicializarColecciones() {
+    suspend fun inicializarColecciones() : MutableList<Prestamo>  {
+        prestamos = mutableListOf()
+        var basePrestamos = db.collection("prestamos").get().await()
+        if (basePrestamos != null){
+            prestamos = basePrestamos.toObjects<Prestamo>() as MutableList<Prestamo>
+        }
+        return prestamos
 
-        //Obtener toda la coleccion de préstamos
+        /*Obtener toda la coleccion de préstamos
         db.collection("prestamos")
             .get()
             .addOnSuccessListener { result ->
@@ -35,9 +43,9 @@ class ListPrestamosViewModel : ViewModel() {
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
-            }
+            } */
 
-        //Obtener toda la coleccion de personal
+        /*Obtener toda la coleccion de personal
         db.collection("personal")
             .get()
             .addOnSuccessListener { result ->
@@ -47,9 +55,9 @@ class ListPrestamosViewModel : ViewModel() {
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
-            }
+            }*/
 
-        //Obtener toda la coleccion de itemsPrestamo
+        /*Obtener toda la coleccion de itemsPrestamo
         db.collection("itemsPrestamo")
             .get()
             .addOnSuccessListener { result ->
@@ -59,7 +67,11 @@ class ListPrestamosViewModel : ViewModel() {
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
-            }
+            }*/
+    }
+
+    fun getListaPrueba () : MutableList<Prestamo> {
+        return prestamos
     }
 
     fun armarListaFinal() {

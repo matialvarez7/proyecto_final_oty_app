@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.example.proyecto_final_oty_app.entities.Personal
@@ -67,6 +68,7 @@ class DetalleAsignacion : Fragment() {
                         "Equipo $elementoId eliminado correctamente",
                         Toast.LENGTH_SHORT
                     ).show()
+                    findNavController().navigateUp()
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT)
                         .show()

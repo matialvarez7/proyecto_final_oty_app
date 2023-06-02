@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#004A8B"
-        android:text="Alta Personal"
+        android:text="Alta asignación"
         app:layout_constraintBottom_toTopOf="@+id/listaAsignaciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

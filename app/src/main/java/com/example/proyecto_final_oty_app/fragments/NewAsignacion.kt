@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -124,6 +125,7 @@ class NewAsignacion : Fragment() {
                                     "Asignacion registrada con éxito",
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                findNavController().navigateUp()
                             }
                         } else {
                             Toast.makeText(

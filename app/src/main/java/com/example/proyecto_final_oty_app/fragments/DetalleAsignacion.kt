@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.proyecto_final_oty_app.R
+import com.example.proyecto_final_oty_app.entities.Equipo
 import com.example.proyecto_final_oty_app.entities.Personal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class DetalleAsignacion : Fragment() {
     private lateinit var viewModel: DetalleAsignacionViewModel
     lateinit var texto:TextView
     lateinit var boton:Button
-
+    lateinit var equipo: Equipo
 
 
 
@@ -34,6 +35,7 @@ class DetalleAsignacion : Fragment() {
         personal=DetalleAsignacionArgs.fromBundle(requireArguments()).Personal
         texto=v.findViewById(R.id.nombreYapellido)
         boton=v.findViewById(R.id.borrar)
+        equipo=DetalleAsignacionArgs.fromBundle(requireArguments()).Equipo
         return v
     }
 
@@ -51,6 +53,7 @@ class DetalleAsignacion : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     viewModel.eliminarAsignacion(elementoId)
+                    viewModel.cambiarEstadoEquipo(equipo.id)
                     Toast.makeText(
                         context,
                         "Equipo $elementoId eliminado correctamente",

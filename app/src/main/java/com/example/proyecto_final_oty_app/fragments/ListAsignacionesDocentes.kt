@@ -103,7 +103,7 @@ class ListAsignacionesDocentes : Fragment() {
         equipos = mutableListOf()
         personales = mutableListOf()
         asignaciones= mutableListOf()
-
+        registro()
 
 
         adapter = AdapterAsignacion(equipos, personales,asignaciones){
@@ -113,7 +113,7 @@ class ListAsignacionesDocentes : Fragment() {
             val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToDetalleAsignacion(asignaciones[position].id,equipos[posE],personales[posP])
             findNavController().navigate(action)
         }
-        registro()
+
         recyclerAsignacionDocente.layoutManager = LinearLayoutManager(context)
 
 

@@ -24,4 +24,17 @@ class DetalleAsignacionViewModel : ViewModel() {
         val equipoDocument = referenciaAsignaciones.document(idEquipo)
         equipoDocument.delete().await()
     }
+    suspend fun cambiarEstadoEquipo(idEquipo: String): Boolean = withContext(Dispatchers.IO) {
+        val db = FirebaseFirestore.getInstance()
+        val equipoRef = db.collection("equipos").document(idEquipo)
+        val nuevoEstado="Disponible"
+        val snapshot = equipoRef.get().await()
+
+        return@withContext if (snapshot.exists()) {
+            equipoRef.update("estado", "Disponible").await()
+            true // Equipo encontrado y estado cambiado
+        } else {
+            false // Equipo no encontrado
+        }
+    }
 }

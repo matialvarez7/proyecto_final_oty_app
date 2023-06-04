@@ -16,6 +16,8 @@ class AdapterPersonal (var personales: MutableList<Personal>, var onClick : (Int
         return MyViewHolder(view)
     }
 
+
+
     override fun onBindViewHolder(holder: AdapterPersonal.MyViewHolder, position: Int) {
 
         val personal : Personal = personales[position]
@@ -29,6 +31,8 @@ class AdapterPersonal (var personales: MutableList<Personal>, var onClick : (Int
         }
 
     }
+
+
 
     override fun getItemCount(): Int {
 

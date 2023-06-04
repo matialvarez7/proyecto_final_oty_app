@@ -18,7 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:navGraph="@navigation/main_nav" />
+        app:navGraph="@navigation/main_nav"
+        android:windowSoftInputMode="adjustResize"
+    />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

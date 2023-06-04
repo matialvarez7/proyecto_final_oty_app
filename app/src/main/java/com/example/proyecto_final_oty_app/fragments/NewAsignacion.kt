@@ -114,19 +114,9 @@ class NewAsignacion : Fragment() {
                         val idEquipoAsignar = equipoEncontrado.id
                         val fechaDeCreacion = Calendar.getInstance().time
                         if (equipoEncontrado.estado == "Disponible") {
-                            if (idPersonalAsignar != null) {
-                                viewModel.registrarAsignacion(
-                                    idPersonalAsignar,
-                                    idEquipoAsignar,
-                                    fechaDeCreacion
-                                )
-                                Toast.makeText(
-                                    context,
-                                    "Asignacion registrada con éxito",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                findNavController().navigateUp()
-                            }
+                            viewModel.registrarAsignacion(idPersonalAsignar, idEquipoAsignar, fechaDeCreacion)
+                            Toast.makeText(context, "Asignacion registrada con éxito", Toast.LENGTH_SHORT).show()
+                            findNavController().navigateUp()
                         } else {
                             Toast.makeText(
                                 context,

@@ -14,128 +14,112 @@
         android:layout_height="48dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="40dp"
         android:hint="Inventario"
         android:inputType="text"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintBottom_toTopOf="@+id/nombreEquipoText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editDNI"
         android:layout_width="0dp"
         android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+
+        android:layout_marginEnd="40dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:hint="DNI"
         android:inputType="number"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintBottom_toTopOf="@+id/nombreCompletoText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buscarInventarioBtn" />
 
     <Button
         android:id="@+id/confirmarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="114dp"
         android:backgroundTint="#138B00"
-        android:text="CONFIRMAR"
         android:elegantTextHeight="true"
+        android:text="CONFIRMAR"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="73dp" />
+        app:layout_constraintTop_toBottomOf="@+id/buscarDNIBtn" />
 
     <Button
         android:id="@+id/buscarInventarioBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BUSCAR"
         android:elegantTextHeight="true"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        android:text="BUSCAR"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/editDNI"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estadoEquipoText" />
 
     <Button
         android:id="@+id/buscarDNIBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BUSCAR"
-        android:minHeight="48dp"
         android:elegantTextHeight="true"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:minHeight="48dp"
+        android:text="BUSCAR"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/confirmarBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editDNI"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.63" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/areaText" />
 
     <TextView
         android:id="@+id/nombreCompletoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintBottom_toTopOf="@+id/areaText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDNI" />
 
     <TextView
         android:id="@+id/areaText"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintBottom_toTopOf="@+id/buscarDNIBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreCompletoText" />
 
     <TextView
         android:id="@+id/nombreEquipoText"
-        android:layout_width="61dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintBottom_toTopOf="@+id/estadoEquipoText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editInventario" />
 
     <TextView
         android:id="@+id/estadoEquipoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintBottom_toTopOf="@+id/buscarInventarioBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreEquipoText" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="170dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="21dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

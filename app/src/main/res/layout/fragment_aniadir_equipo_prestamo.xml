@@ -5,57 +5,87 @@
     android:id="@+id/frameLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AniadirEquipoPrestamo" >
+    tools:context=".fragments.AniadirEquipoPrestamo">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/invEquipoPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="ingrese nro inventario"
         android:inputType="text"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nomEquipoPrestamo"
+        app:layout_constraintEnd_toStartOf="@+id/buscarEquipo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/nomEquipoPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="197dp"
-        android:layout_marginEnd="177dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:text=""
+        android:hint="nombre equipo"
+        app:layout_constraintBottom_toTopOf="@+id/anetEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/invEquipoPrestamo" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/anetEquipoPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="177dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:text=""
+        android:hint="nro anet"
+        app:layout_constraintBottom_toTopOf="@+id/estadoEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/nomEquipoPrestamo" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/estadoEquipoPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="177dp"
-        android:text="TextView"
+        android:text=""
+        android:hint="estado del equipo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anetEquipoPrestamo" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.63" />
+
+    <Button
+        android:id="@+id/buscarEquipo"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:text="buscar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toTopOf="@+id/nomEquipoPrestamo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/invEquipoPrestamo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/confirmarEquipoPrestamo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <Button
+        android:id="@+id/finalizarCarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="245dp"
+        tools:layout_editor_absoluteY="576dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

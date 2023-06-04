@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
+import com.example.proyecto_final_oty_app.adapters.PrestamoAdapter
 import com.example.proyecto_final_oty_app.entities.Personal
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -29,8 +32,12 @@ class NewPrestamo : Fragment() {
     lateinit var nombreResponsable : TextView
     lateinit var apellidoResponsable : TextView
     lateinit var recyclerEquiposPrestamos : RecyclerView
+    lateinit var equiposPrestamoAdapter : PrestamoAdapter
+    lateinit var confirmarPrestamo : Button
+    lateinit var cancelarPrestamo : Button
     var personal : Personal? = null
     private lateinit var viewModel: NewPrestamoViewModel
+    private val sharedViewModel : AniadirEquipoPrestamoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +51,8 @@ class NewPrestamo : Fragment() {
         apellidoResponsable = v.findViewById(R.id.apellidoResponsable)
         aniadirEquipo = v.findViewById(R.id.aniadirEquipo)
         recyclerEquiposPrestamos = v.findViewById(R.id.recyclerEquiposPrestamo)
+        confirmarPrestamo = v.findViewById(R.id.confirmarPrestamo)
+        cancelarPrestamo = v.findViewById(R.id.cancelarPrestamo)
         return v
     }
 
@@ -56,7 +65,9 @@ class NewPrestamo : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.setIdPrestamo()
+        equiposPrestamoAdapter = PrestamoAdapter(sharedViewModel.listaEquipos)
         recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
+        recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
         buscarResponsable.setOnClickListener(){
             if(viewModel.campoDniVacío(dniResponsable.text.toString())){
                 Snackbar.make(v, "El DNI no puede estar vacío", Snackbar.LENGTH_LONG).show()
@@ -70,8 +81,8 @@ class NewPrestamo : Fragment() {
                             Snackbar.make(v, "No existe el personal", Snackbar.LENGTH_LONG).show()
                         }
                         else{
-                            nombreResponsable.text = personal!!.nombre
-                            apellidoResponsable.text = personal!!.apellido
+                            nombreResponsable.text = viewModel.mostrarNombrePersonal()
+                            apellidoResponsable.text = viewModel.mostrarApellidoPersonal()
                         }
                     }
                 }
@@ -80,7 +91,22 @@ class NewPrestamo : Fragment() {
         }
 
         aniadirEquipo.setOnClickListener(){
+            val action = NewPrestamoDirections.actionNewPrestamoToAniadirEquipoPrestamo(viewModel.idPrestamo)
+            findNavController().navigate(action)
+        }
 
+        confirmarPrestamo.setOnClickListener(){
+            lifecycleScope.launch {
+                if(viewModel.confirmarPrestamo(sharedViewModel.traerEquipos())){
+                    Snackbar.make(v, "Prestamo confirmado", Snackbar.LENGTH_LONG).show()
+                    sharedViewModel.limpiarListaEquipos()
+                    sharedViewModel.limpiarListaItemsPrestamo()
+                    findNavController().popBackStack()
+                }
+                else{
+                    Snackbar.make(v, "Error al crear pŕestamo", Snackbar.LENGTH_LONG).show()
+                }
+            }
         }
 
     }

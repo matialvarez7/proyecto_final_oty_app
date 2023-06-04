@@ -120,7 +120,20 @@
         android:id="@+id/newPrestamo"
         android:name="com.example.proyecto_final_oty_app.fragments.NewPrestamo"
         android:label="fragment_new_prestamo"
-        tools:layout="@layout/fragment_new_prestamo" />
+        tools:layout="@layout/fragment_new_prestamo" >
+        <action
+            android:id="@+id/action_newPrestamo_to_aniadirEquipoPrestamo"
+            app:destination="@id/aniadirEquipoPrestamo" />
+    </fragment>
+    <fragment
+        android:id="@+id/aniadirEquipoPrestamo"
+        android:name="com.example.proyecto_final_oty_app.fragments.AniadirEquipoPrestamo"
+        android:label="fragment_aniadir_equipo_prestamo"
+        tools:layout="@layout/fragment_aniadir_equipo_prestamo" >
+        <argument
+            android:name="idPrestamo"
+            app:argType="string" />
+    </fragment>
 
 </navigation>
 

@@ -26,7 +26,6 @@ class LectorViewModel : ViewModel() {
         } else {
             valorEscaneadoAnet.value = valor
         }
-
     }
 
     fun clearValor (){

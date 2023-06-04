@@ -35,20 +35,12 @@ class ListPrestamos : Fragment() {
     lateinit var recyclerPrestamos : RecyclerView
     lateinit var adapter : AdapterPrestamo
 
-    lateinit var prestamosFinal : MutableList<PrestamoFinal>
-    lateinit var prestamos : MutableList<Prestamo>
-    lateinit var prueba1 : TextView
-    lateinit var prueba2 : TextView
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_list_prestamos, container, false)
-        prueba1 = v.findViewById(R.id.prueba1)
-        prueba2 = v.findViewById(R.id.prueba2)
         recyclerPrestamos = v.findViewById(R.id.recPrestamos)
-
         return v
     }
 
@@ -60,68 +52,18 @@ class ListPrestamos : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        prestamos = mutableListOf()
-        prestamos.clear()
-        adapter = AdapterPrestamo(prestamos)
-        viewModel.setearRecycler()
-        Log.d("mensaje","Previo a traer la coleccion")
-        lifecycleScope.launch {
-         prestamos = viewModel.inicializarColecciones()
 
-            prueba1.text = prestamos[0].estadoPrestamo
-            prueba2.text = prestamos[0].idPersonal
+        lifecycleScope.launch {
+         viewModel.inicializarColecciones()
+         viewModel.armarListaFinal()
+         var listaFinal = viewModel.prestamoFinal
+         adapter = AdapterPrestamo(listaFinal){ position ->
+                val action = ListPrestamosDirections.actionListPrestamosToDetallePrestamo(listaFinal[position])
+                findNavController().navigate(action)
+            }
+            recyclerPrestamos.layoutManager = LinearLayoutManager(context)
+            recyclerPrestamos.adapter = adapter
         }
-
-
-
-
-        /*
-        lifecycleScope.launch {
-            db.collection("itemsPrestamo")
-                .get()
-                .addOnSuccessListener { result ->
-                    Log.d("mensaje", "Entre a buscar la coleccion")
-                    for (document in result) {
-                        prestamos.add(document.toObject())
-                    }
-                    var item = prestamos[0].id
-                    Log.d("mensaje", "Item:$item")
-                    prueba1.text = prestamos[0].idPrestamo
-                    prueba2.text = prestamos[0].estadoItem
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-                }
-           } */
-
-        //adapter = AdapterPrestamo(prestamos)
-        //recyclerPrestamos.layoutManager = LinearLayoutManager(context)
-        //recyclerPrestamos.adapter = adapter
-
-        /*
-        var itemsPrueba : MutableList<ItemPrestamo> = mutableListOf()
-        itemsPrueba.add(ItemPrestamo("1","12345","111","Disponible"))
-        itemsPrueba.add(ItemPrestamo("2","54321","222","Disponible"))
-        itemsPrueba.add(ItemPrestamo("3","54","2223333","No disponible"))
-        prestamosFinal = mutableListOf()
-        prestamosFinal.add(PrestamoFinal("1", Date(2024, 1, 1),"En curso","pepe","papito",itemsPrueba))
-        prestamosFinal.add(PrestamoFinal("2", Date(2024, 1, 1),"Finalizado","sandra","saraza",itemsPrueba))
-        */
-
-        /*
-        lifecycleScope.launch {
-            viewModel.inicializarColecciones()
-        }
-
-        viewModel.armarListaFinal()
-
-        val listaPrestamoFinal = viewModel.getListaFinal()
-        */
-
-         /* { position ->
-                 val action = ListPrestamosDirections.actionListPrestamosToDetallePrestamo()
-                 findNavController().navigate(action)
-        }*/
 
     }
 

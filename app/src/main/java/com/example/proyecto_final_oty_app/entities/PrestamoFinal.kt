@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.sql.Date
 
-var list : MutableList<ItemPrestamo> = mutableListOf()
 @Parcelize
 data class PrestamoFinal(
     //Datos del prestamo
@@ -17,5 +16,5 @@ data class PrestamoFinal(
     //Listado de equipos asignados al prestamo
     var itemsPrestamo : MutableList<ItemPrestamo>
 ) : Parcelable {
-    constructor() : this ("",Date(2024, 1, 1),"","","", list)
+    constructor() : this ("",Date(2024, 1, 1),"","","", mutableListOf())
 }

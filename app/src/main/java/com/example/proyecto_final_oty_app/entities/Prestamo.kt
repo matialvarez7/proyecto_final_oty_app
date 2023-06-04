@@ -16,5 +16,4 @@ data class Prestamo(
     var estadoPrestamo : String
 ) : Parcelable {
     constructor() : this("","",Date(2023,1,1),"")
-
 }

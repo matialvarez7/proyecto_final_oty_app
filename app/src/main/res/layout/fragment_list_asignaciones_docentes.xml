@@ -11,11 +11,18 @@
         android:id="@+id/titleListaAsignacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
         android:autoSizeMaxTextSize="35dp"
         android:text="Asignaciones"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/bottonAgregarAsignacion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,13 +39,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listaAsignaciones"
-        android:layout_width="410dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="-45dp"
+        android:layout_width="350dp"
+        android:layout_height="425dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottonAgregarAsignacion"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottonAgregarAsignacion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

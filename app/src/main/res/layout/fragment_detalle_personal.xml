@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DetalleEquipo">
+    tools:context=".fragments.DetallePersonal">
 
     <TextView
         android:id="@+id/textView"
@@ -14,11 +14,13 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="39dp"
         android:text="Personal"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDni"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -155,7 +157,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.388" />
 
     <Button
         android:id="@+id/eliminarBtn"
@@ -168,7 +170,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editarBtn"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.388" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

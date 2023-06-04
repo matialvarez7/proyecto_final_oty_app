@@ -2,72 +2,166 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout4"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DetalleAsignacion">
+    tools:context=".fragments.DetalleEquipo">
 
-    <Button
-        android:id="@+id/borrar"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:text="Eliminar"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        android:text="Asignación"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtDni"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreEquipo" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/nombreResponsable"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/nroAnet"
+        android:background="@drawable/custom_background"
+        android:text="124123414"
+        android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtNombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDni" />
 
     <TextView
-        android:id="@+id/nroAnet"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtNombre"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/nroInventario"
+        android:background="@drawable/blue_custom_background"
+        android:text="Equipo"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nombreEquipo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreResponsable" />
 
     <TextView
-        android:id="@+id/nroInventario"
-        android:layout_width="wrap_content"
+        android:id="@+id/nroAnet"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/nombreEquipo"
+        android:background="@drawable/custom_background"
+        android:text="Actor"
+        android:textAlignment="center"
+        android:textColor="#FF000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nroAnet" />
+        app:layout_constraintTop_toBottomOf="@+id/txtArea" />
 
     <TextView
         android:id="@+id/nombreEquipo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/borrar"
+        android:background="@drawable/custom_background"
+        android:text="Ricardo"
+        android:textAlignment="center"
+        android:textColor="#FF000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtApellido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+
+    <TextView
+        android:id="@+id/nroInventario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_background"
+        android:text="Darin"
+        android:textAlignment="center"
+        android:textColor="#FF000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtArea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtApellido" />
+
+    <TextView
+        android:id="@+id/txtApellido"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_custom_background"
+        android:text="Número de inventario"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nroInventario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreEquipo" />
+
+    <TextView
+        android:id="@+id/txtDni"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_custom_background"
+        android:text="Responsable"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nombreResponsable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/txtArea"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_custom_background"
+        android:text="Número de ANET"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nroAnet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nroInventario" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline10"
+
+    <Button
+        android:id="@+id/borrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="91dp" />
+        android:backgroundTint="#E91E63"
+        android:text="Eliminar"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline11"
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.83" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.74" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

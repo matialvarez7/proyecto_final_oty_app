@@ -13,6 +13,7 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Personal
@@ -208,14 +209,14 @@ class Homepage : Fragment() {
 
                             if(nombreColeccionAoP == "personales" && cantTotalEquipos > 0){ //Aca iria Prestamos
                                 cantEquiposEnCurso = (prestamos.size).toFloat()
-                                cantPres.text = "${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
+                                cantPres.text = "Cantidad Asignada ${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
                                 promedio =(((cantEquiposEnCurso/cantTotalEquipos)* 100))
                                 progreBarPres.setProgress(promedio.roundToInt())
                                 porcentPrestamos.text = "${(promedio).roundToInt()} %"
 
                             } else if(nombreColeccionAoP == "personal" && cantTotalEquipos > 0){ //Aca iria Asignaciones
                                 cantEquiposEnCurso = (asignaciones.size).toFloat()
-                                cantAsign.text = "${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
+                                cantAsign.text = "Cantidad Prestada ${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
                                 promedio =(((cantEquiposEnCurso/cantTotalEquipos)* 100))
                                 progreBarAsig.setProgress(promedio.roundToInt())
                                 porcentAsignaciones.text = "${(promedio).roundToInt()} %"
@@ -241,7 +242,7 @@ class Homepage : Fragment() {
         var promedioAsignaciones : Float
         var cantTotalAsignaciones : Float
         var cantAsignacionesEnCurso : Float
-        db.collection("personal")//Con esto traigo todos los documentos
+        db.collection("asignaciones")//Con esto traigo todos los documentos
             .get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot != null) {
@@ -251,7 +252,7 @@ class Homepage : Fragment() {
                     }
                     cantTotalAsignaciones = (EquiposAsignDocentes.size).toFloat()
 
-                    db.collection("personal").whereEqualTo("apellido", "Spinetta")//Con esto traigo varios documentos
+                    db.collection("personal").whereEqualTo("apellido", "Fernandez")//Con esto traigo varios documentos
                         .get()//Con el whereNotEqualTo trae todos los datos que no tenga ese tipo de valor. Serian los no APROF o los otros.
                         .addOnSuccessListener { snapshot ->
                             if (snapshot != null) {
@@ -263,7 +264,7 @@ class Homepage : Fragment() {
                                 cantAsignacionesEnCurso = (asignaciones.size).toFloat()
 
 
-                                cantAsign.text = "${cantAsignacionesEnCurso.roundToInt()} / ${cantTotalAsignaciones.roundToInt()}" // VER PORQUE SI LO PONGO ABAJO DE ESTO NO FUNCIONA, CREO QUE ES POR LA CORRUTINA.
+                                cantAsign.text = "Cantidad Asignada ${cantAsignacionesEnCurso.roundToInt()} / ${cantTotalAsignaciones.roundToInt()}" // VER PORQUE SI LO PONGO ABAJO DE ESTO NO FUNCIONA, CREO QUE ES POR LA CORRUTINA.
 
                                 promedioAsignaciones =(((cantAsignacionesEnCurso/cantTotalAsignaciones)* 100))
                                 progreBarAsig.setProgress(promedioAsignaciones.roundToInt())
@@ -286,7 +287,7 @@ class Homepage : Fragment() {
         var cantTotalPrestamos : Float
         var cantPrestamosEnCurso : Float
 
-        db.collection("personal")//Con esto traigo todos los documentos
+        db.collection("prestamos")//Con esto traigo todos los documentos
             .get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot != null) {
@@ -296,7 +297,7 @@ class Homepage : Fragment() {
                     }
                     cantTotalPrestamos = (EquiposPrestamos.size).toFloat()
 
-                    db.collection("personal").whereEqualTo("area", "Musica")//Con esto traigo varios documentos
+                    db.collection("personal").whereEqualTo("area", "Historia")//Con esto traigo varios documentos
                         .get()
                         .addOnSuccessListener { snapshot ->
                             if (snapshot != null) {
@@ -307,7 +308,7 @@ class Homepage : Fragment() {
 
                                 cantPrestamosEnCurso = (prestamos.size).toFloat()
 
-                                cantPres.text = "${cantPrestamosEnCurso.roundToInt()} / ${cantTotalPrestamos.roundToInt()}" // VER PORQUE SI LO PONGO ABAJO DE ESTO NO FUNCIONA, CREO QUE ES POR LA CORRUTINA.
+                                cantPres.text = "Cantidad Prestada ${cantPrestamosEnCurso.roundToInt()} / ${cantTotalPrestamos.roundToInt()}" // VER PORQUE SI LO PONGO ABAJO DE ESTO NO FUNCIONA, CREO QUE ES POR LA CORRUTINA.
 
                                 promedioPrestamos =(((cantPrestamosEnCurso/cantTotalPrestamos)* 100))
                                 progreBarPres.setProgress(promedioPrestamos.roundToInt())

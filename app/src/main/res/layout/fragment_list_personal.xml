@@ -7,6 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ListPersonal">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewPersonal"
+        android:layout_width="348dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_background"
+        android:elegantTextHeight="true"
+        android:paddingStart="10dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/bottonAregarPersonal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleListaPersonal"
+        app:queryHint="Buscar"
+        app:searchIcon="@drawable/lupa" />
+
     <TextView
         android:id="@+id/titleListaPersonal"
         android:layout_width="wrap_content"
@@ -14,13 +35,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
         android:autoSizeMaxTextSize="35dp"
         android:text="Personal"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/searchViewPersonal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,22 +53,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#004A8B"
         android:text="Alta Personal"
+        app:layout_constraintBottom_toTopOf="@+id/ListaPersonal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleListaPersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/searchViewPersonal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ListaPersonal"
-        android:layout_width="350dp"
-        android:layout_height="425dp"
+        android:layout_width="348dp"
+        android:layout_height="345dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:isScrollContainer="true"
+        android:windowSoftInputMode="adjustResize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottonAregarPersonal">
 

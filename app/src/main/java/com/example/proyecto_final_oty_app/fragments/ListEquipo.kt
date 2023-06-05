@@ -94,26 +94,25 @@ class ListEquipo : Fragment() {
             fun filterList(query : String?){
                 if(query != null){
                     val filteredList = mutableListOf<Equipo>()
-                    for ( equipo in equipos){
-                        if(equipo.nombre.lowercase(Locale.ROOT).contains(query) || equipo.nombre.contains(query)){
+                    for (equipo in equipos){
+                        val lowercaseQuery = query.lowercase(Locale.ROOT)
+                        if(equipo.nombre.lowercase(Locale.ROOT).contains(lowercaseQuery)
+                            || equipo.nombre.contains(query)){
                             filteredList.add(equipo)
                         }
                     }
 
-                    if(!filteredList.isEmpty()){
-
-                        adapter = AdapterEquipo(filteredList){
-                                position -> val action =ListEquipoDirections.actionListEquipoToDetalleEquipo(equipos[position])
+                    if(filteredList.isNotEmpty()){
+                        adapter = AdapterEquipo(filteredList){ position ->
+                            val action = ListEquipoDirections.actionListEquipoToDetalleEquipo(filteredList[position])
                             findNavController().navigate(action)
                         }
                         recyclerEquipos.adapter = adapter
-
                     }
                 }
-
             }
-
         })
+
 
 
 

@@ -97,23 +97,23 @@ class ListPersonal : Fragment() {
             fun filterList(query : String?){
                 if(query != null){
                     val filteredList = mutableListOf<Personal>()
-                    for ( personal in personales){
-                        if(personal.apellido.lowercase(Locale.ROOT).contains(query) || personal.apellido.contains(query)){
+                    for (personal in personales){
+                        val lowercaseQuery = query.lowercase(Locale.ROOT)
+                        if(personal.apellido.lowercase(Locale.ROOT).contains(lowercaseQuery)
+                            || personal.nombre.lowercase(Locale.ROOT).contains(lowercaseQuery)
+                            || personal.dni.lowercase(Locale.ROOT).contains(lowercaseQuery)){
                             filteredList.add(personal)
                         }
                     }
 
-                    if(!filteredList.isEmpty()){
-
-                        adapter = AdapterPersonal(filteredList){
-                                position -> val action =ListPersonalDirections.actionListPersonalToDetallePersonal(filteredList[position])
+                    if(filteredList.isNotEmpty()){
+                        adapter = AdapterPersonal(filteredList){ position ->
+                            val action = ListPersonalDirections.actionListPersonalToDetallePersonal(filteredList[position])
                             findNavController().navigate(action)
-                    }
+                        }
                         recyclerPersonal.adapter = adapter
-
                     }
                 }
-
             }
 
         })

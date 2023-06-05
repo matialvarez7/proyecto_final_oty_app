@@ -53,7 +53,7 @@
 
     <EditText
         android:id="@+id/editDNI"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="number"
@@ -67,7 +67,7 @@
 
     <EditText
         android:id="@+id/editNombre"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
@@ -81,7 +81,7 @@
 
     <EditText
         android:id="@+id/editApellido"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
@@ -95,7 +95,7 @@
 
     <EditText
         android:id="@+id/editArea"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"

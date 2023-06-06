@@ -95,8 +95,4 @@ class ListPrestamosViewModel : ViewModel() {
                     }
             }
 
-        fun getListaFinal () : MutableList<PrestamoFinal> {
-            return prestamoFinal
-        }
-
 }

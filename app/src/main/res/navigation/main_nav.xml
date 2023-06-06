@@ -137,6 +137,18 @@
         <argument
             android:name="prestamoFinal"
             app:argType="com.example.proyecto_final_oty_app.entities.PrestamoFinal" />
+        <action
+            android:id="@+id/action_detallePrestamo_to_detallePrestamoEquipo"
+            app:destination="@id/detallePrestamoEquipo" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePrestamoEquipo"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetallePrestamoEquipo"
+        android:label="fragment_detalle_prestamo_equipo"
+        tools:layout="@layout/fragment_detalle_prestamo_equipo" >
+        <argument
+            android:name="equipo"
+            app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
     </fragment>
 
 </navigation>

@@ -2,7 +2,6 @@ package com.example.proyecto_final_oty_app.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,19 +11,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
-import com.example.proyecto_final_oty_app.entities.Equipo
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.example.proyecto_final_oty_app.entities.EquipoABM
-import com.example.proyecto_final_oty_app.entities.PersonalABM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 //import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 class DetalleEquipo : Fragment() {
@@ -50,11 +42,11 @@ class DetalleEquipo : Fragment() {
     ): View? {
 
         v = inflater.inflate(R.layout.fragment_detalle_equipo, container, false)
-        numInv = v.findViewById(R.id.baseInventario)
-        nomEquipo = v.findViewById((R.id.baseNombreEquipo))
-        numAnet = v.findViewById(R.id.baseNumeroAnet)
-        estado = v.findViewById(R.id.baseEstado)
-        editar=v.findViewById(R.id.editar)
+        numInv = v.findViewById(R.id.inventarioDetPrestEquipo)
+        nomEquipo = v.findViewById((R.id.nombreDetPrestEquipo))
+        numAnet = v.findViewById(R.id.anetDetPrestEquipo)
+        estado = v.findViewById(R.id.estadoDetPrestEquipo)
+        editar=v.findViewById(R.id.editarDetPrestEquipo)
         eliminarBtn=v.findViewById(R.id.EliminarBtn)
 
         return v

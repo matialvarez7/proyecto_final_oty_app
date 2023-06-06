@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
-    android:id="@+id/cardPrestamo"
+    android:id="@+id/cardDetallePrestamo"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tituloEquipos"
+            android:id="@+id/tituloNombreEquipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Equipos:"
@@ -63,18 +63,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/cantEquipos"
+            android:id="@+id/nombreEquipoPrestamo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="42dp"
             android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toEndOf="@+id/tituloEquipos"
+            app:layout_constraintStart_toEndOf="@+id/tituloNombreEquipo"
             app:layout_constraintTop_toBottomOf="@+id/Responsable" />
 
         <TextView
-            android:id="@+id/EstadoFinal"
+            android:id="@+id/estadoEquipoPrestamo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"

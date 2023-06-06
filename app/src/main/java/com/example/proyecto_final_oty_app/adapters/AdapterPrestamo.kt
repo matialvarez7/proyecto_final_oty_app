@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
-import com.example.proyecto_final_oty_app.entities.ItemPrestamo
-import com.example.proyecto_final_oty_app.entities.Prestamo
 import com.example.proyecto_final_oty_app.entities.PrestamoFinal
 
 class AdapterPrestamo(var prestamos : MutableList<PrestamoFinal>, var onClick : (Int) -> Unit) : RecyclerView.Adapter<AdapterPrestamo.PrestamoHolder>() {
@@ -26,17 +24,17 @@ class AdapterPrestamo(var prestamos : MutableList<PrestamoFinal>, var onClick : 
         }
 
         fun setEquipos(equipos: String) {
-            var txtEquipos : TextView = view.findViewById(R.id.cantEquipos)
+            var txtEquipos : TextView = view.findViewById(R.id.nombreEquipoPrestamo)
             txtEquipos.text = equipos
         }
 
         fun setEstadoPrestamo(estadoPrestamo: String) {
-            var txtEstadoPrestamo: TextView = view.findViewById(R.id.EstadoFinal)
+            var txtEstadoPrestamo: TextView = view.findViewById(R.id.estadoEquipoPrestamo)
             txtEstadoPrestamo.text = estadoPrestamo
         }
 
         fun getCard(): CardView {
-            return view.findViewById(R.id.cardPrestamo)
+            return view.findViewById(R.id.cardDetallePrestamo)
         }
 
     }

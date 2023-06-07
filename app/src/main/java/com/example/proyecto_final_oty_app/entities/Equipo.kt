@@ -11,7 +11,7 @@ data class Equipo(
     var nombre : String,
     var anet : String,
     var estado : String
-    //var tipoDeEquipo : String (Agregar en el constructor y modificar la base de datos).
+
 ): Parcelable {
     constructor() : this("","","","","")
 }

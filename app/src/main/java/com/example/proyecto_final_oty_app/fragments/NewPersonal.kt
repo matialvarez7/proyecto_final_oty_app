@@ -56,7 +56,9 @@ class NewPersonal : Fragment() {
                 lifecycleScope.launch {
                     if (!viewModel.existeDni(dni)) {
                         val id = viewModel.agregarPersonal(nuevoPersonal)
-                        nuevoPersonal.id = id
+                        if (id != null) {
+                            nuevoPersonal.id = id  //SE MODIFICO ACA PARA QUE FUNCIONE
+                        }
                         Toast.makeText(requireContext(), "Personal agregado correctamente.", Toast.LENGTH_SHORT).show()
 
                         nombreEditText.text.clear()

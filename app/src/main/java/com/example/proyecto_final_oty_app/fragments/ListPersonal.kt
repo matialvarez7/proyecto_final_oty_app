@@ -47,8 +47,6 @@ class ListPersonal : Fragment() {
         btnAlta = v.findViewById(R.id.bottonAregarPersonal)
         buscadorPersonal = v.findViewById(R.id.searchViewPersonal)
 
-
-
         return v
     }
 

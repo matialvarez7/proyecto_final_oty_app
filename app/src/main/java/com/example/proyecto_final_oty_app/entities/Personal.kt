@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 
 data class Personal(
-    var id: String? = null,
+    var id: String,
     var dni : String,
     var nombre : String,
     var apellido : String,

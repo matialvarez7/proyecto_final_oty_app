@@ -14,11 +14,14 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Personal
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.launch
+import java.util.Locale
 import kotlin.math.roundToInt
 
 class Homepage : Fragment() {
@@ -41,9 +44,9 @@ class Homepage : Fragment() {
     lateinit var btnCerrarSesion: ImageButton
     lateinit var porcentAsignaciones : TextView
     lateinit var porcentPrestamos : TextView
+    lateinit var viewModel: HomepageViewModel
 
-
-      override fun onCreateView(
+          override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -62,6 +65,12 @@ class Homepage : Fragment() {
         porcentPrestamos = v.findViewById(R.id.porcentajePrestamos)
 
         return v
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(HomepageViewModel::class.java)
+        // TODO: Use the ViewModel
     }
 
     // UNA VEZ TERMINADO PRESTAMOS Y ASIGNACIONES PASARLO AL VIEW MODEL.
@@ -99,234 +108,11 @@ class Homepage : Fragment() {
             findNavController().navigate(action)
         }
 
-        generarProgressBarAsignaciones()
-
-        generarProgressBarPrestamos()
-
-        //generarProgressBar2("personal", "personal","apellido", "Spinetta")
-
-    }
-
-
-    //USAR ESTA FUNCION CUANDO TENGA LOS OBJETOS Y BASE DE DATOS DE LAS ENTIDADES CORRESPONDIENTES.
-
-    private fun generarProgressBar(nombreColeccionEquipos : String, nombreColeccionAoP : String, fieldEquipos : String, valueEquipos : String){
-        var promedio : Float = 0F
-        var cantTotalEquipos : Float
-        var cantEquiposEnCurso : Float =0F
-        db.collection(nombreColeccionEquipos).whereEqualTo(fieldEquipos,valueEquipos)//Me traigo todos los equipos segun corresponda a prestamos o asignaciones.
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (document in snapshot) {
-                        EquiposAsignDocentes.add(document.toObject())
-
-                    }
-                    cantTotalEquipos = (EquiposAsignDocentes.size).toFloat()
-
-                    db.collection(nombreColeccionAoP) // Quiero traerme asignaciones o prestamos en curso. Si esta el estado finalizados, Agregar el whereEqualTo.
-                        .get()
-                        .addOnSuccessListener { snapshot ->
-                            if (snapshot != null && nombreColeccionAoP == "personales") { //Aca iria Prestamos
-                                for (document in snapshot) {
-                                    prestamos.add(document.toObject())
-
-                                }
-                            } else if (snapshot != null && nombreColeccionAoP == "personal"){ //Aca iria Asignaciones
-                                for (document in snapshot) {
-                                    asignaciones.add(document.toObject())
-
-                                }
-                            }
-
-                            if(nombreColeccionAoP == "personales"){ //Aca iria Prestamos
-                                cantEquiposEnCurso = (prestamos.size).toFloat()
-                                cantPres.text = "${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
-
-
-                            } else if(nombreColeccionAoP == "personal"){ //Aca iria Asignaciones
-                                cantEquiposEnCurso = (asignaciones.size).toFloat()
-                                cantAsign.text = "${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
-                            }
-
-
-                            if(cantTotalEquipos > 0){
-                                promedio =(((cantEquiposEnCurso/cantTotalEquipos)* 100))
-                            }
-
-
-                            progreBarAsig.setProgress(promedio.roundToInt())
-
-                            if(nombreColeccionAoP == "personales"){ //Aca iria Prestamos
-                                porcentPrestamos.text = "${(promedio).roundToInt()} %"
-
-                            } else if(nombreColeccionAoP == "personal"){ //Aca iria Asignaciones
-                                porcentAsignaciones.text = "${(promedio).roundToInt()} %"
-                            }
-
-
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                        }
-                }
-
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-    }
-
-
-    private fun generarProgressBar2(nombreColeccionEquipos : String, nombreColeccionAoP : String, fieldEquipos : String, valueEquipos : String){
-        var promedio : Float = 0F
-        var cantTotalEquipos : Float
-        var cantEquiposEnCurso : Float =0F
-        db.collection(nombreColeccionEquipos).whereEqualTo(fieldEquipos,valueEquipos)//Me traigo todos los equipos segun corresponda a prestamos o asignaciones.
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (document in snapshot) {
-                        EquiposAsignDocentes.add(document.toObject())
-
-                    }
-                    cantTotalEquipos = (EquiposAsignDocentes.size).toFloat()
-
-                    db.collection(nombreColeccionAoP) // Quiero traerme asignaciones o prestamos en curso. Si esta el estado finalizados, Agregar el whereEqualTo.
-                        .get()
-                        .addOnSuccessListener { snapshot ->
-                            if (snapshot != null && nombreColeccionAoP == "personales") { //Aca iria Prestamos
-                                for (document in snapshot) {
-                                    prestamos.add(document.toObject())
-
-                                }
-                            } else if (snapshot != null && nombreColeccionAoP == "personal"){ //Aca iria Asignaciones
-                                for (document in snapshot) {
-                                    asignaciones.add(document.toObject())
-
-                                }
-                            }
-
-                            if(nombreColeccionAoP == "personales" && cantTotalEquipos > 0){ //Aca iria Prestamos
-                                cantEquiposEnCurso = (prestamos.size).toFloat()
-                                cantPres.text = "Cantidad Asignada ${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
-                                promedio =(((cantEquiposEnCurso/cantTotalEquipos)* 100))
-                                progreBarPres.setProgress(promedio.roundToInt())
-                                porcentPrestamos.text = "${(promedio).roundToInt()} %"
-
-                            } else if(nombreColeccionAoP == "personal" && cantTotalEquipos > 0){ //Aca iria Asignaciones
-                                cantEquiposEnCurso = (asignaciones.size).toFloat()
-                                cantAsign.text = "Cantidad Prestada ${cantEquiposEnCurso.roundToInt()} / ${cantTotalEquipos.roundToInt()}"
-                                promedio =(((cantEquiposEnCurso/cantTotalEquipos)* 100))
-                                progreBarAsig.setProgress(promedio.roundToInt())
-                                porcentAsignaciones.text = "${(promedio).roundToInt()} %"
-
-                            }
-
-
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                        }
-                }
-
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-    }
-
-
-    private fun generarProgressBarAsignaciones(){
-
-        var promedioAsignaciones : Float
-        var cantTotalAsignaciones : Float
-        var cantAsignacionesEnCurso : Float
-        db.collection("asignaciones")//Con esto traigo todos los documentos
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (personal in snapshot) {
-                        EquiposAsignDocentes.add(personal.toObject())
-
-                    }
-                    cantTotalAsignaciones = (EquiposAsignDocentes.size).toFloat()
-
-                    db.collection("personal").whereEqualTo("apellido", "Fernandez")//Con esto traigo varios documentos
-                        .get()//Con el whereNotEqualTo trae todos los datos que no tenga ese tipo de valor. Serian los no APROF o los otros.
-                        .addOnSuccessListener { snapshot ->
-                            if (snapshot != null) {
-                                for (personal in snapshot) {
-                                    asignaciones.add(personal.toObject())
-
-                                }
-
-                                cantAsignacionesEnCurso = (asignaciones.size).toFloat()
-
-
-                                cantAsign.text = "Cantidad Asignada ${cantAsignacionesEnCurso.roundToInt()} / ${cantTotalAsignaciones.roundToInt()}" // VER PORQUE SI LO PONGO ABAJO DE ESTO NO FUNCIONA, CREO QUE ES POR LA CORRUTINA.
-
-                                promedioAsignaciones =(((cantAsignacionesEnCurso/cantTotalAsignaciones)* 100))
-                                progreBarAsig.setProgress(promedioAsignaciones.roundToInt())
-                                porcentAsignaciones.text = "${(promedioAsignaciones).roundToInt()} %"
-                            }
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                        }
-                }
-
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-    }
-
-    private fun generarProgressBarPrestamos(){
-        var promedioPrestamos : Float
-        var cantTotalPrestamos : Float
-        var cantPrestamosEnCurso : Float
-
-        db.collection("prestamos")//Con esto traigo todos los documentos
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (personal in snapshot) {
-                        EquiposPrestamos.add(personal.toObject())
-
-                    }
-                    cantTotalPrestamos = (EquiposPrestamos.size).toFloat()
-
-                    db.collection("personal").whereEqualTo("area", "Historia")//Con esto traigo varios documentos
-                        .get()
-                        .addOnSuccessListener { snapshot ->
-                            if (snapshot != null) {
-                                for (personal in snapshot) {
-                                    prestamos.add(personal.toObject())
-
-                                }
-
-                                cantPrestamosEnCurso = (prestamos.size).toFloat()
-
-                                cantPres.text = "Cantidad Prestada ${cantPrestamosEnCurso.roundToInt()} / ${cantTotalPrestamos.roundToInt()}" // VER PORQUE SI LO PONGO ABAJO DE ESTO NO FUNCIONA, CREO QUE ES POR LA CORRUTINA.
-
-                                promedioPrestamos =(((cantPrestamosEnCurso/cantTotalPrestamos)* 100))
-                                progreBarPres.setProgress(promedioPrestamos.roundToInt())
-                                porcentPrestamos.text = "${(promedioPrestamos).roundToInt()} %"
-                            }
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                        }
-                }
-
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-
-        // MINUTO 16:31 DEL VIDEO DE BOTON BAR, POR LAS JERARQUIAS SI VUELVO A TOCAR MENU NO PUEDO VOLVER A LA PRINCIPAL, SI NO AL FRAGMENT QUE ESTABA ANTES.
-
+        lifecycleScope.launch {
+            viewModel.generarProgressBar("Asignaciones",cantAsign, porcentAsignaciones, progreBarAsig)
+            viewModel.generarProgressBar("Prestamos",cantPres, porcentPrestamos, progreBarPres)
+        }
 
     }
+
 }

@@ -110,7 +110,14 @@
         android:id="@+id/listAsignacionesDocentes"
         android:name="com.example.proyecto_final_oty_app.fragments.ListAsignacionesDocentes"
         android:label="fragment_list_asignaciones_docentes"
-        tools:layout="@layout/fragment_list_asignaciones_docentes" />
+        tools:layout="@layout/fragment_list_asignaciones_docentes" >
+        <action
+            android:id="@+id/action_listAsignacionesDocentes_to_newAsignacion"
+            app:destination="@id/newAsignacion" />
+        <action
+            android:id="@+id/action_listAsignacionesDocentes_to_detalleAsignacion"
+            app:destination="@id/detalleAsignacion" />
+    </fragment>
     <fragment
         android:id="@+id/listPrestamos"
         android:name="com.example.proyecto_final_oty_app.fragments.ListPrestamos"
@@ -135,6 +142,21 @@
         android:name="com.example.proyecto_final_oty_app.fragments.NewPrestamo"
         android:label="fragment_new_prestamo"
         tools:layout="@layout/fragment_new_prestamo" />
+    <fragment
+        android:id="@+id/detalleAsignacion"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetalleAsignacion"
+        android:label="fragment_detalle_asignacion"
+        tools:layout="@layout/fragment_detalle_asignacion" >
+        <argument
+            android:name="idAsignacion"
+            app:argType="string" />
+        <argument
+            android:name="equipo"
+            app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
+        <argument
+            android:name="personal"
+            app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
+    </fragment>
 
 </navigation>
 

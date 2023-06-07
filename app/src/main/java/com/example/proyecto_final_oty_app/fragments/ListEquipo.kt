@@ -47,9 +47,7 @@ class ListEquipo : Fragment() {
         btnAlta = v.findViewById(R.id.bottonAregarEquipos)
         buscadorEquipos = v.findViewById(R.id.searchViewEquipos)
 
-
-
-        return v
+      return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

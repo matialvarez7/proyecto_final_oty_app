@@ -7,6 +7,79 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ListPrestamos" >
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewPersonal"
+        android:layout_width="348dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/custom_background"
+        android:elegantTextHeight="true"
+        android:paddingStart="10dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/recPrestamos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloPrestamo"
+        app:queryHint="Buscar"
+        app:searchIcon="@drawable/lupa" />
+
+    <TextView
+        android:id="@+id/tituloPrestamo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
+        android:autoSizeMaxTextSize="35dp"
+        android:text="Prestamos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--
+    <Button
+        android:id="@+id/bottonAregarPersonal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#004A8B"
+        android:text="Alta Personal"
+        app:layout_constraintBottom_toTopOf="@+id/ListaPersonal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchViewPersonal" />
+            -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recPrestamos"
+        android:layout_width="348dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:isScrollContainer="true"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent">
+        <!-- app:layout_constraintTop_toBottomOf="@+id/bottonAregarPersonal"> -->
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <!--
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recPrestamos"
         android:layout_width="409dp"
@@ -30,5 +103,7 @@
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

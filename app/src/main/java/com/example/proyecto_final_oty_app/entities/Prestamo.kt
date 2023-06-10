@@ -6,9 +6,9 @@ import java.util.Date
 data class Prestamo(
     var id : String,
     var idPersonal : String,
-    var fechaPrestamo : String,
+    var fechaPrestamo : Date,
     var estadoPrestamo : String
 ) {
-    constructor() : this("","", "", "")
+    constructor() : this("","", Date(), "")
 
 }

@@ -133,6 +133,18 @@
         <argument
             android:name="idPrestamo"
             app:argType="string" />
+        <action
+            android:id="@+id/action_aniadirEquipoPrestamo_to_lector"
+            app:destination="@id/lector" />
+    </fragment>
+    <fragment
+        android:id="@+id/lector"
+        android:name="com.example.proyecto_final_oty_app.fragments.Lector"
+        android:label="fragment_lector"
+        tools:layout="@layout/fragment_lector" >
+        <argument
+            android:name="campo"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

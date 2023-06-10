@@ -10,7 +10,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -20,8 +22,10 @@ class AniadirEquipoPrestamo : Fragment() {
     companion object {
         fun newInstance() = AniadirEquipoPrestamo()
     }
-
-    private val viewModel: AniadirEquipoPrestamoViewModel by activityViewModels()
+    private lateinit var viewModel: AniadirEquipoPrestamoViewModel
+    private val sharedViewModel : NewPrestamoViewModel by activityViewModels()
+    private val sharedScaner : LectorViewModel by activityViewModels()
+    //private val viewModel: NewPrestamoViewModel by activityViewModels()
     lateinit var v : View
     lateinit var inventario : EditText
     lateinit var nombreEquipo : TextView
@@ -29,6 +33,7 @@ class AniadirEquipoPrestamo : Fragment() {
     lateinit var estadoEquipo : TextView
     lateinit var buscar : Button
     lateinit var aniadir : Button
+    lateinit var scanInventario : Button
 
 
     override fun onCreateView(
@@ -42,26 +47,35 @@ class AniadirEquipoPrestamo : Fragment() {
         estadoEquipo = v.findViewById(R.id.estadoEquipoPrestamo)
         buscar =  v.findViewById(R.id.buscarEquipo)
         aniadir = v.findViewById(R.id.confirmarEquipoPrestamo)
+        scanInventario = v.findViewById(R.id.scanInventario)
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    /*override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //viewModel = ViewModelProvider(this).get(AniadirEquipoPrestamoViewModel::class.java)
         // TODO: Use the ViewModel
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()
         val id = AniadirEquipoPrestamoArgs.fromBundle(requireArguments()).idPrestamo
 
+        scanInventario.setOnClickListener{
+            val action = AniadirEquipoPrestamoDirections.actionAniadirEquipoPrestamoToLector("0".toInt())
+            findNavController().navigate(action)
+        }
+        sharedScaner.valorEscaneadoInventario.observe(viewLifecycleOwner, Observer { valor ->
+            inventario.setText(valor)
+        })
+
         buscar.setOnClickListener(){
-            if(viewModel.campoInventarioVacío(inventario.text.toString())) {
+            if(sharedViewModel.campoInventarioVacío(inventario.text.toString())) {
                 Snackbar.make(v, "El número de inventario no puede estar vacío", Snackbar.LENGTH_LONG).show()
             }
             else{
                 lifecycleScope.launch {
-                    if(!viewModel.buscarEquipo(inventario.text.toString())){
+                    if(!sharedViewModel.buscarEquipo(inventario.text.toString())){
                         Snackbar.make(v, "El número de inventario no existe", Snackbar.LENGTH_LONG).show()
                     }
                     else{
@@ -72,7 +86,7 @@ class AniadirEquipoPrestamo : Fragment() {
         }
         aniadir.setOnClickListener(){
             lifecycleScope.launch {
-                if(viewModel.confirmarEquipo(id.toString())){
+                if(sharedViewModel.confirmarEquipo(id.toString())){
                     limpiarDatos()
                     Snackbar.make(v, "Equipo añadido al préstamo", Snackbar.LENGTH_LONG).show()
                 }else{
@@ -84,10 +98,10 @@ class AniadirEquipoPrestamo : Fragment() {
     }
 
     fun mostrarDatos() {
-        if(viewModel.equipo != null){
-            nombreEquipo.text = viewModel.equipo!!.nombre
-            nroAnetEquipo.text = viewModel.equipo!!.anet
-            estadoEquipo.text = viewModel.equipo!!.estado
+        if(sharedViewModel.equipo != null){
+            nombreEquipo.text = sharedViewModel.equipo!!.nombre
+            nroAnetEquipo.text = sharedViewModel.equipo!!.anet
+            estadoEquipo.text = sharedViewModel.equipo!!.estado
         }
 
     }

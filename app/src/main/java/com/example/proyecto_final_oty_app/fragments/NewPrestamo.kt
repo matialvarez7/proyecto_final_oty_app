@@ -36,8 +36,9 @@ class NewPrestamo : Fragment() {
     lateinit var confirmarPrestamo : Button
     lateinit var cancelarPrestamo : Button
     var personal : Personal? = null
-    private lateinit var viewModel: NewPrestamoViewModel
-    private val sharedViewModel : AniadirEquipoPrestamoViewModel by activityViewModels()
+    //private lateinit var viewModel: NewPrestamoViewModel
+    //private val sharedViewModel : NewPrestamoViewModel by activityViewModels()
+    private val viewModel: NewPrestamoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,16 +57,16 @@ class NewPrestamo : Fragment() {
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    /*override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewPrestamoViewModel::class.java)
         // TODO: Use the ViewModel
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()
         viewModel.setIdPrestamo()
-        equiposPrestamoAdapter = PrestamoAdapter(sharedViewModel.listaEquipos)
+        equiposPrestamoAdapter = PrestamoAdapter(viewModel.listaEquipos)
         recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
         recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
         buscarResponsable.setOnClickListener(){
@@ -97,10 +98,8 @@ class NewPrestamo : Fragment() {
 
         confirmarPrestamo.setOnClickListener(){
             lifecycleScope.launch {
-                if(viewModel.confirmarPrestamo(sharedViewModel.traerEquipos())){
+                if(viewModel.confirmarPrestamo()){
                     Snackbar.make(v, "Prestamo confirmado", Snackbar.LENGTH_LONG).show()
-                    sharedViewModel.limpiarListaEquipos()
-                    sharedViewModel.limpiarListaItemsPrestamo()
                     findNavController().popBackStack()
                 }
                 else{

@@ -18,7 +18,10 @@ class NewPrestamoViewModel : ViewModel() {
     // TODO: Implement the ViewModel
     val db = Firebase.firestore
     var idPrestamo : String = ""
+    lateinit var equipo: Equipo
     lateinit var personalACargo : Personal
+    var listaItems : MutableList<ItemPrestamo> = arrayListOf()
+    var listaEquipos : MutableList<Equipo> = arrayListOf()
     fun campoDniVacío(dni : String) : Boolean {
         var vacio : Boolean = false
         if(dni.isEmpty()) {
@@ -35,6 +38,33 @@ class NewPrestamoViewModel : ViewModel() {
         return invalido
     }
 
+    fun campoInventarioVacío(inventario: String): Boolean {
+        var vacio: Boolean = false
+        if (inventario.isEmpty()) {
+            vacio = true
+        }
+        return vacio
+    }
+
+    suspend fun buscarEquipo(inventario : String): Boolean {
+        var encontrado = false
+        var listAux: MutableList<Equipo>
+
+        try{
+            var equipoRef = db.collection("equipos").whereEqualTo("inventario", inventario).get().await()
+            if (!equipoRef.isEmpty) {
+                listAux = equipoRef.toObjects(Equipo::class.java)
+                for (e in listAux) {
+                    this.equipo = e
+                    encontrado = true
+                }
+            }
+        }catch (e : Exception){
+
+        }
+        return encontrado
+    }
+
     suspend fun buscarResponsable(dni : String) : Personal? {
         var listAux : MutableList<Personal>
         var personalRef = db.collection("personal").whereEqualTo("dni", dni).get().await()
@@ -47,20 +77,46 @@ class NewPrestamoViewModel : ViewModel() {
         return this.personalACargo
     }
 
-    suspend fun confirmarPrestamo(listaItems : MutableList<ItemPrestamo>) : Boolean{
+    suspend fun confirmarEquipo(idPrestamo : String) : Boolean{
+        var confirmado : Boolean = false
+        lateinit var item : ItemPrestamo
+
+        try{
+            if (this.equipo != null){
+                if (this.equipoDisponible()) {
+                    item = ItemPrestamo("", this.equipo.id, idPrestamo, "No devuelto")
+                    listaItems.add(item)
+                    listaEquipos.add(this.equipo)
+                    this.equipo.estado = "En préstamo"
+                    db.collection("equipos").document(this.equipo.id).set(this.equipo).await()
+                    confirmado = true
+
+                }
+            }
+        }catch (e : Exception){
+            Log.w(ContentValues.TAG, "Error adding document", e)
+        }
+        return confirmado
+    }
+
+    fun equipoDisponible(): Boolean {
+        return this.equipo.estado.equals("Disponible", ignoreCase = true)
+    }
+    suspend fun confirmarPrestamo() : Boolean{
         var confirmado : Boolean = false
         lateinit var nuevoPrestamo : Prestamo
-        var fechaCreacion : Date
         try{
-            this.setIdItemsPrestamo(listaItems)
+            this.setIdItemsPrestamo(this.listaItems)
             if(this.personalACargo != null){
-                nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo.id.toString(), "ahora", "Activo")
+                nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo.id.toString(), Date(), "Activo")
                 db.collection("prestamos").document(idPrestamo).set(nuevoPrestamo).await()
                 for(elemento in listaItems){
                     db.collection("itemsPrestamo").document(elemento.id).set(elemento).await()
                 }
-                this.idPrestamo = ""
                 confirmado =  true
+                this.idPrestamo = ""
+                this.limpiarListaEquipos()
+                this.limpiarListaItemsPrestamo()
             }
         }catch(e : Exception){
             for(elemento in listaItems){
@@ -90,5 +146,15 @@ class NewPrestamoViewModel : ViewModel() {
     fun mostrarApellidoPersonal () : String {
        return this.personalACargo.apellido
     }
+    fun equipoYaAgregado(equipo : Equipo) : Boolean {
+        return this.listaItems.find { it.idEquipo == equipo.id } != null
+    }
 
+    fun limpiarListaEquipos() {
+        this.listaEquipos.clear()
+    }
+
+    fun limpiarListaItemsPrestamo() {
+        this.listaItems.clear()
+    }
 }

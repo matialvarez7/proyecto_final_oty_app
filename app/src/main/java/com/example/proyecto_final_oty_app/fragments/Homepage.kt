@@ -17,8 +17,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Personal
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import kotlin.math.roundToInt
 
 class Homepage : Fragment() {
@@ -41,6 +44,7 @@ class Homepage : Fragment() {
     lateinit var btnCerrarSesion: ImageButton
     lateinit var porcentAsignaciones : TextView
     lateinit var porcentPrestamos : TextView
+    private lateinit var auth: FirebaseAuth
 
 
       override fun onCreateView(
@@ -48,6 +52,7 @@ class Homepage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_homepage, container, false)
+        auth = Firebase.auth
         txtTitle = v.findViewById(R.id.titleMenu)
         btnAsigDocent = v.findViewById(R.id.botonAsignacionesDocentes)
         btnPrestamos = v.findViewById(R.id.botonPrestamos)
@@ -95,8 +100,9 @@ class Homepage : Fragment() {
         }
 
         btnCerrarSesion.setOnClickListener(){
-            val action = HomepageDirections.actionHomepageToListEquipo2() //Modificar aca para que cierre sesion.
-            findNavController().navigate(action)
+            auth.signOut()
+            requireActivity().finish()
+
         }
 
         generarProgressBarAsignaciones()

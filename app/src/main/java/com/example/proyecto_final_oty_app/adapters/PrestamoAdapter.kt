@@ -3,6 +3,7 @@ package com.example.proyecto_final_oty_app.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
@@ -15,13 +16,14 @@ class PrestamoAdapter(var equipos : MutableList<Equipo>) : RecyclerView.Adapter<
     class PrestamoHolder(v : View) : RecyclerView.ViewHolder(v){
 
         private var view : View
+        lateinit var eliminarEquipoBtn : Button
         init {
             this.view = v
         }
 
         fun setNumeroInventario(inventario : String){
             val nroIventario : TextView = view.findViewById( R.id.nroIventario)
-            nroIventario.text = inventario
+            nroIventario.text = "Numero de inventario $inventario"
         }
     }
 

@@ -22,28 +22,65 @@ class NewPrestamoViewModel : ViewModel() {
     lateinit var personalACargo : Personal
     var listaItems : MutableList<ItemPrestamo> = arrayListOf()
     var listaEquipos : MutableList<Equipo> = arrayListOf()
-    fun campoDniVacío(dni : String) : Boolean {
-        var vacio : Boolean = false
-        if(dni.isEmpty()) {
-            vacio = true
+
+    suspend fun confirmarPrestamo() : Boolean{
+        var confirmado : Boolean = false
+        lateinit var nuevoPrestamo : Prestamo
+        try{
+            this.setIdItemsPrestamo(this.listaItems)
+            if(this.personalACargo != null){
+                nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo.id.toString(), Date(), "Activo")
+                db.collection("prestamos").document(idPrestamo).set(nuevoPrestamo).await()
+                for(elemento in listaItems){
+                    db.collection("itemsPrestamo").document(elemento.id).set(elemento).await()
+                }
+                confirmado =  true
+                this.limpiarDatos()
+            }
+        }catch(e : Exception){
+            for(elemento in listaItems){
+                db.collection("equipos").document(elemento.idEquipo).update("estado", "Disponible").await()
+            }
         }
-        return vacio
+        return confirmado
     }
 
-    fun dniInvalido(dni: String) : Boolean {
-        var invalido : Boolean = false
-        if(dni.length > 8){
-            invalido = true
+    suspend fun cancelarPrestamo() : Boolean{
+        var cancelado : Boolean = false
+        try{
+            for(eq in this.listaEquipos){
+                db.collection("equipos").document(eq.id).update("estado", "Disponible").await()
+            }
+            this.limpiarDatos()
+            cancelado =  true
+        }catch (e : Exception){
+            Log.w(ContentValues.TAG, "Error:", e)
         }
-        return invalido
+
+
+        return cancelado
     }
 
-    fun campoInventarioVacío(inventario: String): Boolean {
-        var vacio: Boolean = false
-        if (inventario.isEmpty()) {
-            vacio = true
+    suspend fun confirmarEquipo(idPrestamo : String) : Boolean{
+        var confirmado : Boolean = false
+        lateinit var item : ItemPrestamo
+
+        try{
+            if (this.equipo != null){
+                if (this.equipoDisponible()) {
+                    item = ItemPrestamo("", this.equipo.id, idPrestamo, "No devuelto")
+                    listaItems.add(item)
+                    listaEquipos.add(this.equipo)
+                    this.equipo.estado = "En préstamo"
+                    db.collection("equipos").document(this.equipo.id).set(this.equipo).await()
+                    confirmado = true
+
+                }
+            }
+        }catch (e : Exception){
+            Log.w(ContentValues.TAG, "Error adding document", e)
         }
-        return vacio
+        return confirmado
     }
 
     suspend fun buscarEquipo(inventario : String): Boolean {
@@ -77,62 +114,38 @@ class NewPrestamoViewModel : ViewModel() {
         return this.personalACargo
     }
 
-    suspend fun confirmarEquipo(idPrestamo : String) : Boolean{
-        var confirmado : Boolean = false
-        lateinit var item : ItemPrestamo
-
-        try{
-            if (this.equipo != null){
-                if (this.equipoDisponible()) {
-                    item = ItemPrestamo("", this.equipo.id, idPrestamo, "No devuelto")
-                    listaItems.add(item)
-                    listaEquipos.add(this.equipo)
-                    this.equipo.estado = "En préstamo"
-                    db.collection("equipos").document(this.equipo.id).set(this.equipo).await()
-                    confirmado = true
-
-                }
-            }
-        }catch (e : Exception){
-            Log.w(ContentValues.TAG, "Error adding document", e)
+    fun campoDniVacío(dni : String) : Boolean {
+        var vacio : Boolean = false
+        if(dni.isEmpty()) {
+            vacio = true
         }
-        return confirmado
+        return vacio
     }
 
+    fun dniInvalido(dni: String) : Boolean {
+        var invalido : Boolean = false
+        if(dni.length > 8 || dni.length < 7){
+            invalido = true
+        }
+        return invalido
+    }
+
+    fun campoInventarioVacío(inventario: String): Boolean {
+        var vacio: Boolean = false
+        if (inventario.isEmpty()) {
+            vacio = true
+        }
+        return vacio
+    }
     fun equipoDisponible(): Boolean {
         return this.equipo.estado.equals("Disponible", ignoreCase = true)
     }
-    suspend fun confirmarPrestamo() : Boolean{
-        var confirmado : Boolean = false
-        lateinit var nuevoPrestamo : Prestamo
-        try{
-            this.setIdItemsPrestamo(this.listaItems)
-            if(this.personalACargo != null){
-                nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo.id.toString(), Date(), "Activo")
-                db.collection("prestamos").document(idPrestamo).set(nuevoPrestamo).await()
-                for(elemento in listaItems){
-                    db.collection("itemsPrestamo").document(elemento.id).set(elemento).await()
-                }
-                confirmado =  true
-                this.idPrestamo = ""
-                this.limpiarListaEquipos()
-                this.limpiarListaItemsPrestamo()
-            }
-        }catch(e : Exception){
-            for(elemento in listaItems){
-                db.collection("equipos").document(elemento.idEquipo).update("estado", "Disponible").await()
-            }
-        }
-        return confirmado
-    }
-
     fun setIdPrestamo() {
         if(this.idPrestamo.isEmpty()){
             val id = db.collection("personal").document()
             idPrestamo = id.id
         }
     }
-
     fun setIdItemsPrestamo(lista : MutableList<ItemPrestamo>){
         for(elemento in lista) {
             val idItemsPrestamo = db.collection("itemsPrestamo").document()
@@ -142,14 +155,17 @@ class NewPrestamoViewModel : ViewModel() {
     fun mostrarNombrePersonal() : String {
         return this.personalACargo.nombre
     }
-
     fun mostrarApellidoPersonal () : String {
        return this.personalACargo.apellido
     }
-    fun equipoYaAgregado(equipo : Equipo) : Boolean {
-        return this.listaItems.find { it.idEquipo == equipo.id } != null
+    fun equipoYaAgregado(nroInventario : String) : Boolean {
+        return this.listaEquipos.find { it.inventario == nroInventario } != null
     }
-
+    fun limpiarDatos() {
+        this.idPrestamo = ""
+        this.listaEquipos.clear()
+        this.listaItems.clear()
+    }
     fun limpiarListaEquipos() {
         this.listaEquipos.clear()
     }

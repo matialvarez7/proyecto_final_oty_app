@@ -86,11 +86,16 @@ class AniadirEquipoPrestamo : Fragment() {
         }
         aniadir.setOnClickListener(){
             lifecycleScope.launch {
-                if(sharedViewModel.confirmarEquipo(id.toString())){
-                    limpiarDatos()
-                    Snackbar.make(v, "Equipo añadido al préstamo", Snackbar.LENGTH_LONG).show()
+                if(!sharedViewModel.equipoYaAgregado(inventario.text.toString())){
+                    if(sharedViewModel.confirmarEquipo(id.toString())){
+                        limpiarDatos()
+                        Snackbar.make(v, "Equipo añadido al préstamo", Snackbar.LENGTH_LONG).show()
+
+                    }else{
+                        Snackbar.make(v, "Error al añadir un equipo", Snackbar.LENGTH_LONG).show()
+                    }
                 }else{
-                    Snackbar.make(v, "Error al añadir un equipo", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(v, "Equipo añadido al préstamo", Snackbar.LENGTH_LONG).show()
                 }
             }
         }

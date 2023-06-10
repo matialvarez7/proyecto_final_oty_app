@@ -108,6 +108,15 @@ class NewPrestamo : Fragment() {
             }
         }
 
+        cancelarPrestamo.setOnClickListener(){
+            lifecycleScope.launch {
+                if(viewModel.cancelarPrestamo()){
+                    Snackbar.make(v, "Prestamo cancelado", Snackbar.LENGTH_LONG).show()
+                    findNavController().popBackStack()
+                }
+            }
+        }
+
     }
 
 }

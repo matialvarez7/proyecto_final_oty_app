@@ -7,84 +7,103 @@
     android:layout_height="match_parent"
     tools:context=".fragments.DetallePrestamo">
 
+
     <TextView
-        android:id="@+id/tituloDetPrestamo"
-        android:layout_width="wrap_content"
+        android:id="@+id/tituloPrestamo"
+        android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginEnd="177dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
         android:text="Prestamo"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="50dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tituloResponsable"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="165dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/blue_custom_background"
         android:text="Responsable"
-        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloDetPrestamo" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloPrestamo" />
 
     <TextView
         android:id="@+id/responsableDetallePrestamo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="177dp"
-        android:text="NombreYApellido"
-        android:textSize="22sp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/custom_background"
+        android:text="nom y ap respo"
+        android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloResponsable" />
 
     <TextView
         android:id="@+id/tituloFecha"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="177dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/blue_custom_background"
         android:text="Fecha"
-        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/responsableDetallePrestamo" />
 
+
     <TextView
         android:id="@+id/fechaDetallePrestamo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="177dp"
-        android:text="Fecha Prestamo"
-        android:textSize="22sp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
+        android:background="@drawable/custom_background"
+        android:text="fechaPrestamo"
+        android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloFecha" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerItems"
-        android:layout_width="409dp"
-        android:layout_height="410dp"
-        android:layout_marginTop="33dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="100dp"
+        android:isScrollContainer="true"
+        android:windowSoftInputMode="adjustResize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fechaDetallePrestamo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

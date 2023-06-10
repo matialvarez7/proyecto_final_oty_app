@@ -2,13 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.DetalleEquipo">
 
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tituloItemPrestamo"
         android:layout_width="177dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -20,13 +22,13 @@
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/numInventario"
+        app:layout_constraintBottom_toTopOf="@+id/tituloInventario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/numInventario"
+        android:id="@+id/tituloInventario"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="39dp"
@@ -39,10 +41,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloItemPrestamo" />
 
     <TextView
-        android:id="@+id/baseInventario"
+        android:id="@+id/inventarioDetPrestEquipo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_background"
@@ -54,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numInventario" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloInventario" />
 
     <TextView
         android:id="@+id/nombreEquipo"
@@ -70,10 +72,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/baseInventario" />
+        app:layout_constraintTop_toBottomOf="@+id/inventarioDetPrestEquipo" />
 
     <TextView
-        android:id="@+id/baseNombreEquipo"
+        android:id="@+id/nombreDetPrestEquipo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_background"
@@ -87,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nombreEquipo" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/numeroAnet"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -100,10 +102,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/baseNombreEquipo" />
+        app:layout_constraintTop_toBottomOf="@+id/nombreDetPrestEquipo" />
 
     <TextView
-        android:id="@+id/baseNumeroAnet"
+        android:id="@+id/anetDetPrestEquipo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_background"
@@ -114,7 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/numeroAnet" />
 
     <TextView
         android:id="@+id/Estado"
@@ -130,10 +132,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/baseNumeroAnet" />
+        app:layout_constraintTop_toBottomOf="@+id/anetDetPrestEquipo" />
 
     <TextView
-        android:id="@+id/baseEstado"
+        android:id="@+id/estadoDetPrestEquipo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_background"
@@ -153,24 +155,12 @@
         android:backgroundTint="#4CAF50"
         android:text="editar"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toStartOf="@+id/EliminarBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/EliminarBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#E91E63"
-        android:text="Eliminar"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editar"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -185,4 +175,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.83" />
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

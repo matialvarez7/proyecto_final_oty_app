@@ -7,4 +7,7 @@ data class Prestamo(
     var idPersonal : String,
     var fechaPrestamo : Date,
     var estadoPrestamo : String
-)
+) {
+    constructor() : this("","", Date(), "")
+
+}

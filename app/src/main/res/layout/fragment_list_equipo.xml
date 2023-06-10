@@ -9,40 +9,50 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewEquipos"
-        android:layout_width="386dp"
+        android:layout_width="348dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/custom_background"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Buscar"
-        app:searchIcon="@drawable/lupa"
         android:elegantTextHeight="true"
         android:paddingStart="10dp"
-        />
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/bottonAregarEquipos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleListaEquipos"
+        app:queryHint="Buscar"
+        app:searchIcon="@drawable/lupa" />
 
     <TextView
         android:id="@+id/titleListaEquipos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="24dp"
         android:autoSizeMaxTextSize="35dp"
         android:text="Equipos"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/searchViewEquipos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchViewEquipos" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ListaEquipos"
-        android:layout_width="409dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="21dp"
+        android:layout_width="348dp"
+        android:layout_height="345dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottonAregarEquipos">
 
@@ -52,14 +62,15 @@
         android:id="@+id/bottonAregarEquipos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="159dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#004A8B"
         android:text="Alta Equipo"
+        app:layout_constraintBottom_toTopOf="@+id/ListaEquipos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleListaEquipos" />
+        app:layout_constraintTop_toBottomOf="@+id/searchViewEquipos" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-
 

@@ -96,7 +96,10 @@ class ListPersonal : Fragment() {
                 if(query != null){
                     val filteredList = mutableListOf<Personal>()
                     for ( personal in personales){
-                        if(personal.apellido.lowercase(Locale.ROOT).contains(query) || personal.apellido.contains(query)){
+                        val lowercaseQuery = query.lowercase(Locale.ROOT)
+                        if(personal.apellido.lowercase(Locale.ROOT).contains(lowercaseQuery)
+                            || personal.nombre.lowercase(Locale.ROOT).contains(lowercaseQuery)
+                            || personal.dni.lowercase(Locale.ROOT).contains(lowercaseQuery)){
                             filteredList.add(personal)
                         }
                     }

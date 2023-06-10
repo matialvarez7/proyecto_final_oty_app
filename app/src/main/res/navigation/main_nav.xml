@@ -122,7 +122,11 @@
         android:id="@+id/listPrestamos"
         android:name="com.example.proyecto_final_oty_app.fragments.ListPrestamos"
         android:label="fragment_list_prestamos"
-        tools:layout="@layout/fragment_list_prestamos" />
+        tools:layout="@layout/fragment_list_prestamos" >
+        <action
+            android:id="@+id/action_listPrestamos_to_detallePrestamo"
+            app:destination="@id/detallePrestamo" />
+    </fragment>
     <fragment
         android:id="@+id/lector"
         android:name="com.example.proyecto_final_oty_app.fragments.Lector"
@@ -141,7 +145,11 @@
         android:id="@+id/newPrestamo2"
         android:name="com.example.proyecto_final_oty_app.fragments.NewPrestamo"
         android:label="fragment_new_prestamo"
-        tools:layout="@layout/fragment_new_prestamo" />
+        tools:layout="@layout/fragment_new_prestamo" >
+        <action
+            android:id="@+id/action_newPrestamo2_to_aniadirEquipoPrestamo"
+            app:destination="@id/aniadirEquipoPrestamo" />
+    </fragment>
     <fragment
         android:id="@+id/detalleAsignacion"
         android:name="com.example.proyecto_final_oty_app.fragments.DetalleAsignacion"
@@ -157,6 +165,41 @@
             android:name="personal"
             app:argType="com.example.proyecto_final_oty_app.entities.Personal" />
     </fragment>
+
+    <fragment
+        android:id="@+id/aniadirEquipoPrestamo"
+        android:name="com.example.proyecto_final_oty_app.fragments.AniadirEquipoPrestamo"
+        android:label="fragment_aniadir_equipo_prestamo"
+        tools:layout="@layout/fragment_aniadir_equipo_prestamo" >
+        <argument
+            android:name="idPrestamo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_aniadirEquipoPrestamo_to_lector"
+            app:destination="@id/lector" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePrestamoEquipo"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetallePrestamoEquipo"
+        android:label="fragment_detalle_prestamo_equipo"
+        tools:layout="@layout/fragment_detalle_prestamo_equipo" >
+        <argument
+            android:name="equipo"
+            app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePrestamo"
+        android:name="com.example.proyecto_final_oty_app.fragments.DetallePrestamo"
+        android:label="fragment_detalle_prestamo"
+        tools:layout="@layout/fragment_detalle_prestamo" >
+        <argument
+            android:name="prestamoFinal"
+            app:argType="com.example.proyecto_final_oty_app.entities.PrestamoFinal" />
+        <action
+            android:id="@+id/action_detallePrestamo_to_detallePrestamoEquipo"
+            app:destination="@id/detallePrestamoEquipo" />
+    </fragment>
+
 
 </navigation>
 

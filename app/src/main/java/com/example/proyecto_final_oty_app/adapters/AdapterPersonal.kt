@@ -58,7 +58,7 @@ class AdapterPersonal (var personales: MutableList<Personal>, var onClick : (Int
 
         fun setPersonalNombre (nombre : String){
             val txtNombre : TextView = view.findViewById(R.id.nombrePersonal)
-            txtNombre.text = nombre
+            txtNombre.text = nombre + ","
 
         }
 
@@ -70,7 +70,7 @@ class AdapterPersonal (var personales: MutableList<Personal>, var onClick : (Int
 
         fun setPersonalApellido (apellido : String){
             val txtApellido : TextView = view.findViewById(R.id.apellidoPersonal)
-            txtApellido.text = apellido
+            txtApellido.text = apellido + " -"
 
         }
 

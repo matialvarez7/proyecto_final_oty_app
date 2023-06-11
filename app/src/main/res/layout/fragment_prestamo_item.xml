@@ -32,9 +32,8 @@
             android:id="@+id/tituloNombreEquipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
             android:text="Equipos:"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.377"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
@@ -66,8 +65,7 @@
             android:id="@+id/nombreEquipoPrestamo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="44dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            android:layout_marginStart="3dp"
             app:layout_constraintStart_toEndOf="@+id/tituloNombreEquipo"
             app:layout_constraintTop_toTopOf="@+id/guideline4" />
 

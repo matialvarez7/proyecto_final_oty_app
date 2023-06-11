@@ -96,7 +96,7 @@ class ListAsignacionesDocentes : Fragment() {
                     for (equipo in snapshot) {
                         equipos.add(equipo.toObject())
                     }
-                    recyclerAsignacionDocente.adapter = adapter //Va aca porque equipos esta vacio, entonces aca le paso el adaptador con los equipos agregados.
+                    recyclerAsignacionDocente.adapter = adapter
                 }
             }
             .addOnFailureListener { exception ->

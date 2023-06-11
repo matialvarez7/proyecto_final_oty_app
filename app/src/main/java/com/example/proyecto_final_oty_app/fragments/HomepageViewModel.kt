@@ -91,12 +91,12 @@ class HomepageViewModel : ViewModel() {
         if(tipoDeColeccion == "Asignaciones" && cantTotal > 0){
             cantEnCurso = obtenerColeccionAsignacionDocente().size.toFloat()
             promedio =(((cantEnCurso/cantTotal)* 100))
+            textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         } else if(tipoDeColeccion == "Prestamos" && cantTotal > 0){
             cantEnCurso =obtenerColeccionPrestamos().size.toFloat()
             promedio =(((cantEnCurso/cantTotal)* 100))
+            textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }
-
-        textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
 
 
         progreBarAsig.setProgress(promedio.roundToInt())

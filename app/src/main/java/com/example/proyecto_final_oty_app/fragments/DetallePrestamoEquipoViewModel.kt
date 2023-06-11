@@ -38,7 +38,7 @@ class DetallePrestamoEquipoViewModel : ViewModel() {
             val snapshot = itemPrestamoDocument.get().await()
             val itemPrestamo = snapshot.toObject(ItemPrestamo::class.java)
             itemPrestamo?.let {
-                it.estadoItem = "devuelto"
+                it.estadoItem = "Devuelto"
                 itemPrestamoDocument.set(it).await()
             }
         } catch (e: Exception) {
@@ -50,7 +50,7 @@ class DetallePrestamoEquipoViewModel : ViewModel() {
             val snapshot = equipoDocument.get().await()
             val equipo = snapshot.toObject(Equipo::class.java)
             equipo?.let {
-                it.estado = "disponible"
+                it.estado = "Disponible"
                 equipoDocument.set(it).await()
             }
         } catch (e: Exception) {

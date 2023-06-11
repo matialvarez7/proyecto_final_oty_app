@@ -39,7 +39,7 @@ class HomepageViewModel : ViewModel() {
         prestamos = mutableListOf()
         this.db = FirebaseFirestore.getInstance()
 
-        var basePrestamos = db.collection("prestamos").get().await()
+        var basePrestamos = db.collection("prestamos").whereEqualTo("estadoPrestamo","Activo").get().await()
         if (basePrestamos != null){
             prestamos = basePrestamos.toObjects<Prestamo>() as MutableList<Prestamo>
         } else {

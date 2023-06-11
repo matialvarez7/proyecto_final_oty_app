@@ -45,8 +45,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recPrestamos"
-        android:layout_width="347dp"
-        android:layout_height="245dp"
+        android:layout_width="357dp"
+        android:layout_height="488dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"

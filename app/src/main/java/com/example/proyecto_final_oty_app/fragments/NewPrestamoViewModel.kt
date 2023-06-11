@@ -19,7 +19,7 @@ class NewPrestamoViewModel : ViewModel() {
     val db = Firebase.firestore
     var idPrestamo : String = ""
     lateinit var equipo: Equipo
-    lateinit var personalACargo : Personal
+    var personalACargo : Personal? = null
     var listaItems : MutableList<ItemPrestamo> = arrayListOf()
     var listaEquipos : MutableList<Equipo> = arrayListOf()
 
@@ -29,7 +29,7 @@ class NewPrestamoViewModel : ViewModel() {
         try{
             this.setIdItemsPrestamo(this.listaItems)
             if(this.personalACargo != null){
-                nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo.id.toString(), Date(), "Activo")
+                nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo?.id.toString(), Date(), "Activo")
                 db.collection("prestamos").document(idPrestamo).set(nuevoPrestamo).await()
                 for(elemento in listaItems){
                     db.collection("itemsPrestamo").document(elemento.id).set(elemento).await()
@@ -153,10 +153,18 @@ class NewPrestamoViewModel : ViewModel() {
         }
     }
     fun mostrarNombrePersonal() : String {
-        return this.personalACargo.nombre
+        var nombre : String = ""
+        if(this.personalACargo != null){
+            nombre = this.personalACargo!!.nombre
+        }
+        return nombre
     }
     fun mostrarApellidoPersonal () : String {
-       return this.personalACargo.apellido
+        var apellido : String = ""
+        if(this.personalACargo != null){
+            apellido = this.personalACargo!!.apellido
+        }
+        return apellido
     }
     fun equipoYaAgregado(nroInventario : String) : Boolean {
         return this.listaEquipos.find { it.inventario == nroInventario } != null

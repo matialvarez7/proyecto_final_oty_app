@@ -29,7 +29,7 @@ class ListPrestamosViewModel : ViewModel() {
 
         //Obtener coleccion de prestamos
         prestamos = mutableListOf()
-        var basePrestamos = db.collection("prestamos").get().await()
+        var basePrestamos = db.collection("prestamos").orderBy("estadoPrestamo").get().await()
         if (basePrestamos != null){
             prestamos = basePrestamos.toObjects<Prestamo>() as MutableList<Prestamo>
         } else {

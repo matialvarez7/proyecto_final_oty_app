@@ -1,5 +1,7 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.content.ContentValues
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
@@ -18,7 +20,7 @@ class HomepageViewModel : ViewModel() {
     lateinit var db : FirebaseFirestore
     lateinit var equipos : MutableList<Equipo>
     lateinit var asignaciones : MutableList<AsignacionDocente>
-    lateinit var prestamos : MutableList<Personal> // CAMBIAR POR PRESTAMO
+    lateinit var prestamos : MutableList<Prestamo>
 
     suspend fun obtenerColeccionAsignacionDocente() : MutableList<AsignacionDocente> {
         asignaciones = mutableListOf()
@@ -27,21 +29,24 @@ class HomepageViewModel : ViewModel() {
         var baseAsignaciones = db.collection("asignaciones").get().await()
         if(baseAsignaciones != null){
             asignaciones = baseAsignaciones.toObjects<AsignacionDocente>() as MutableList<AsignacionDocente>
+        } else {
+            Log.d(ContentValues.TAG, "Error getting documents")
         }
         return asignaciones
     }
 
-    suspend fun obtenerColeccionPrestamos() : MutableList<Personal> {
+    suspend fun obtenerColeccionPrestamos() : MutableList<Prestamo> {
         prestamos = mutableListOf()
         this.db = FirebaseFirestore.getInstance()
 
-        var basePrestamos = db.collection("personal").get().await() //CAMBIAR POR PRESTAMO
-        if(basePrestamos != null){
-            prestamos = basePrestamos.toObjects<Personal>() as MutableList<Personal> //CAMBIAR POR PRESTAMO
+        var basePrestamos = db.collection("prestamos").get().await()
+        if (basePrestamos != null){
+            prestamos = basePrestamos.toObjects<Prestamo>() as MutableList<Prestamo>
+        } else {
+            Log.d(ContentValues.TAG, "Error getting documents")
         }
         return prestamos
     }
-
 
     suspend fun obtenerColeccionEquipos(tipoDeColeccion: String) : MutableList<Equipo>{
         equipos = mutableListOf()
@@ -67,7 +72,7 @@ class HomepageViewModel : ViewModel() {
 
                 for (equipo in equipos){
 
-                    if(equipo.nombre.contains("A-NGG3-OTYP")){
+                    if(equipo.nombre.contains("A-NHG3-OTYP")){
                         equiposADevolver.add(equipo)
                     }
                 }

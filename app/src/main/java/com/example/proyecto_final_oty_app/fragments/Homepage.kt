@@ -35,10 +35,6 @@ class Homepage : Fragment() {
     lateinit var progreBarAsig : ProgressBar
     lateinit var progreBarPres : ProgressBar
     lateinit var db : FirebaseFirestore
-    lateinit var asignaciones : MutableList<Personal>  //Cambiar por Asignaciones
-    lateinit var EquiposAsignDocentes : MutableList<Personal> //Equipos de Asignaciones
-    lateinit var prestamos : MutableList<Personal>  //Cambiar por Asignaciones
-    lateinit var EquiposPrestamos : MutableList<Personal> //Equipos de Prestamos
     lateinit var cantAsign : TextView
     lateinit var cantPres : TextView
     lateinit var btnCerrarSesion: ImageButton
@@ -73,15 +69,10 @@ class Homepage : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    // UNA VEZ TERMINADO PRESTAMOS Y ASIGNACIONES PASARLO AL VIEW MODEL.
 
     override fun onStart() {
         super.onStart()
         db = FirebaseFirestore.getInstance()
-        asignaciones = mutableListOf()
-        EquiposAsignDocentes = mutableListOf()
-        prestamos = mutableListOf()
-        EquiposPrestamos = mutableListOf()
 
         btnAsigDocent.setOnClickListener(){
             val action = HomepageDirections.actionHomepageToListAsignacionesDocentes()

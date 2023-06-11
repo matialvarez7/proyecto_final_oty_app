@@ -9,16 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.adapters.AdapterAsignacion
+import com.example.proyecto_final_oty_app.adapters.AdapterPrestamo
 import com.example.proyecto_final_oty_app.entities.AsignacionDocente
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.example.proyecto_final_oty_app.entities.Personal
+import com.example.proyecto_final_oty_app.entities.PrestamoFinal
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import java.util.Locale
 
 class ListAsignacionesDocentes : Fragment() {
 
@@ -31,6 +35,8 @@ class ListAsignacionesDocentes : Fragment() {
     lateinit var asignaciones : MutableList<AsignacionDocente>
     lateinit var personales : MutableList<Personal>
     lateinit var btnAltaAsignacion : Button
+    lateinit var buscadorAsignaciones : SearchView
+
 
 
     companion object {
@@ -46,6 +52,7 @@ class ListAsignacionesDocentes : Fragment() {
         v= inflater.inflate(R.layout.fragment_list_asignaciones_docentes, container, false)
         btnAltaAsignacion = v.findViewById(R.id.bottonAgregarAsignacion)
         recyclerAsignacionDocente = v.findViewById(R.id.listaAsignaciones)
+        buscadorAsignaciones = v.findViewById(R.id.searchViewAsignaciones)
 
         return v
     }
@@ -103,6 +110,9 @@ class ListAsignacionesDocentes : Fragment() {
         equipos = mutableListOf()
         personales = mutableListOf()
         asignaciones= mutableListOf()
+        recyclerAsignacionDocente.setHasFixedSize(true)
+        recyclerAsignacionDocente.layoutManager = LinearLayoutManager(context)
+
 
 
 
@@ -114,12 +124,52 @@ class ListAsignacionesDocentes : Fragment() {
             findNavController().navigate(action)
         }
         registro()
-        recyclerAsignacionDocente.layoutManager = LinearLayoutManager(context)
+
+        buscadorAsignaciones.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+            fun filterList(query : String?){
+                if(query != null){
+                    val filteredList = mutableListOf<AsignacionDocente>()
+                    for (asignacion in asignaciones){
+                        val pos = buscarPersonalPos(asignacion.idPersonal)
+                     if(personales[pos].nombre.lowercase(Locale.ROOT).contains(query) || personales[pos].nombre.contains(query)  ){
+                            filteredList.add(asignacion)
+                        }
+                    }
+
+                    if(!filteredList.isEmpty()){
+
+                        adapter = AdapterAsignacion(equipos, personales,filteredList){
+                                position ->
+                            val posE=buscarEquipoPos(filteredList[position].idEquipo)
+                            val posP=buscarPersonalPos(filteredList[position].idPersonal)
+                            val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToDetalleAsignacion(filteredList[position].id,equipos[posE],personales[posP])
+                            findNavController().navigate(action)
+                        }
+                        recyclerAsignacionDocente.adapter = adapter
+
+                    }
+                }
+
+            }
+
+        })
+
 
         btnAltaAsignacion.setOnClickListener(){
             val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToNewAsignacion()
             findNavController().navigate(action)
         }
+
+
     }
 
     fun buscarEquipoPos( equipoId: String): Int {

@@ -7,6 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ListAsignacionesDocentes">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewAsignaciones"
+        android:layout_width="386dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/custom_background"
+        android:elegantTextHeight="true"
+        android:paddingStart="10dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleListaAsignacion"
+        app:queryHint="Buscar"
+        app:searchIcon="@drawable/lupa" />
+
     <TextView
         android:id="@+id/titleListaAsignacion"
         android:layout_width="wrap_content"
@@ -20,7 +37,6 @@
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bottonAgregarAsignacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,22 +46,22 @@
         android:id="@+id/bottonAgregarAsignacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#004A8B"
         android:text="Alta asignación"
-        app:layout_constraintBottom_toTopOf="@+id/listaAsignaciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleListaAsignacion" />
+        app:layout_constraintTop_toBottomOf="@+id/searchViewAsignaciones" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listaAsignaciones"
-        android:layout_width="350dp"
-        android:layout_height="425dp"
+        android:layout_width="353dp"
+        android:layout_height="288dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottonAgregarAsignacion" />
 

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.example.proyecto_final_oty_app.entities.Equipo
+import com.example.proyecto_final_oty_app.entities.ItemPrestamo
 import com.example.proyecto_final_oty_app.entities.Personal
 import com.example.proyecto_final_oty_app.entities.Prestamo
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,9 +21,9 @@ class HomepageViewModel : ViewModel() {
     lateinit var db : FirebaseFirestore
     lateinit var equipos : MutableList<Equipo>
     lateinit var asignaciones : MutableList<AsignacionDocente>
-    lateinit var prestamos : MutableList<Prestamo>
+    lateinit var prestamos : MutableList<Equipo>
 
-    suspend fun obtenerColeccionAsignacionDocente() : MutableList<AsignacionDocente> {
+    suspend fun obtenerColeccionAsignacionDocenteEnCurso() : MutableList<AsignacionDocente> {
         asignaciones = mutableListOf()
         this.db = FirebaseFirestore.getInstance()
 
@@ -35,13 +36,13 @@ class HomepageViewModel : ViewModel() {
         return asignaciones
     }
 
-    suspend fun obtenerColeccionPrestamos() : MutableList<Prestamo> {
+    suspend fun obtenerColeccionPrestamosEnCurso() : MutableList<Equipo> {
         prestamos = mutableListOf()
         this.db = FirebaseFirestore.getInstance()
 
-        var basePrestamos = db.collection("prestamos").whereEqualTo("estadoPrestamo","Activo").get().await()
+        var basePrestamos = db.collection("equipos").whereEqualTo("estado","En préstamo").get().await()
         if (basePrestamos != null){
-            prestamos = basePrestamos.toObjects<Prestamo>() as MutableList<Prestamo>
+            prestamos = basePrestamos.toObjects<Equipo>() as MutableList<Equipo>
         } else {
             Log.d(ContentValues.TAG, "Error getting documents")
         }
@@ -89,11 +90,11 @@ class HomepageViewModel : ViewModel() {
 
 
         if(tipoDeColeccion == "Asignaciones" && cantTotal > 0){
-            cantEnCurso = obtenerColeccionAsignacionDocente().size.toFloat()
+            cantEnCurso = obtenerColeccionAsignacionDocenteEnCurso().size.toFloat()
             promedio =(((cantEnCurso/cantTotal)* 100))
             textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         } else if(tipoDeColeccion == "Prestamos" && cantTotal > 0){
-            cantEnCurso =obtenerColeccionPrestamos().size.toFloat()
+            cantEnCurso =obtenerColeccionPrestamosEnCurso().size.toFloat()
             promedio =(((cantEnCurso/cantTotal)* 100))
             textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }

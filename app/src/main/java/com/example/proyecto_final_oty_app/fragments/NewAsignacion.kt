@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +23,7 @@ import java.util.Calendar
 class NewAsignacion : Fragment() {
 
     private lateinit var v: View
+    private val sharedViewModel : LectorViewModel by activityViewModels()
     lateinit var editDNI: EditText
     lateinit var editInventario: EditText
     lateinit var confirmarBtn: Button
@@ -29,6 +33,7 @@ class NewAsignacion : Fragment() {
     lateinit var areaText: TextView
     lateinit var nombreEquipoText: TextView
     lateinit var estadoEquipoText: TextView
+    lateinit var lector : ImageButton
 
     companion object {
         fun newInstance() = NewAsignacion()
@@ -50,6 +55,7 @@ class NewAsignacion : Fragment() {
         areaText = v.findViewById(R.id.areaText)
         nombreEquipoText = v.findViewById(R.id.nombreEquipoText)
         estadoEquipoText = v.findViewById(R.id.estadoEquipoText)
+        lector = v.findViewById(R.id.lectorAsignacion)
         return v
     }
 
@@ -65,6 +71,14 @@ class NewAsignacion : Fragment() {
         //"placeholders"
         //editDNI.hint = "DNI"
         //editInventario.hint = "Nro. Inventario"
+
+        lector.setOnClickListener {
+            val action = NewAsignacionDirections.actionNewAsignacionToLector(0)
+            findNavController().navigate(action)
+        }
+        sharedViewModel.valorEscaneadoInventario.observe(viewLifecycleOwner, Observer { valor ->
+            editInventario.setText(valor)
+        })
 
         buscarDNIBtn.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {

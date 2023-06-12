@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/areaPersonal"
-                android:layout_width="wrap_content"
+                android:layout_width="165dp"
                 android:layout_height="wrap_content"
                 android:text="Biologia"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"

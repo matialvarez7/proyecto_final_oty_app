@@ -101,6 +101,9 @@ class Homepage : Fragment() {
 
         lifecycleScope.launch {
             viewModel.generarProgressBar("Asignaciones",cantAsign, porcentAsignaciones, progreBarAsig)
+        }
+
+        lifecycleScope.launch {
             viewModel.generarProgressBar("Prestamos",cantPres, porcentPrestamos, progreBarPres)
         }
 

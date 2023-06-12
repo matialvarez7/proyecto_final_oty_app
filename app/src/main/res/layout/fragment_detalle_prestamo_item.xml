@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/estadoEquipoPrestamo"
-            android:layout_width="78dp"
+            android:layout_width="85dp"
             android:layout_height="19dp"
             android:layout_marginEnd="3dp"
             app:layout_constraintBottom_toBottomOf="parent"

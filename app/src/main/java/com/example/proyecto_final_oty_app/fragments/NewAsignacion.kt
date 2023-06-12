@@ -29,10 +29,9 @@ class NewAsignacion : Fragment() {
     lateinit var confirmarBtn: Button
     lateinit var buscarInventarioBtn: Button
     lateinit var buscarDNIBtn: Button
-    lateinit var nombreCompletoText: TextView
-    lateinit var areaText: TextView
-    lateinit var nombreEquipoText: TextView
-    lateinit var estadoEquipoText: TextView
+    lateinit var nombreCompletoText: EditText
+    lateinit var areaText: EditText
+    lateinit var nombreEquipoText: EditText
     lateinit var lector : ImageButton
 
     companion object {
@@ -47,14 +46,13 @@ class NewAsignacion : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_new_asignacion, container, false)
         editDNI = v.findViewById(R.id.editDNI)
-        editInventario = v.findViewById(R.id.editInventario)
+        editInventario = v.findViewById(R.id.editInventario2)
         confirmarBtn = v.findViewById(R.id.confirmarBtn)
         buscarDNIBtn = v.findViewById(R.id.buscarDNIBtn)
         buscarInventarioBtn = v.findViewById(R.id.buscarInventarioBtn)
-        nombreCompletoText = v.findViewById(R.id.nombreCompletoText)
-        areaText = v.findViewById(R.id.areaText)
-        nombreEquipoText = v.findViewById(R.id.nombreEquipoText)
-        estadoEquipoText = v.findViewById(R.id.estadoEquipoText)
+        nombreCompletoText = v.findViewById(R.id.editResponsable)
+        areaText = v.findViewById(R.id.editAreaAsig)
+        nombreEquipoText = v.findViewById(R.id.editNombreEquipo)
         lector = v.findViewById(R.id.lectorAsignacion)
         return v
     }
@@ -84,9 +82,8 @@ class NewAsignacion : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     val personalEncontrado = viewModel.buscarPersonalByDNI(editDNI.text.toString())
-                    nombreCompletoText.text =
-                        personalEncontrado.nombre + " " + personalEncontrado.apellido
-                    areaText.text = personalEncontrado.area
+                    nombreCompletoText.setText(personalEncontrado.nombre + " " + personalEncontrado.apellido)
+                    areaText.setText(personalEncontrado.area)
 
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
@@ -98,8 +95,8 @@ class NewAsignacion : Fragment() {
                 try {
                     val equipoEncontrado =
                         viewModel.buscarEquipoByInventario(editInventario.text.toString())
-                    nombreEquipoText.text = equipoEncontrado.nombre
-                    estadoEquipoText.text = "Estado: " + equipoEncontrado.estado
+                    nombreEquipoText.setText(equipoEncontrado.nombre)
+
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }
@@ -110,10 +107,9 @@ class NewAsignacion : Fragment() {
             val invenatrioIngresado = editInventario.text.toString()
             editDNI.text.clear()
             editInventario.text.clear()
-            nombreCompletoText.text = ""
-            areaText.text = ""
-            nombreEquipoText.text = ""
-            estadoEquipoText.text = ""
+            nombreCompletoText.text.clear()
+            areaText.text.clear()
+            nombreEquipoText.text.clear()
 
 
             if (viewModel.camposValidos(invenatrioIngresado, dniIngresado)) {

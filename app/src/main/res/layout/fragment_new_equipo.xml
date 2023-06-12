@@ -14,7 +14,6 @@
         android:layout_height="48dp"
         android:layout_marginStart="-5dp"
         android:layout_marginEnd="-5dp"
-        android:layout_marginBottom="48dp"
         android:background="@color/white"
         android:paddingTop="20px"
         android:src="@drawable/bcode"
@@ -28,11 +27,11 @@
         android:layout_width="41dp"
         android:layout_height="45dp"
         android:layout_marginStart="-2dp"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="-4dp"
         android:background="@color/white"
         android:paddingTop="20px"
         android:src="@drawable/bcode"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nroAnet"
         app:layout_constraintTop_toBottomOf="@+id/btnEscEquipo" />
@@ -77,7 +76,7 @@
         android:ems="10"
         android:hint=""
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editar1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/btnEscAnet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nroEquipo" />
@@ -86,15 +85,15 @@
         android:id="@+id/editar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="282dp"
+        android:layout_marginBottom="270dp"
         android:backgroundTint="#146517"
         android:text="Confirmar"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nroAnet"
-        app:cornerRadius="10dp"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -124,8 +123,6 @@
         android:id="@+id/btnEscInventario"
         android:layout_width="40dp"
         android:layout_height="43dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="15dp"
         android:background="@color/white"
         android:paddingTop="20px"
         android:src="@drawable/bcode"
@@ -182,5 +179,12 @@
         app:layout_constraintStart_toEndOf="@+id/titulo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.504" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

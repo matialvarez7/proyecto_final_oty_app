@@ -10,11 +10,12 @@
     <EditText
         android:id="@+id/invEquipoPrestamo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="ingrese nro inventario"
+        android:hint=""
+        android:background="@drawable/custom_background"
         android:inputType="text"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/buscarEquipo"
@@ -24,12 +25,13 @@
 
     <TextView
         android:id="@+id/nomEquipoPrestamo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="nombre equipo"
+        android:background="@drawable/custom_background"
         android:text=""
-        android:textSize="24sp"
         android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/anetEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -38,13 +40,13 @@
 
     <TextView
         android:id="@+id/anetEquipoPrestamo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="nro anet"
+        android:background="@drawable/custom_background"
         android:text=""
-        android:textSize="24sp"
         android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/estadoEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,13 +54,13 @@
 
     <TextView
         android:id="@+id/estadoEquipoPrestamo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="estado del equipo"
+        android:background="@drawable/custom_background"
         android:text=""
-        android:textSize="24sp"
         android:textAlignment="center"
+        android:textColor="#090909"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -70,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <Button
         android:id="@+id/buscarEquipo"
@@ -95,8 +97,10 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.119" />
 
     <Button
         android:id="@+id/scanInventario"
@@ -112,12 +116,78 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/invEquipoPrestamo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.385" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.28" />
+
+    <TextView
+        android:id="@+id/nombEquipoAniadir"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/blue_custom_background"
+        android:text="Nombre del equipo"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nomEquipoPrestamo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/anetEqAniadir"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/blue_custom_background"
+        android:text="Número de A-NET"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/anetEquipoPrestamo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomEquipoPrestamo"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/blue_custom_background"
+        android:text="Estado"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/estadoEquipoPrestamo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anetEquipoPrestamo"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese número de inventario"
+        app:layout_constraintBottom_toTopOf="@+id/invEquipoPrestamo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.695" />
 </androidx.constraintlayout.widget.ConstraintLayout>

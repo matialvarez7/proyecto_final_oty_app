@@ -1,5 +1,7 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.proyecto_final_oty_app.entities.EquipoABM
 import com.example.proyecto_final_oty_app.entities.PersonalABM
@@ -14,8 +16,17 @@ class DetalleEquipoViewModel : ViewModel() {
 
 
     suspend fun eliminarEquipo(idEquipo: String) = withContext(Dispatchers.IO) {
-        val equipoDocument = equiposCollection.document(idEquipo)
-        equipoDocument.delete().await()
-    }
+        actualizarEstadoDelEquipo(idEquipo,"inactivo")
 
+    }
+    private fun actualizarEstadoDelEquipo(idEquipo: String, nuevoEstado: String) {
+
+        equiposCollection.document(idEquipo).update("estado",nuevoEstado)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "Equipo actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error al actualizar equipo", e)
+            }
+    }
 }

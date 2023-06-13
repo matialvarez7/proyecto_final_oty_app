@@ -13,6 +13,6 @@ data class Equipo(
     var estado : String
 
 ): Parcelable {
-    constructor() : this("","","","","")
+    constructor() : this("","","","","Disponible")
 }
 

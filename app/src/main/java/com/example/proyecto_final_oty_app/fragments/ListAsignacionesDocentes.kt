@@ -140,7 +140,8 @@ class ListAsignacionesDocentes : Fragment() {
                     val filteredList = mutableListOf<AsignacionDocente>()
                     for (asignacion in asignaciones){
                         val pos = buscarPersonalPos(asignacion.idPersonal)
-                     if(personales[pos].nombre.lowercase(Locale.ROOT).contains(query) || personales[pos].nombre.contains(query)  ){
+                     if(personales[pos].nombre.lowercase(Locale.ROOT).contains(query) || personales[pos].nombre.contains(query)
+                         ||personales[pos].apellido.lowercase(Locale.ROOT).contains(query) || personales[pos].apellido.contains(query)  ){
                             filteredList.add(asignacion)
                         }
                     }

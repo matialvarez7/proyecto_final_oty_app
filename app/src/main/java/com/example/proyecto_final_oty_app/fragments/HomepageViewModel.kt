@@ -5,14 +5,9 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import com.example.proyecto_final_oty_app.entities.Equipo
-import com.example.proyecto_final_oty_app.entities.ItemPrestamo
-import com.example.proyecto_final_oty_app.entities.Personal
-import com.example.proyecto_final_oty_app.entities.Prestamo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlin.math.roundToInt
 

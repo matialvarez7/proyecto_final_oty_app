@@ -1,28 +1,24 @@
 package com.example.proyecto_final_oty_app.fragments
 
-import android.content.ContentValues
+
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
-import com.example.proyecto_final_oty_app.entities.Personal
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import java.util.Locale
-import kotlin.math.roundToInt
 
 class Homepage : Fragment() {
 
@@ -41,12 +37,16 @@ class Homepage : Fragment() {
     lateinit var porcentAsignaciones : TextView
     lateinit var porcentPrestamos : TextView
     lateinit var viewModel: HomepageViewModel
+    lateinit var user : TextView
+    private lateinit var auth: FirebaseAuth
+
 
           override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_homepage, container, false)
+        auth = Firebase.auth
         txtTitle = v.findViewById(R.id.titleMenu)
         btnAsigDocent = v.findViewById(R.id.botonAsignacionesDocentes)
         btnPrestamos = v.findViewById(R.id.botonPrestamos)
@@ -59,6 +59,7 @@ class Homepage : Fragment() {
         btnCerrarSesion = v.findViewById(R.id.buttonCS)
         porcentAsignaciones = v.findViewById(R.id.porcentajeAsignaciones)
         porcentPrestamos = v.findViewById(R.id.porcentajePrestamos)
+        user = v.findViewById(R.id.User)
 
         return v
     }
@@ -95,8 +96,9 @@ class Homepage : Fragment() {
         }
 
         btnCerrarSesion.setOnClickListener(){
-            val action = HomepageDirections.actionHomepageToListEquipo2() //Modificar aca para que cierre sesion.
-            findNavController().navigate(action)
+            auth.signOut()
+            requireActivity().finish()
+
         }
 
         lifecycleScope.launch {
@@ -106,6 +108,8 @@ class Homepage : Fragment() {
         lifecycleScope.launch {
             viewModel.generarProgressBar("Prestamos",cantPres, porcentPrestamos, progreBarPres)
         }
+
+        user.text = auth.currentUser?.email.toString()
 
     }
 

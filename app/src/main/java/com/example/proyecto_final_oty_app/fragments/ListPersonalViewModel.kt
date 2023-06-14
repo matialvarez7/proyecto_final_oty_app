@@ -29,7 +29,8 @@ class ListPersonalViewModel : ViewModel() {
         if(basePersonal != null){
             personales = basePersonal.toObjects<Personal>() as MutableList<Personal>
         }
-        return personales
+
+        return personales.filter { it.estado=="Activo" } as MutableList<Personal>
     }
 
 

@@ -104,7 +104,7 @@ class NewPrestamoViewModel : ViewModel() {
 
     suspend fun buscarResponsable(dni : String) : Personal? {
         var listAux : MutableList<Personal>
-        var personalRef = db.collection("personal").whereEqualTo("dni", dni).get().await()
+        var personalRef = db.collection("personal").whereEqualTo("dni", dni).whereEqualTo("estado","Activo").get().await()
         if(!personalRef.isEmpty){
             listAux = personalRef.toObjects(Personal::class.java)
             for(e in listAux){

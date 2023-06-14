@@ -2,6 +2,8 @@ package com.example.proyecto_final_oty_app.fragments
 
 import android.content.ContentValues
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.example.proyecto_final_oty_app.entities.ItemPrestamo
@@ -27,20 +29,22 @@ class NewPrestamoViewModel : ViewModel() {
         var confirmado : Boolean = false
         lateinit var nuevoPrestamo : Prestamo
         try{
+            this.crearItemsPrestamos(this.listaEquipos)
             this.setIdItemsPrestamo(this.listaItems)
-            if(this.personalACargo != null){
+            if(this.personalACargo != null && this.listaEquipos.isNotEmpty()){
                 nuevoPrestamo = Prestamo(this.idPrestamo, this.personalACargo?.id.toString(), Date(), "Activo")
                 db.collection("prestamos").document(idPrestamo).set(nuevoPrestamo).await()
-                for(elemento in listaItems){
+                for(elemento in this.listaItems){
                     db.collection("itemsPrestamo").document(elemento.id).set(elemento).await()
+                }
+                for(equipo in this.listaEquipos){
+                    db.collection("equipos").document(equipo.id).set(equipo).await()
                 }
                 confirmado =  true
                 this.limpiarDatos()
             }
         }catch(e : Exception){
-            for(elemento in listaItems){
-                db.collection("equipos").document(elemento.idEquipo).update("estado", "Disponible").await()
-            }
+            Log.w(ContentValues.TAG, "Error: ", e)
         }
         return confirmado
     }
@@ -48,33 +52,23 @@ class NewPrestamoViewModel : ViewModel() {
     suspend fun cancelarPrestamo() : Boolean{
         var cancelado : Boolean = false
         try{
-            for(eq in this.listaEquipos){
-                db.collection("equipos").document(eq.id).update("estado", "Disponible").await()
-            }
             this.limpiarDatos()
             cancelado =  true
         }catch (e : Exception){
             Log.w(ContentValues.TAG, "Error:", e)
         }
-
-
         return cancelado
     }
 
-    suspend fun confirmarEquipo(idPrestamo : String) : Boolean{
+    suspend fun confirmarEquipo() : Boolean{
         var confirmado : Boolean = false
-        lateinit var item : ItemPrestamo
 
         try{
             if (this.equipo != null){
                 if (this.equipoDisponible()) {
-                    item = ItemPrestamo("", this.equipo.id, idPrestamo, "No devuelto")
-                    listaItems.add(item)
-                    listaEquipos.add(this.equipo)
                     this.equipo.estado = "En préstamo"
-                    db.collection("equipos").document(this.equipo.id).set(this.equipo).await()
                     confirmado = true
-
+                    listaEquipos.add(this.equipo)
                 }
             }
         }catch (e : Exception){
@@ -152,6 +146,12 @@ class NewPrestamoViewModel : ViewModel() {
             elemento.id = idItemsPrestamo.id
         }
     }
+
+    fun crearItemsPrestamos(equipos: MutableList<Equipo>) {
+        for(eq in equipos){
+            this.listaItems.add(ItemPrestamo("", eq.id, this.idPrestamo, "No devuelto"))
+        }
+    }
     fun mostrarNombrePersonal() : String {
         var apellido : String = ""
         if(this.personalACargo != null){
@@ -175,11 +175,5 @@ class NewPrestamoViewModel : ViewModel() {
         this.listaEquipos.clear()
         this.listaItems.clear()
     }
-    fun limpiarListaEquipos() {
-        this.listaEquipos.clear()
-    }
 
-    fun limpiarListaItemsPrestamo() {
-        this.listaItems.clear()
-    }
 }

@@ -4,10 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Equipo
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class AdapterCrearPrestamo(var equipos : MutableList<Equipo>) : RecyclerView.Adapter<AdapterCrearPrestamo.PrestamoHolder>() {
 
@@ -16,7 +22,7 @@ class AdapterCrearPrestamo(var equipos : MutableList<Equipo>) : RecyclerView.Ada
     class PrestamoHolder(v : View) : RecyclerView.ViewHolder(v){
 
         private var view : View
-        lateinit var eliminarEquipoBtn : Button
+        val eliminarEquipoBtn : ImageButton = v.findViewById(R.id.eliminarEquipoBtn)
         init {
             this.view = v
         }
@@ -25,6 +31,7 @@ class AdapterCrearPrestamo(var equipos : MutableList<Equipo>) : RecyclerView.Ada
             val nroIventario : TextView = view.findViewById( R.id.nroIventario)
             nroIventario.text = "Numero de inventario $inventario"
         }
+
     }
 
     // Instancia el Holder
@@ -41,5 +48,8 @@ class AdapterCrearPrestamo(var equipos : MutableList<Equipo>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: PrestamoHolder, position: Int) {
         holder.setNumeroInventario(equipos[position].inventario)
+        holder.eliminarEquipoBtn.setOnClickListener(){
+            equipos.remove(equipos[position])
+        }
     }
 }

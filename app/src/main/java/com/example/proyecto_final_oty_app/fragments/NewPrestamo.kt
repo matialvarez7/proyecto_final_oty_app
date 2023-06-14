@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,6 +70,7 @@ class NewPrestamo : Fragment() {
         equiposPrestamoAdapter = AdapterCrearPrestamo(viewModel.listaEquipos)
         recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
         recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
+
         buscarResponsable.setOnClickListener(){
             if(viewModel.campoDniVacío(dniResponsable.text.toString())){
                 Snackbar.make(v, "El DNI no puede estar vacío", Snackbar.LENGTH_LONG).show()

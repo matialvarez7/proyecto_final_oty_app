@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Equipo
+import com.example.proyecto_final_oty_app.entities.ItemPrestamoInterno
 
-class AdapterDetallePrestamo (var equipos : MutableList<Equipo>, var onClick : (Int) -> Unit) : RecyclerView.Adapter<AdapterDetallePrestamo.DetallePrestamoHolder>() {
+class AdapterDetallePrestamo (var items : MutableLiveData<MutableList<ItemPrestamoInterno>>, var onClick : (Int) -> Unit) : RecyclerView.Adapter<AdapterDetallePrestamo.DetallePrestamoHolder>() {
 
     class DetallePrestamoHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 
 import androidx.navigation.fragment.findNavController
@@ -56,9 +57,28 @@ class DetallePrestamo : Fragment() {
     override fun onStart() {
         super.onStart()
         val prestamo = DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
-
+        //En la vista muestro los detalles del responsable y fecha de prestamo
         responsablePrestamo.text = "${prestamo.nombre} ${prestamo.apellido}"
         fechaPrestamo.text = prestamo.fechaPrestamo.toString()
+
+        //Necesito armar una lista live, con ItemPrestamoInterno, con los datos para DetallePrestamo y DetalleEquipoPrestamo
+        lifecycleScope.launch {
+            viewModel.obtenerEquiposDeDB()
+            //Necesito poder observar los cambios en dicha lista, principalmente para cuando cambian los estados de sus items.
+            var listaItemsPrestamo = viewModel.listaItemsFinal
+            listaItemsPrestamo.observe(viewLifecycleOwner, Observer { lista ->
+
+            })
+
+            //Luego la seteo en el adapter y la renderizo
+            adapter = AdapterDetallePrestamo(listaItemsPrestamo) { position ->
+                val action = DetallePrestamoDirections.actionDetallePrestamoToDetallePrestamoEquipo()
+                findNavController().navigate(action)
+            }
+            recyclerItems.layoutManager = LinearLayoutManager(context)
+            recyclerItems.adapter = adapter
+        }
+            /*
         lifecycleScope.launch {
             viewModel.obtenerEquipos(prestamo.itemsPrestamo)
             var equipos = viewModel.getListadoEquiposPrestamo()
@@ -68,21 +88,27 @@ class DetallePrestamo : Fragment() {
             }
             recyclerItems.layoutManager = LinearLayoutManager(context)
             recyclerItems.adapter = adapter
-        }
+        } */
 
-        finalizarPrestamoBtn.setOnClickListener {
-            val prestamo = DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    viewModel.finalizarPrestamo(prestamo)
-                    Toast.makeText(context, "Préstamo finalizado correctamente", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
-                } catch(e:Exception) {
-                    Toast.makeText(context, "Error al finalizar el préstamo: $e", Toast.LENGTH_SHORT).show()
+            finalizarPrestamoBtn.setOnClickListener {
+                val prestamo = DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        viewModel.finalizarPrestamo(prestamo)
+                        Toast.makeText(
+                            context,
+                            "Préstamo finalizado correctamente",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().popBackStack()
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            context,
+                            "Error al finalizar el préstamo: $e",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
-        }
-
     }
-
 }

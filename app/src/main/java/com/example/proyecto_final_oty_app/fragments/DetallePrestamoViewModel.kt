@@ -1,9 +1,10 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.example.proyecto_final_oty_app.entities.ItemPrestamo
-import com.example.proyecto_final_oty_app.entities.Prestamo
+import com.example.proyecto_final_oty_app.entities.ItemPrestamoInterno
 import com.example.proyecto_final_oty_app.entities.PrestamoFinal
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -14,13 +15,26 @@ import kotlinx.coroutines.withContext
 
 class DetallePrestamoViewModel : ViewModel() {
 
-    lateinit var listadoEquiposDB : MutableList<Equipo>
-    lateinit var listadoEquiposFinal : MutableList<Equipo>
+    //lateinit var listadoEquiposDB : MutableList<Equipo>
+    //lateinit var listadoEquiposFinal : MutableList<Equipo>
     private var db = Firebase.firestore
     private val itemsPrestamoCollection = db.collection("itemsPrestamo")
     private val prestamosCollection = db.collection("prestamos")
     private val equiposCollection = db.collection("equipos")
+    var listaItemsFinal : MutableLiveData<MutableList<ItemPrestamoInterno>> = MutableLiveData()
+    var listaItemsAux : MutableList<ItemPrestamoInterno> = mutableListOf()
+    lateinit var listadoEquiposDB : MutableList<Equipo>
+     suspend fun obtenerEquiposDeDB() {
+         //Obtener las colecciones de la base y pasarlas a objetos.
+         try {
+             var baseEquipos = db.collection("equipos").get().await()
+             listadoEquiposDB = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
+         } catch (e: Exception) {
+             throw e
+         }
+    }
 
+    /*
     suspend fun obtenerEquipos(itemsPrestamo : MutableList<ItemPrestamo>) {
         //Obtener el listado de equipos de Firebase
         var baseEquipos = db.collection("equipos").get().await()
@@ -41,7 +55,7 @@ class DetallePrestamoViewModel : ViewModel() {
     fun getListadoEquiposPrestamo(): MutableList<Equipo> {
         return listadoEquiposFinal
     }
-
+        */
     suspend fun finalizarPrestamo(prestamo: PrestamoFinal) = withContext(Dispatchers.IO) {
         val itemsPrestamoSnapshot = itemsPrestamoCollection.whereEqualTo("idPrestamo", prestamo.idPrestamo).get().await()
 
@@ -49,19 +63,19 @@ class DetallePrestamoViewModel : ViewModel() {
 
         // Marcar todos los itemsPrestamo como devueltos si no lo están ya.
         itemsPrestamo.forEach { itemPrestamo ->
-            if(itemPrestamo.estadoItem != "devuelto") {
+            if(itemPrestamo.estadoItem != "Devuelto") {
                 val itemPrestamoDocument = itemsPrestamoCollection.document(itemPrestamo.id)
-                itemPrestamoDocument.update("estadoItem", "devuelto").await()
+                itemPrestamoDocument.update("estadoItem", "Devuelto").await()
 
                 // También marcar el equipo asociado como disponible.
                 val equipoDocument = equiposCollection.document(itemPrestamo.idEquipo)
-                equipoDocument.update("estado", "disponible").await()
+                equipoDocument.update("estado", "Disponible").await()
             }
         }
 
         // Marcar el prestamo como finalizado.
         val prestamoDocument = prestamosCollection.document(prestamo.idPrestamo)
-        prestamoDocument.update("estadoPrestamo", "finalizado").await()
+        prestamoDocument.update("estadoPrestamo", "Finalizado").await()
     }
 
 

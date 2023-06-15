@@ -67,9 +67,14 @@ class NewPrestamo : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.setIdPrestamo()
-        equiposPrestamoAdapter = AdapterCrearPrestamo(viewModel.listaEquipos)
-        recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
-        recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
+
+        viewModel.liveListaEquipos.observe(viewLifecycleOwner, Observer{ lista ->
+            equiposPrestamoAdapter = AdapterCrearPrestamo(lista){position ->
+                viewModel.eliminarEquipoAniadido(position)
+            }
+            recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
+            recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
+        })
 
         buscarResponsable.setOnClickListener(){
             if(viewModel.campoDniVacío(dniResponsable.text.toString())){

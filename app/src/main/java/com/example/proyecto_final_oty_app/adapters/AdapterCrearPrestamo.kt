@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class AdapterCrearPrestamo(var equipos : MutableList<Equipo>) : RecyclerView.Adapter<AdapterCrearPrestamo.PrestamoHolder>() {
+class AdapterCrearPrestamo(var equipos : MutableList<Equipo>, var onClick : (Int) -> Unit) : RecyclerView.Adapter<AdapterCrearPrestamo.PrestamoHolder>() {
 
 
 
@@ -49,7 +49,7 @@ class AdapterCrearPrestamo(var equipos : MutableList<Equipo>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: PrestamoHolder, position: Int) {
         holder.setNumeroInventario(equipos[position].inventario)
         holder.eliminarEquipoBtn.setOnClickListener(){
-            equipos.remove(equipos[position])
+            onClick(position)
         }
     }
 }

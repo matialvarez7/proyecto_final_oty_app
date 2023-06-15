@@ -24,7 +24,8 @@ class NewPrestamoViewModel : ViewModel() {
     var personalACargo : Personal ? = null
     var listaItems : MutableList<ItemPrestamo> = arrayListOf()
     var listaEquipos : MutableList<Equipo> = arrayListOf()
-
+    var auxListaEquipos : MutableList<Equipo> = arrayListOf()
+    var liveListaEquipos : MutableLiveData<MutableList<Equipo>> = MutableLiveData()
     suspend fun confirmarPrestamo() : Boolean{
         var confirmado : Boolean = false
         lateinit var nuevoPrestamo : Prestamo
@@ -69,6 +70,7 @@ class NewPrestamoViewModel : ViewModel() {
                     this.equipo.estado = "En préstamo"
                     confirmado = true
                     listaEquipos.add(this.equipo)
+                    this.actualizarDatos(this.listaEquipos)
                 }
             }
         }catch (e : Exception){
@@ -134,6 +136,11 @@ class NewPrestamoViewModel : ViewModel() {
     fun equipoDisponible(): Boolean {
         return this.equipo.estado.equals("Disponible", ignoreCase = true)
     }
+
+    fun eliminarEquipoAniadido(posicion : Int) {
+        this.listaEquipos.removeAt(posicion)
+        this.actualizarDatos(this.listaEquipos)
+    }
     fun setIdPrestamo() {
         if(this.idPrestamo.isEmpty()){
             val id = db.collection("personal").document()
@@ -175,5 +182,8 @@ class NewPrestamoViewModel : ViewModel() {
         this.listaEquipos.clear()
         this.listaItems.clear()
     }
-
+    fun actualizarDatos(datos : MutableList<Equipo>){
+        this.auxListaEquipos = datos
+        this.liveListaEquipos.value = auxListaEquipos
+    }
 }

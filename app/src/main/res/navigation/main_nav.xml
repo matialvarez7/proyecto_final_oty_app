@@ -86,7 +86,9 @@
             app:argType="com.example.proyecto_final_oty_app.entities.Equipo" />
         <action
             android:id="@+id/action_detalleEquipo_to_editDetalleEquipo"
-            app:destination="@id/editDetalleEquipo" />
+            app:destination="@id/editDetalleEquipo"
+            app:launchSingleTop="false"
+             app:popUpTo="@id/listEquipo" />
     </fragment>
     <fragment
         android:id="@+id/newEquipo"

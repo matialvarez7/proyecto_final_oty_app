@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +22,13 @@ class EditarDetallePersonal : Fragment() {
     lateinit var editNombre:EditText
     lateinit var editApellido:EditText
     lateinit var editArea:EditText
-
+    private lateinit var builder : AlertDialog.Builder
+    private lateinit var viewModel: EditarDetallePersonalViewModel
     companion object {
         fun newInstance() = EditarDetallePersonal()
     }
 
-    private lateinit var viewModel: EditarDetallePersonalViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,17 +52,27 @@ class EditarDetallePersonal : Fragment() {
     override fun onStart() {
         super.onStart()
         val personal = DetallePersonalArgs.fromBundle(requireArguments()).personal
-
+        builder = AlertDialog.Builder(context)
         editDNI.setText(personal.dni.toString())
         editNombre.setText(personal.nombre.toString())
         editApellido.setText(personal.apellido.toString())
         editArea.setText(personal.area.toString())
         if(personal!=null) {
             confirmarBtn.setOnClickListener {
-                var personalNuevo = Personal(personal.id,editDNI.text.toString() , editNombre.text.toString(), editApellido.text.toString(), editArea.text.toString())
-                viewModel.actualizarPersonal(personalNuevo)
-                Snackbar.make(v,"Se edito correctamente el usuario",1000).show()
-                findNavController().navigateUp()
+                builder.setMessage("¿Desea Confirmar?")
+                    .setCancelable(true)
+                    .setNegativeButton("no"){ dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Si"){dialogInterface,it->
+                        var personalNuevo = Personal(personal.id,editDNI.text.toString() , editNombre.text.toString(), editApellido.text.toString(), editArea.text.toString())
+                        viewModel.actualizarPersonal(personalNuevo)
+                        Snackbar.make(v,"Se edito correctamente el usuario",1000).show()
+                        findNavController().navigateUp()
+                    }
+
+                    .show()
+
             }
         }
     }

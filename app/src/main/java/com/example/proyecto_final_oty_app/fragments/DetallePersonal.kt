@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ class DetallePersonal : Fragment() {
     lateinit var eliminarBtn: Button
     lateinit var viewModel: DetallePersonalViewModel
     private lateinit var abm: PersonalABM
+    private lateinit var builder : AlertDialog.Builder
 
     companion object {
         fun newInstance() = DetallePersonal()
@@ -49,7 +51,6 @@ class DetallePersonal : Fragment() {
         baseArea = v.findViewById(R.id.baseArea)
         editarBtn=v.findViewById(R.id.editarBtn)
         eliminarBtn = v.findViewById(R.id.eliminarBtn)
-
         return v
     }
 
@@ -65,27 +66,40 @@ class DetallePersonal : Fragment() {
         baseNombre.text = personal.nombre
         baseApellido.text = personal.apellido
         baseArea.text = personal.area
+        builder = AlertDialog.Builder(context)
 
         editarBtn.setOnClickListener(){
             val action = DetallePersonalDirections.actionDetallePersonalToEditarDetallePersonal(personal)
             findNavController().navigate(action)
         }
         eliminarBtn.setOnClickListener {
-            val idPersonal = personal.id // Aquí deberías obtener el id que quieres eliminar.
-            CoroutineScope(Dispatchers.Main).launch {
-                try{
-                    viewModel.eliminarPersonal(idPersonal)
-                    Toast.makeText(context, "Personal $idPersonal eliminado correctamente", Toast.LENGTH_SHORT).show()
 
-                    findNavController().popBackStack()
-                }catch(e:Exception){
-                    Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
+            val idPersonal = personal.id // Aquí deberías obtener el id que quieres eliminar.
+            builder.setMessage("Estarás eliminando el registro de "+baseNombre.text+" "+baseApellido.text+" ¿Deseas continuar?")
+                .setCancelable(true)
+                .setNegativeButton("no"){ dialogInterface, it ->
+                    dialogInterface.cancel()
                 }
-            }
+                .setPositiveButton("Si"){dialogInterface,it->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try{
+                            viewModel.eliminarPersonal(idPersonal)
+                            Toast.makeText(context, "Personal $idPersonal eliminado correctamente", Toast.LENGTH_SHORT).show()
+
+                            findNavController().popBackStack()
+                        }catch(e:Exception){
+                            Toast.makeText(context, "Error al eliminar el personal: $e", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                .show()
+
+        }
+
         }
 
     }
 
-}
 
 

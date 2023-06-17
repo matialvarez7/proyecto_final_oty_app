@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import kotlinx.coroutines.CoroutineScope
@@ -59,21 +60,28 @@ class DetallePrestamoEquipo : Fragment() {
         estado.text = equipo.estado
 
         eliminarBtn.setOnClickListener {
-            val idEquipo = equipo.id // Aquí deberías obtener el id del Equipo que quieres marcar como disponible.
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    val itemPrestamo = viewModel.obtenerItemPrestamoPorIdEquipo(idEquipo)
-                    if (itemPrestamo != null) {
-                        viewModel.devolverEquipoYMarcarItemPrestamo(itemPrestamo.id, idEquipo)
-                        Toast.makeText(context, "Equipo devuelto y item de préstamo marcado correctamente", Toast.LENGTH_SHORT).show()
-                        findNavController().popBackStack()
-                    } else {
-                        Toast.makeText(context, "No se encontró el item de préstamo correspondiente", Toast.LENGTH_SHORT).show()
+            AlertDialog.Builder(requireContext())
+                .setTitle("Confirmación de eliminación")
+                .setMessage("¿Estás seguro de que quieres devolver este equipo?")
+                .setPositiveButton("Sí") { _, _ ->
+                    val idEquipo = equipo.id
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try {
+                            val itemPrestamo = viewModel.obtenerItemPrestamoPorIdEquipo(idEquipo)
+                            if (itemPrestamo != null) {
+                                viewModel.devolverEquipoYMarcarItemPrestamo(itemPrestamo.id, idEquipo)
+                                Toast.makeText(context, "Equipo devuelto y item de préstamo marcado correctamente", Toast.LENGTH_SHORT).show()
+                                findNavController().popBackStack()
+                            } else {
+                                Toast.makeText(context, "No se encontró el item de préstamo correspondiente", Toast.LENGTH_SHORT).show()
+                            }
+                        } catch(e:Exception) {
+                            Toast.makeText(context, "Error al devolver el equipo y marcar el item de préstamo: $e", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                } catch(e:Exception) {
-                    Toast.makeText(context, "Error al devolver el equipo y marcar el item de préstamo: $e", Toast.LENGTH_SHORT).show()
                 }
-            }
+                .setNegativeButton("No", null)
+                .show()
         }
     }
 

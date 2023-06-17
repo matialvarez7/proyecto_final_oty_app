@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 
 import androidx.navigation.fragment.findNavController
@@ -70,17 +71,44 @@ class DetallePrestamo : Fragment() {
             recyclerItems.adapter = adapter
         }
 
-        finalizarPrestamoBtn.setOnClickListener {
-            val prestamo = DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    viewModel.finalizarPrestamo(prestamo)
-                    Toast.makeText(context, "Préstamo finalizado correctamente", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
-                } catch(e:Exception) {
-                    Toast.makeText(context, "Error al finalizar el préstamo: $e", Toast.LENGTH_SHORT).show()
-                }
+
+        if (prestamo.estadoPrestamo == "Finalizado") {
+            finalizarPrestamoBtn.visibility = View.GONE
+        } else {
+            finalizarPrestamoBtn.visibility = View.VISIBLE
+
+            finalizarPrestamoBtn.setOnClickListener {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Finalizar Préstamo")
+                    .setMessage("¿Estás seguro que deseas finalizar este préstamo?")
+                    .setPositiveButton("Sí") { dialog, which ->
+                        val prestamo =
+                            DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
+                        CoroutineScope(Dispatchers.Main).launch {
+                            try {
+                                viewModel.finalizarPrestamo(prestamo)
+                                Toast.makeText(
+                                    context,
+                                    "Préstamo finalizado correctamente",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().popBackStack()
+                            } catch (e: Exception) {
+                                Toast.makeText(
+                                    context,
+                                    "Error al finalizar el préstamo: $e",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+
+                    .setNegativeButton("No") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
             }
+
         }
 
     }

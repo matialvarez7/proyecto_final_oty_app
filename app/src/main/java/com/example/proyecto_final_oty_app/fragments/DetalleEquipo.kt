@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
+import android.app.AlertDialog
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.proyecto_final_oty_app.entities.EquipoABM
 import com.example.proyecto_final_oty_app.entities.PersonalABM
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +40,7 @@ class DetalleEquipo : Fragment() {
     lateinit var editar:Button
     lateinit var eliminarBtn: Button
     lateinit var abm: EquipoABM
+    private lateinit var builder : AlertDialog.Builder
 
     companion object {
         fun newInstance() = DetalleEquipo()
@@ -72,7 +74,7 @@ class DetalleEquipo : Fragment() {
 
 
         val equipo = DetalleEquipoArgs.fromBundle(requireArguments()).equipo
-
+        builder = AlertDialog.Builder(context)
         numInv.text = equipo.inventario
         nomEquipo.text = equipo.nombre
         numAnet.text = equipo.anet
@@ -83,32 +85,42 @@ class DetalleEquipo : Fragment() {
 
         }
         eliminarBtn.setOnClickListener {
-            val idEquipo = equipo.id // Aquí deberías obtener el id que quieres eliminar.
-            CoroutineScope(Dispatchers.Main).launch {
-            try{
-                viewModel.eliminarEquipo(idEquipo)
-                Toast.makeText(context, "Equipo $idEquipo eliminado correctamente", Toast.LENGTH_SHORT).show()
 
-                findNavController().popBackStack()
-            }catch(e:Exception){
-                Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
-            }
-            }
+            builder.setMessage("Se eliminará el equipo "+numAnet.text+"¿Desea Confirmar?")
+                .setCancelable(true)
+                .setNegativeButton("no"){ dialogInterface, it ->
+                    dialogInterface.cancel()
+                }
+                .setPositiveButton("Si"){dialogInterface,it->
+                    val idEquipo = equipo.id // Aquí deberías obtener el id que quieres eliminar.
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try{
+                            viewModel.eliminarEquipo(idEquipo)
+                            Toast.makeText(context, "Equipo $idEquipo eliminado correctamente", Toast.LENGTH_SHORT).show()
+
+                            findNavController().popBackStack()
+                        }catch(e:Exception){
+                            Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                .show()
+
         }
 
-}//cierra OnStart
+    }//cierra OnStart
 }
 
-    /*private fun deleteDeviceById(idEquipo: String) {
-    CoroutineScope(Dispatchers.Main).launch {
-        try {
-            val viewModel = DetalleEquipoViewModel()
-            viewModel.eliminarEquipo(idEquipo)
-            Toast.makeText(context, "Equipo $idEquipo eliminado correctamente", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
-            Toast.makeText(withContext(), "equipo eliminado correctamente", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-
+/*private fun deleteDeviceById(idEquipo: String) {
+CoroutineScope(Dispatchers.Main).launch {
+    try {
+        val viewModel = DetalleEquipoViewModel()
+        viewModel.eliminarEquipo(idEquipo)
+        Toast.makeText(context, "Equipo $idEquipo eliminado correctamente", Toast.LENGTH_SHORT).show()
+    } catch (e: Exception) {
+        Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT).show()
+        Toast.makeText(withContext(), "equipo eliminado correctamente", Toast.LENGTH_SHORT).show()
+    }
+}*/
 

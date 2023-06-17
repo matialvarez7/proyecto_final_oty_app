@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ class DetalleAsignacion : Fragment() {
     lateinit var nroInventario:TextView
     lateinit var nroAnet:TextView
     lateinit var nombreEquipo:TextView
+    private lateinit var builder : AlertDialog.Builder
 
 
     override fun onCreateView(
@@ -58,22 +60,37 @@ class DetalleAsignacion : Fragment() {
         nroInventario.text= equipoBundle.inventario
         nombreEquipo.text= equipoBundle.nombre
 
+        builder = AlertDialog.Builder(context)
+
         botonEliminar.setOnClickListener {
+
             val elementoId = DetalleAsignacionArgs.fromBundle(requireArguments()).idAsignacion
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    viewModel.eliminarAsignacion(elementoId)
-                    Toast.makeText(
-                        context,
-                        "Equipo $elementoId eliminado correctamente",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().navigateUp()
-                } catch (e: Exception) {
-                    Toast.makeText(context, "Error al eliminar el equipo: $e", Toast.LENGTH_SHORT)
-                        .show()
+            builder.setMessage("Estarás eliminando la asignacion de "+nombreResponsable.text+" ¿Deseas continuar?")
+                .setCancelable(true)
+                .setNegativeButton("no"){ dialogInterface, it ->
+                    dialogInterface.cancel()
                 }
-            }
+                .setPositiveButton("Si"){dialogInterface,it->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try {
+                            viewModel.eliminarAsignacion(elementoId)
+                            Toast.makeText(
+                                context,
+                                "Asignacion eliminada correctamente",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            findNavController().navigateUp()
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "Error al eliminar la asignacion: $e", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
+                }
+
+                .show()
+
         }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,9 +68,15 @@ class NewPrestamo : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.setIdPrestamo()
-        equiposPrestamoAdapter = AdapterCrearPrestamo(viewModel.listaEquipos)
-        recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
-        recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
+
+        viewModel.liveListaEquipos.observe(viewLifecycleOwner, Observer{ lista ->
+            equiposPrestamoAdapter = AdapterCrearPrestamo(lista){position ->
+                viewModel.eliminarEquipoAniadido(position)
+            }
+            recyclerEquiposPrestamos.layoutManager = LinearLayoutManager(context)
+            recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
+        })
+
         buscarResponsable.setOnClickListener(){
             if(viewModel.campoDniVacío(dniResponsable.text.toString())){
                 Snackbar.make(v, "El DNI no puede estar vacío", Snackbar.LENGTH_LONG).show()
@@ -96,17 +104,28 @@ class NewPrestamo : Fragment() {
             findNavController().navigate(action)
         }
 
-        confirmarPrestamo.setOnClickListener(){
-            lifecycleScope.launch {
-                if(viewModel.confirmarPrestamo()){
-                    Snackbar.make(v, "Prestamo confirmado", Snackbar.LENGTH_LONG).show()
-                    findNavController().popBackStack()
+
+        confirmarPrestamo.setOnClickListener() {
+            AlertDialog.Builder(context).setTitle("Confirmar préstamo").setMessage("¿Desea confirmar el nuevo préstamo?")
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    lifecycleScope.launch {
+                        if (viewModel.confirmarPrestamo()) {
+                            Snackbar.make(v, "Prestamo confirmado", Snackbar.LENGTH_LONG)
+                                .show()
+                            findNavController().popBackStack()
+                        } else {
+                            Snackbar.make(
+                                v,
+                                "Error al crear pŕestamo",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+                    }
                 }
-                else{
-                    Snackbar.make(v, "Error al crear pŕestamo", Snackbar.LENGTH_LONG).show()
-                }
-            }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
+
 
         cancelarPrestamo.setOnClickListener(){
             lifecycleScope.launch {

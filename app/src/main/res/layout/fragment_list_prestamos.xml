@@ -45,11 +45,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recPrestamos"
-        android:layout_width="357dp"
-        android:layout_height="488dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="395dp"
+        android:layout_height="462dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="20dp"
         android:isScrollContainer="true"
         android:windowSoftInputMode="adjustResize"
         app:layout_constraintEnd_toEndOf="parent"

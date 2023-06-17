@@ -8,19 +8,20 @@ import com.example.proyecto_final_oty_app.adapters.AdapterEquipo
 import com.example.proyecto_final_oty_app.entities.Equipo
 import com.example.proyecto_final_oty_app.entities.Personal
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.tasks.await
 
 class ListEquipoViewModel : ViewModel() {
 
-    lateinit var db : FirebaseFirestore
+    private val db = FirebaseFirestore.getInstance()
+    private val equiposCollection = db.collection("equipos")
     lateinit var equipos : MutableList<Equipo>
     suspend fun obtenerColeccion () : MutableList<Equipo>{
         equipos = mutableListOf()
-        this.db = FirebaseFirestore.getInstance()
 
-        var baseEquipos = db.collection("equipos").orderBy("nombre").get().await()
+        var baseEquipos = equiposCollection.whereNotEqualTo("estado","inactivo").orderBy("estado").get().await()
         if(baseEquipos != null){
             equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
         }

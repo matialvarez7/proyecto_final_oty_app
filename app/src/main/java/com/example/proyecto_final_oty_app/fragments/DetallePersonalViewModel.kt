@@ -18,7 +18,7 @@ class DetallePersonalViewModel : ViewModel() {
     suspend fun eliminarPersonal(idPersonal: String?) = withContext(Dispatchers.IO) {
         if (idPersonal != null) {
             val personalDocument = personalCollection.document(idPersonal)
-            personalDocument.delete().await()
+            personalDocument.update("estado", "Inactivo").await()
         }
     }
 }

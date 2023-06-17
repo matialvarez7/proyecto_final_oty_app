@@ -19,7 +19,7 @@ class NewAsignacionViewModel : ViewModel() {
     private val asignacionesCollection = firestore.collection("asignaciones")
     suspend fun buscarPersonalByDNI(dni: String): Personal {
         val listaPersonalConDNI: MutableList<Personal> = mutableListOf()
-        val dataPersonal = personalCollection.whereEqualTo("dni", dni).get().await()
+        val dataPersonal = personalCollection.whereEqualTo("dni", dni).whereEqualTo("estado","Activo").get().await()
         if (dataPersonal != null) {
             for (personal in dataPersonal) {
                 listaPersonalConDNI.add(personal.toObject())// OBTENGO LA EQUIPO LIST

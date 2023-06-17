@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -33,6 +34,7 @@ class DetallePrestamo : Fragment() {
     lateinit var responsablePrestamo : TextView
     lateinit var fechaPrestamo : TextView
     lateinit var finalizarPrestamoBtn: Button
+    private lateinit var builder : AlertDialog.Builder
 
 
     override fun onCreateView(
@@ -56,6 +58,7 @@ class DetallePrestamo : Fragment() {
     override fun onStart() {
         super.onStart()
         val prestamo = DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
+        builder = AlertDialog.Builder(context)
 
         responsablePrestamo.text = "${prestamo.nombre} ${prestamo.apellido}"
         fechaPrestamo.text = prestamo.fechaPrestamo.toString()
@@ -72,15 +75,27 @@ class DetallePrestamo : Fragment() {
 
         finalizarPrestamoBtn.setOnClickListener {
             val prestamo = DetallePrestamoArgs.fromBundle(requireArguments()).prestamoFinal
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    viewModel.finalizarPrestamo(prestamo)
-                    Toast.makeText(context, "Préstamo finalizado correctamente", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
-                } catch(e:Exception) {
-                    Toast.makeText(context, "Error al finalizar el préstamo: $e", Toast.LENGTH_SHORT).show()
+
+            builder.setMessage("Estarás finalizando el prestamo ¿Estás seguro?")
+                .setCancelable(true)
+                .setNegativeButton("no"){ dialogInterface, it ->
+                    dialogInterface.cancel()
                 }
-            }
+                .setPositiveButton("Si"){dialogInterface,it->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try {
+                            viewModel.finalizarPrestamo(prestamo)
+                            Toast.makeText(context, "Préstamo finalizado correctamente", Toast.LENGTH_SHORT).show()
+                            findNavController().popBackStack()
+                        } catch(e:Exception) {
+                            Toast.makeText(context, "Error al finalizar el préstamo: $e", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+
+                .show()
+
         }
 
     }

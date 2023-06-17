@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -96,17 +97,28 @@ class NewPrestamo : Fragment() {
             findNavController().navigate(action)
         }
 
-        confirmarPrestamo.setOnClickListener(){
-            lifecycleScope.launch {
-                if(viewModel.confirmarPrestamo()){
-                    Snackbar.make(v, "Prestamo confirmado", Snackbar.LENGTH_LONG).show()
-                    findNavController().popBackStack()
-                }
-                else{
-                    Snackbar.make(v, "Error al crear pŕestamo", Snackbar.LENGTH_LONG).show()
-                }
-            }
-        }
+
+                confirmarPrestamo.setOnClickListener() {
+                    AlertDialog.Builder(context).setTitle("Confirmar préstamo").setMessage("¿Desea confirmar el nuevo préstamo?")
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
+                            lifecycleScope.launch {
+                                if (viewModel.confirmarPrestamo()) {
+                                    Snackbar.make(v, "Prestamo confirmado", Snackbar.LENGTH_LONG)
+                                        .show()
+                                    findNavController().popBackStack()
+                                } else {
+                                    Snackbar.make(
+                                        v,
+                                        "Error al crear pŕestamo",
+                                        Snackbar.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show()
+                    }
+
 
         cancelarPrestamo.setOnClickListener(){
             lifecycleScope.launch {

@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -78,7 +79,7 @@ class NewEquipo : Fragment() {
         super.onStart()
 
         //Boton escaneo de inventario
-        scanInventario.setOnClickListener{
+        scanInventario.setOnClickListener {
             val action = NewEquipoDirections.actionNewEquipoToLector("0".toInt())
             findNavController().navigate(action)
         }
@@ -88,7 +89,7 @@ class NewEquipo : Fragment() {
 
 
         //Boton escaneo de nombre de equipo
-        scanNombre.setOnClickListener{
+        scanNombre.setOnClickListener {
             val action = NewEquipoDirections.actionNewEquipoToLector("1".toInt())
             findNavController().navigate(action)
         }
@@ -97,7 +98,7 @@ class NewEquipo : Fragment() {
         })
 
         //Boton escaneo de anet
-        scanAnet.setOnClickListener{
+        scanAnet.setOnClickListener {
             val action = NewEquipoDirections.actionNewEquipoToLector("2".toInt())
             findNavController().navigate(action)
         }
@@ -106,31 +107,40 @@ class NewEquipo : Fragment() {
         })
 
         btnConfirmar.setOnClickListener {
-            if(!viewModel.formularioValido(nroInventario.text.toString(), nroEquipo.text.toString(), nroAnet.text.toString())){
-                Snackbar.make(v, "Debe completar todos los campos", Snackbar.LENGTH_LONG).show()
-            }else{
-                lifecycleScope.launch {
-                    if (viewModel.equipoExistente(nroInventario.text.toString())) {
-                        Toast.makeText(requireContext(), "El equipo ya existe.", Toast.LENGTH_SHORT).show()
-                    } else {
-                        viewModel.altaNuevoEquipo(
+            AlertDialog.Builder(context).setTitle("Confirmar nuevo equipo")
+                .setMessage("¿Desea confirmar el nuevo equipo?")
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    if (!viewModel.formularioValido(
                             nroInventario.text.toString(),
                             nroEquipo.text.toString(),
                             nroAnet.text.toString()
                         )
-
-                        //nroInventario.text.clear()
-                        //nroEquipo.text.clear()
-                        //nroAnet.text.clear()
-
-                        sharedViewModel.clearValor()
-
-                        findNavController().popBackStack()
+                    ) {
+                        Snackbar.make(v, "Debe completar todos los campos", Snackbar.LENGTH_LONG)
+                            .show()
+                    } else {
+                        lifecycleScope.launch {
+                            if (viewModel.equipoExistente(nroInventario.text.toString())) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "El equipo ya existe.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                viewModel.altaNuevoEquipo(
+                                    nroInventario.text.toString(),
+                                    nroEquipo.text.toString(),
+                                    nroAnet.text.toString()
+                                )
+                                sharedViewModel.clearValor()
+                                findNavController().popBackStack()
+                            }
+                        }
                     }
+
                 }
-            }
-
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+             }
         }
-    }
-
 }

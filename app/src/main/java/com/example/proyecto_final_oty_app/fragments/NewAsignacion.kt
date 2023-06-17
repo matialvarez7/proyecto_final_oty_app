@@ -1,5 +1,6 @@
 package com.example.proyecto_final_oty_app.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -105,46 +106,56 @@ class NewAsignacion : Fragment() {
                 }
             }
         }
+
+
         confirmarBtn.setOnClickListener {
             val dniIngresado = editDNI.text.toString()
             val invenatrioIngresado = editInventario.text.toString()
+            /*
             editDNI.text.clear()
             editInventario.text.clear()
             nombreCompletoText.text = ""
             areaText.text = ""
             nombreEquipoText.text = ""
             estadoEquipoText.text = ""
+            */
 
+            AlertDialog.Builder(context).setTitle("Confirmar asignacion").setMessage("¿Desea confirmar la asignación?")
+               .setPositiveButton(android.R.string.ok) { _, _ ->
 
-            if (viewModel.camposValidos(invenatrioIngresado, dniIngresado)) {
-
-
-                CoroutineScope(Dispatchers.Main).launch {
-                    try {
-                        val personalEncontrado = viewModel.buscarPersonalByDNI(dniIngresado)
-                        val equipoEncontrado =
-                            viewModel.buscarEquipoByInventario(invenatrioIngresado)
-                        val idPersonalAsignar = personalEncontrado.id
-                        val idEquipoAsignar = equipoEncontrado.id
-                        val fechaDeCreacion = Calendar.getInstance().time
-                        if (equipoEncontrado.estado == "Disponible") {
-                            viewModel.registrarAsignacion(idPersonalAsignar, idEquipoAsignar, fechaDeCreacion)
-                            Toast.makeText(context, "Asignacion registrada con éxito", Toast.LENGTH_SHORT).show()
+                    if (viewModel.camposValidos(invenatrioIngresado, dniIngresado)) {
+                        CoroutineScope(Dispatchers.Main).launch {
+                        try {
+                            val personalEncontrado = viewModel.buscarPersonalByDNI(dniIngresado)
+                            val equipoEncontrado =
+                                viewModel.buscarEquipoByInventario(invenatrioIngresado)
+                            val idPersonalAsignar = personalEncontrado.id
+                            val idEquipoAsignar = equipoEncontrado.id
+                            val fechaDeCreacion = Calendar.getInstance().time
+                            if (equipoEncontrado.estado == "Disponible") {
+                                viewModel.registrarAsignacion(
+                                idPersonalAsignar,
+                                idEquipoAsignar,
+                                fechaDeCreacion
+                                )
+                                Toast.makeText(
+                                context,
+                                "Asignacion registrada con éxito",
+                                Toast.LENGTH_SHORT
+                                ).show()
                             findNavController().navigateUp()
                         } else {
                             Toast.makeText(
                                 context,
                                 "El equipo no esta disponible para su asignacion",
                                 Toast.LENGTH_SHORT
-                            ).show()
+                                ).show()
                         }
                     } catch (e: Exception) {
                         Toast.makeText(context, "Revise los campos ingresados", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }//cierro corrutina anidada
-
-
             } else {
                 Toast.makeText(
                     context,
@@ -152,6 +163,10 @@ class NewAsignacion : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }//cierro camposValidos
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
+
     }
 }

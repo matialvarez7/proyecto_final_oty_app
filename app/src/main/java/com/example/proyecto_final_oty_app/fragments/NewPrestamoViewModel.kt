@@ -183,7 +183,7 @@ class NewPrestamoViewModel : ViewModel() {
         this.listaItems.clear()
     }
     fun actualizarDatos(datos : MutableList<Equipo>){
-        this.auxListaEquipos = datos
-        this.liveListaEquipos.value = auxListaEquipos
+        //this.auxListaEquipos = datos
+        this.liveListaEquipos.value = this.listaEquipos
     }
 }

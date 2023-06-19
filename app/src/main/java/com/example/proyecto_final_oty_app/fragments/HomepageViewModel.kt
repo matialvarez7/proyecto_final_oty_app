@@ -14,11 +14,9 @@ import kotlin.math.roundToInt
 class HomepageViewModel : ViewModel() {
 
     lateinit var db : FirebaseFirestore
-    lateinit var equipos : MutableList<Equipo>
-    lateinit var asignaciones : MutableList<AsignacionDocente>
-    lateinit var prestamos : MutableList<Equipo>
 
-    suspend fun obtenerColeccionAsignacionDocenteEnCurso() : MutableList<AsignacionDocente> {
+
+    /*suspend fun obtenerColeccionAsignacionDocenteEnCurso() : MutableList<AsignacionDocente> {
         asignaciones = mutableListOf()
         this.db = FirebaseFirestore.getInstance()
 
@@ -43,9 +41,28 @@ class HomepageViewModel : ViewModel() {
         }
         return prestamos
     }
+*/
+    suspend fun obtenerColeccionEquiposEnCurso(estado : String) : MutableList<Equipo> {
 
-    suspend fun obtenerColeccionEquipos(tipoDeColeccion: String) : MutableList<Equipo>{
-        equipos = mutableListOf()
+        var equiposEnCurso : MutableList<Equipo> = mutableListOf()
+
+        this.db = FirebaseFirestore.getInstance()
+
+        var baseEquipos = db.collection("equipos").whereEqualTo("estado", estado).get().await()
+        if(baseEquipos != null){
+            equiposEnCurso = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
+        } else {
+            Log.d(ContentValues.TAG, "Error getting documents")
+        }
+        return equiposEnCurso
+    }
+
+
+
+    suspend fun obtenerColeccionEquipos(tipoDeColeccion: String) : MutableList <Equipo>{
+
+        var equipos : MutableList<Equipo>
+
         var equiposADevolver : MutableList<Equipo>  = mutableListOf()
 
         this.db = FirebaseFirestore.getInstance()
@@ -53,13 +70,14 @@ class HomepageViewModel : ViewModel() {
         var baseEquipos = db.collection("equipos").get().await()
 
         if(baseEquipos != null){
+
             equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
 
             if(tipoDeColeccion == "Asignaciones"){
 
                 for (equipo in equipos){
 
-                    if(equipo.nombre.contains("A-PROFH")){
+                    if(equipo.nombre.contains("A-PROFH") && (!equipo.estado.equals("inactivo"))){
                         equiposADevolver.add(equipo)
                     }
                 }
@@ -68,7 +86,7 @@ class HomepageViewModel : ViewModel() {
 
                 for (equipo in equipos){
 
-                    if(equipo.nombre.contains("A-NHG3-OTYP")){
+                    if(equipo.nombre.contains("A-NHG3-OTYP") && (!equipo.estado.equals("inactivo"))){
                         equiposADevolver.add(equipo)
                     }
                 }
@@ -85,11 +103,11 @@ class HomepageViewModel : ViewModel() {
 
 
         if(tipoDeColeccion == "Asignaciones" && cantTotal > 0){
-            cantEnCurso = obtenerColeccionAsignacionDocenteEnCurso().size.toFloat()
+            cantEnCurso = obtenerColeccionEquiposEnCurso("Asignado").size.toFloat()
             promedio =(((cantEnCurso/cantTotal)* 100))
             textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         } else if(tipoDeColeccion == "Prestamos" && cantTotal > 0){
-            cantEnCurso =obtenerColeccionPrestamosEnCurso().size.toFloat()
+            cantEnCurso = obtenerColeccionEquiposEnCurso("En préstamo").size.toFloat()
             promedio =(((cantEnCurso/cantTotal)* 100))
             textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }

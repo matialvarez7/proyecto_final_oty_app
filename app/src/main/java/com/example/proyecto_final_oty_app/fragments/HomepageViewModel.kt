@@ -15,33 +15,6 @@ class HomepageViewModel : ViewModel() {
 
     lateinit var db : FirebaseFirestore
 
-
-    /*suspend fun obtenerColeccionAsignacionDocenteEnCurso() : MutableList<AsignacionDocente> {
-        asignaciones = mutableListOf()
-        this.db = FirebaseFirestore.getInstance()
-
-        var baseAsignaciones = db.collection("asignaciones").get().await()
-        if(baseAsignaciones != null){
-            asignaciones = baseAsignaciones.toObjects<AsignacionDocente>() as MutableList<AsignacionDocente>
-        } else {
-            Log.d(ContentValues.TAG, "Error getting documents")
-        }
-        return asignaciones
-    }
-
-    suspend fun obtenerColeccionPrestamosEnCurso() : MutableList<Equipo> {
-        prestamos = mutableListOf()
-        this.db = FirebaseFirestore.getInstance()
-
-        var basePrestamos = db.collection("equipos").whereEqualTo("estado","En préstamo").get().await()
-        if (basePrestamos != null){
-            prestamos = basePrestamos.toObjects<Equipo>() as MutableList<Equipo>
-        } else {
-            Log.d(ContentValues.TAG, "Error getting documents")
-        }
-        return prestamos
-    }
-*/
     suspend fun obtenerColeccionEquiposEnCurso(estado : String) : MutableList<Equipo> {
 
         var equiposEnCurso : MutableList<Equipo> = mutableListOf()

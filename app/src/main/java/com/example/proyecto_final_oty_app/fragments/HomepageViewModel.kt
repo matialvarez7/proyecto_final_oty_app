@@ -69,19 +69,53 @@ class HomepageViewModel : ViewModel() {
         return equiposADevolver
     }
 
+    suspend fun obtenerColeccionEquipos2(nomeclaturaNet : String, estadoNet : String) : MutableList <Equipo>{
+
+        var equipos : MutableList<Equipo>
+
+        var equiposADevolver : MutableList<Equipo>  = mutableListOf()
+
+        this.db = FirebaseFirestore.getInstance()
+
+        var baseEquipos = db.collection("equipos").get().await()
+
+        if(baseEquipos != null){
+
+            equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
+
+             for (equipo in equipos){
+
+                    if(equipo.nombre.contains(nomeclaturaNet) && (!equipo.estado.equals(estadoNet))){
+                        equiposADevolver.add(equipo)
+                    }
+                }
+
+            }
+
+        return equiposADevolver
+    }
+
     suspend fun generarProgressBar(tipoDeColeccion: String,textoCantidades: TextView, textPromedio: TextView, progreBarAsig : ProgressBar) {
-        var promedio : Float = 0F
-        var cantEnCurso : Float = 0F
-        var cantTotal : Float = obtenerColeccionEquipos(tipoDeColeccion).size.toFloat()
+        var promedio = 0F
+        var cantEnCurso : Float
+        var cantTotal : Float
 
 
-        if(tipoDeColeccion == "Asignaciones" && cantTotal > 0){
+        if(tipoDeColeccion == "Asignaciones"){
+            cantTotal = obtenerColeccionEquipos2("A-PROFH", "inactivo").size.toFloat()
             cantEnCurso = obtenerColeccionEquiposEnCurso("Asignado").size.toFloat()
-            promedio =(((cantEnCurso/cantTotal)* 100))
+            if(cantTotal > 0) {
+                promedio =(((cantEnCurso/cantTotal)* 100))
+            }
             textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
-        } else if(tipoDeColeccion == "Prestamos" && cantTotal > 0){
+
+        } else if(tipoDeColeccion == "Prestamos"){
+            cantTotal = obtenerColeccionEquipos2("A-NHG3", "inactivo").size.toFloat()
             cantEnCurso = obtenerColeccionEquiposEnCurso("En préstamo").size.toFloat()
-            promedio =(((cantEnCurso/cantTotal)* 100))
+            if(cantTotal > 0){
+                promedio =(((cantEnCurso/cantTotal)* 100))
+            }
+
             textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }
 

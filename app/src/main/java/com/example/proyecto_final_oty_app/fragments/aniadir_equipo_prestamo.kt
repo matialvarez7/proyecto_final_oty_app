@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -33,7 +34,7 @@ class AniadirEquipoPrestamo : Fragment() {
     lateinit var estadoEquipo : TextView
     lateinit var buscar : Button
     lateinit var aniadir : Button
-    lateinit var scanInventario : Button
+    lateinit var scanInventario : ImageButton
 
 
     override fun onCreateView(
@@ -47,7 +48,7 @@ class AniadirEquipoPrestamo : Fragment() {
         estadoEquipo = v.findViewById(R.id.estadoEquipoPrestamo)
         buscar =  v.findViewById(R.id.buscarEquipo)
         aniadir = v.findViewById(R.id.confirmarEquipoPrestamo)
-        scanInventario = v.findViewById(R.id.scanInventario)
+        scanInventario = v.findViewById(R.id.scanInventarioPrestamo)
         return v
     }
 

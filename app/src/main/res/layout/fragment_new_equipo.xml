@@ -12,8 +12,9 @@
         android:id="@+id/btnEscEquipo"
         android:layout_width="40dp"
         android:layout_height="48dp"
-        android:layout_marginStart="-5dp"
-        android:layout_marginEnd="-5dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/white"
         android:paddingTop="20px"
         android:src="@drawable/bcode"
@@ -24,10 +25,11 @@
 
     <ImageButton
         android:id="@+id/btnEscAnet"
-        android:layout_width="41dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="-2dp"
-        android:layout_marginEnd="-4dp"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/white"
         android:paddingTop="20px"
         android:src="@drawable/bcode"
@@ -38,10 +40,11 @@
 
     <EditText
         android:id="@+id/nroInventario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/custom_background"
         android:ems="10"
         android:hint=""
@@ -53,10 +56,11 @@
 
     <EditText
         android:id="@+id/nroEquipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/custom_background"
         android:ems="10"
         android:hint=""
@@ -68,10 +72,11 @@
 
     <EditText
         android:id="@+id/nroAnet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="9dp"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/custom_background"
         android:ems="10"
         android:hint=""
@@ -85,15 +90,13 @@
         android:id="@+id/editar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="270dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#146517"
         android:text="Confirmar"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline11"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/nroAnet" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -101,28 +104,32 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="161dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.22"
+        app:layout_constraintGuide_percent="0.26"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="-30dp"
+        android:layout_width="168dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
         android:text="Alta Equipo"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/imageMonitor"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnEscInventario"
         android:layout_width="40dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/white"
         android:paddingTop="20px"
         android:src="@drawable/bcode"
@@ -135,6 +142,7 @@
         android:id="@+id/altaInvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
         android:text="Número de inventario"
         app:layout_constraintBottom_toTopOf="@+id/nroInventario"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,6 +155,7 @@
         android:id="@+id/altaEqTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
         android:text="Nombre de equipo"
         app:layout_constraintBottom_toTopOf="@+id/nroEquipo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -159,6 +168,7 @@
         android:id="@+id/altaAnetTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
         android:text="Número de Serie ANET"
         app:layout_constraintBottom_toTopOf="@+id/nroAnet"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,24 +177,11 @@
         app:layout_constraintTop_toBottomOf="@+id/nroEquipo"
         app:layout_constraintVertical_bias="0.764" />
 
-    <ImageView
-        android:id="@+id/imageMonitor"
-        android:layout_width="55dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="20dp"
-        android:src="@mipmap/monitor"
-        android:tint="#004A8B"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titulo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.504" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.61" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -98,15 +98,12 @@ class ListEquipo : Fragment() {
                         }
                     }
 
-                    if(!filteredList.isEmpty()){
-
-                        adapter = AdapterEquipo(filteredList){
+                    adapter = AdapterEquipo(filteredList){
                                 position -> val action =ListEquipoDirections.actionListEquipoToDetalleEquipo(filteredList[position])
                             findNavController().navigate(action)
                         }
                         recyclerEquipos.adapter = adapter
 
-                    }
                 }
 
             }

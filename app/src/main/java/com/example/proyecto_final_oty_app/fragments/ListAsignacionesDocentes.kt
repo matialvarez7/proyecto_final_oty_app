@@ -146,7 +146,6 @@ class ListAsignacionesDocentes : Fragment() {
                         }
                     }
 
-                    if(!filteredList.isEmpty()){
 
                         adapter = AdapterAsignacion(equipos, personales,filteredList){
                                 position ->
@@ -157,7 +156,7 @@ class ListAsignacionesDocentes : Fragment() {
                         }
                         recyclerAsignacionDocente.adapter = adapter
 
-                    }
+
                 }
 
             }

@@ -62,7 +62,7 @@ class NewEquipo : Fragment() {
         nroAnet = v.findViewById(R.id.nroAnet)
         btnConfirmar = v.findViewById(R.id.editar1)
         titulo = v.findViewById(R.id.titulo)
-        titulo.text = "Alta equipo"
+        titulo.text = "Alta Equipo"
         scanInventario = v.findViewById(R.id.btnEscInventario)
         scanNombre = v.findViewById(R.id.btnEscEquipo)
         scanAnet = v.findViewById(R.id.btnEscAnet)

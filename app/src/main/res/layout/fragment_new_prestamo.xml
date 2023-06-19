@@ -12,40 +12,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.13" />
 
     <TextView
         android:id="@+id/tituloPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="-50dp"
+        android:layout_marginTop="60dp"
         android:text="Nuevo Prestamo"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/aniadirEquipo"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/aniadirEquipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#004A8B"
         android:text="Añadir Equipo"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloPrestamo" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerEquiposPrestamo" />
 
     <EditText
         android:id="@+id/dniResponsable"
-        android:layout_width="240dp"
+        android:layout_width="290dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/custom_background"
         android:elevation="5dp"
         android:ems="10"
@@ -54,152 +55,120 @@
         android:text=""
         android:textColor="#090909"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/nombreResponsable"
-        app:layout_constraintEnd_toStartOf="@+id/buscarResponsable"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@+id/dniTitulo" />
+
 
     <Button
         android:id="@+id/buscarResponsable"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#004A8B"
         android:elevation="5dp"
-        android:text="Buscar"
-        android:textSize="8sp"
+        android:text="BUSCAR"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/nombreResponsable"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dniResponsable"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apellidoResponsable" />
 
     <TextView
         android:id="@+id/nombreResponsable"
-        android:layout_width="240dp"
+        android:layout_width="290dp"
         android:layout_height="30dp"
-        android:layout_marginTop="-100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/custom_background"
         android:elevation="5dp"
         android:text=""
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/apellidoResponsable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dniResponsable" />
+        app:layout_constraintTop_toBottomOf="@+id/nombreTitulo" />
 
     <TextView
         android:id="@+id/apellidoResponsable"
-        android:layout_width="240dp"
+        android:layout_width="290dp"
         android:layout_height="30dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="7dp"
         android:background="@drawable/custom_background"
         android:elevation="5dp"
         android:text=""
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apellidoTitulo" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="365dp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerEquiposPrestamo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="372dp"
+        android:layout_height="137dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+        app:layout_constraintTop_toBottomOf="@+id/buscarResponsable" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.66" />
+        app:layout_constraintGuide_percent="0.89" />
 
     <Button
         android:id="@+id/confirmarPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#0E6512"
         android:text="Confirmar"
         app:cornerRadius="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/cancelarPrestamo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+        app:layout_constraintTop_toBottomOf="@+id/aniadirEquipo" />
 
     <Button
         android:id="@+id/cancelarPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="#D30404"
         android:text="Cancelar"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/confirmarPrestamo"
-        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+        app:layout_constraintTop_toBottomOf="@+id/aniadirEquipo" />
 
     <TextView
         android:id="@+id/dniTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="230dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
         android:text="DNI Responsable"
-        app:layout_constraintBottom_toTopOf="@+id/dniResponsable"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloPrestamo" />
 
     <TextView
         android:id="@+id/nombreTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="230dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
         android:text="Nombre Responsable"
-        app:layout_constraintBottom_toTopOf="@+id/nombreResponsable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.653"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dniResponsable"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintTop_toBottomOf="@+id/dniResponsable" />
 
     <TextView
         android:id="@+id/apellidoTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
         android:text="Apellido Responsable"
-        app:layout_constraintBottom_toTopOf="@+id/apellidoResponsable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreResponsable" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="58dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="50dp"
-        android:src="@drawable/prestamos"
-        app:layout_constraintBottom_toTopOf="@+id/aniadirEquipo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tituloPrestamo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

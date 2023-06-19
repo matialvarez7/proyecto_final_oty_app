@@ -7,65 +7,87 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AniadirEquipoPrestamo">
 
-    <EditText
-        android:id="@+id/invEquipoPrestamo"
+    <ImageButton
+        android:id="@+id/scanInventarioPrestamo"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="42dp"
+        android:background="@color/white"
+        android:src="@drawable/bcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tituloNewPrestamo"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint=""
-        android:background="@drawable/custom_background"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/buscarEquipo"
-        app:layout_constraintEnd_toStartOf="@+id/scanInventario"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Nuevo Prestamo"
+        android:textColor="#000000"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/invEquipoPrestamo"
+        android:layout_width="250dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/custom_background"
+        android:ems="10"
+        android:hint=""
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/nomEquipoPrestamo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:background="@drawable/custom_background"
         android:text=""
         android:textAlignment="center"
         android:textColor="#090909"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/anetEquipoPrestamo"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+        app:layout_constraintTop_toBottomOf="@+id/nombEquipoAniadir" />
 
     <TextView
         android:id="@+id/anetEquipoPrestamo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:background="@drawable/custom_background"
         android:text=""
         android:textAlignment="center"
         android:textColor="#090909"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/estadoEquipoPrestamo"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomEquipoPrestamo" />
+        app:layout_constraintTop_toBottomOf="@+id/anetEqAniadir" />
 
     <TextView
         android:id="@+id/estadoEquipoPrestamo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:background="@drawable/custom_background"
         android:text=""
         android:textAlignment="center"
         android:textColor="#090909"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/anetEquipoPrestamo" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -76,15 +98,14 @@
 
     <Button
         android:id="@+id/buscarEquipo"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#004A8B"
         android:text="buscar"
         android:textSize="16sp"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/invEquipoPrestamo" />
 
@@ -92,31 +113,14 @@
         android:id="@+id/confirmarEquipoPrestamo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#138B00"
         android:text="Añadir"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.119" />
-
-    <Button
-        android:id="@+id/scanInventario"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="29dp"
-        android:backgroundTint="#004A8B"
-        android:text="Escanear"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/buscarEquipo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/invEquipoPrestamo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385" />
+        app:layout_constraintTop_toBottomOf="@+id/estadoEquipoPrestamo" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -134,60 +138,53 @@
         android:text="Nombre del equipo"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/nomEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/anetEqAniadir"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/blue_custom_background"
         android:text="Número de A-NET"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/anetEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomEquipoPrestamo"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/nomEquipoPrestamo" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/blue_custom_background"
         android:text="Estado"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/estadoEquipoPrestamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/anetEquipoPrestamo"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/anetEquipoPrestamo" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingrese número de inventario"
-        app:layout_constraintBottom_toTopOf="@+id/invEquipoPrestamo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:text="Numero de inventario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloNewPrestamo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

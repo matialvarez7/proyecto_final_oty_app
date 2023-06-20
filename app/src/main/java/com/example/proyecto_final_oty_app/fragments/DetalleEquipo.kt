@@ -2,7 +2,6 @@ package com.example.proyecto_final_oty_app.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,20 +11,11 @@ import android.app.AlertDialog
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
-import com.example.proyecto_final_oty_app.entities.Equipo
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import com.example.proyecto_final_oty_app.entities.EquipoABM
-import com.example.proyecto_final_oty_app.entities.PersonalABM
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 //import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 class DetalleEquipo : Fragment() {
@@ -39,7 +29,6 @@ class DetalleEquipo : Fragment() {
     lateinit var estado: TextView
     lateinit var editar:Button
     lateinit var eliminarBtn: Button
-    lateinit var abm: EquipoABM
     private lateinit var builder : AlertDialog.Builder
 
     companion object {
@@ -70,7 +59,7 @@ class DetalleEquipo : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        abm = EquipoABM() // Inicializar la instancia de EquipoABM
+
 
 
         val equipo = DetalleEquipoArgs.fromBundle(requireArguments()).equipo

@@ -3,11 +3,8 @@ package com.example.proyecto_final_oty_app.fragments
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.proyecto_final_oty_app.entities.EquipoABM
-import com.example.proyecto_final_oty_app.entities.PersonalABM
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class DetalleEquipoViewModel : ViewModel() {

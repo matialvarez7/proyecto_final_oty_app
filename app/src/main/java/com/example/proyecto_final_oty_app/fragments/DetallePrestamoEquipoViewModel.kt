@@ -21,8 +21,6 @@ class DetallePrestamoEquipoViewModel : ViewModel() {
 
         if (!snapshot.isEmpty) {
             // Esto devuelve el primer ItemPrestamo que coincide.
-            // Asegúrate de que no haya más de un ItemPrestamo con el mismo idEquipo,
-            // o de que esté bien devolver solo el primero si hay más de uno.
             return@withContext snapshot.documents[0].toObject(ItemPrestamo::class.java)
         } else {
             throw Exception("No se encontró ItemPrestamo para el idEquipo proporcionado.")
@@ -33,19 +31,14 @@ class DetallePrestamoEquipoViewModel : ViewModel() {
         val itemPrestamoDocument = itemsPrestamoCollection.document(idItemPrestamo)
         val equipoDocument = equiposCollection.document(idEquipo)
 
-        // Primero, obten el documento ItemPrestamo y cambia el estado a "devuelto"
+        // Primero obtengo el documento ItemPrestamo y cambia el estado a "devuelto"
         try {
-            val snapshot = itemPrestamoDocument.get().await()
-            val itemPrestamo = snapshot.toObject(ItemPrestamo::class.java)
-            itemPrestamo?.let {
-                it.estadoItem = "Devuelto"
-                itemPrestamoDocument.set(it).await()
-            }
+            itemPrestamoDocument.update("estadoItem", "Devuelto").await()
         } catch (e: Exception) {
             throw e
         }
 
-        // Finalmente, cambia el estado del Equipo a "disponible"
+        //Cambio el estado del Equipo a "disponible"
         try {
             val snapshot = equipoDocument.get().await()
             val equipo = snapshot.toObject(Equipo::class.java)

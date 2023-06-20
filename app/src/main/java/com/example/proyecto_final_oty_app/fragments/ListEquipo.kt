@@ -58,12 +58,14 @@ class ListEquipo : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         equipos = mutableListOf()
 
         equipos.clear()
 
 
         lifecycleScope.launch {
+
             equipos = viewModel.obtenerColeccion()
 
             recyclerEquipos.setHasFixedSize(true)
@@ -76,10 +78,11 @@ class ListEquipo : Fragment() {
             }
 
             recyclerEquipos.adapter = adapter
+
         }
 
 
-        buscadorEquipos.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        buscadorEquipos.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -102,6 +105,7 @@ class ListEquipo : Fragment() {
                                 position -> val action =ListEquipoDirections.actionListEquipoToDetalleEquipo(filteredList[position])
                             findNavController().navigate(action)
                         }
+
                         recyclerEquipos.adapter = adapter
 
                 }
@@ -109,7 +113,6 @@ class ListEquipo : Fragment() {
             }
 
         })
-
 
 
         btnAlta.setOnClickListener(){

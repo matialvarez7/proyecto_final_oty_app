@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 class Homepage : Fragment() {
 
     lateinit var v : View
-    lateinit var txtTitle : TextView
     lateinit var btnAsigDocent : CardView
     lateinit var btnPrestamos : CardView
     lateinit var btnPersonal : CardView
@@ -47,7 +46,6 @@ class Homepage : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_homepage, container, false)
         auth = Firebase.auth
-        txtTitle = v.findViewById(R.id.titleMenu)
         btnAsigDocent = v.findViewById(R.id.botonAsignacionesDocentes)
         btnPrestamos = v.findViewById(R.id.botonPrestamos)
         btnPersonal = v.findViewById(R.id.botonPersonal)

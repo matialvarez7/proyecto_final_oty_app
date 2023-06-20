@@ -22,54 +22,22 @@ class HomepageViewModel : ViewModel() {
         this.db = FirebaseFirestore.getInstance()
 
         var baseEquipos = db.collection("equipos").whereEqualTo("estado", estado).get().await()
+
         if(baseEquipos != null){
+
             equiposEnCurso = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
+
         } else {
+
             Log.d(ContentValues.TAG, "Error getting documents")
+
         }
+
         return equiposEnCurso
+
     }
 
-
-
-    suspend fun obtenerColeccionEquipos(tipoDeColeccion: String) : MutableList <Equipo>{
-
-        var equipos : MutableList<Equipo>
-
-        var equiposADevolver : MutableList<Equipo>  = mutableListOf()
-
-        this.db = FirebaseFirestore.getInstance()
-
-        var baseEquipos = db.collection("equipos").get().await()
-
-        if(baseEquipos != null){
-
-            equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
-
-            if(tipoDeColeccion == "Asignaciones"){
-
-                for (equipo in equipos){
-
-                    if(equipo.nombre.contains("A-PROFH") && (!equipo.estado.equals("inactivo"))){
-                        equiposADevolver.add(equipo)
-                    }
-                }
-
-            } else if (tipoDeColeccion == "Prestamos"){
-
-                for (equipo in equipos){
-
-                    if(equipo.nombre.contains("A-NHG3-OTYP") && (!equipo.estado.equals("inactivo"))){
-                        equiposADevolver.add(equipo)
-                    }
-                }
-            }
-        }
-
-        return equiposADevolver
-    }
-
-    suspend fun obtenerColeccionEquipos2(nomeclaturaNet : String, estadoNet : String) : MutableList <Equipo>{
+    suspend fun obtenerColeccionEquipos(nomeclaturaNet : String, estadoNetNoDeseado : String) : MutableList <Equipo>{
 
         var equipos : MutableList<Equipo>
 
@@ -85,7 +53,7 @@ class HomepageViewModel : ViewModel() {
 
              for (equipo in equipos){
 
-                    if(equipo.nombre.contains(nomeclaturaNet) && (!equipo.estado.equals(estadoNet))){
+                    if(equipo.nombre.contains(nomeclaturaNet) && (!equipo.estado.equals(estadoNetNoDeseado))){
                         equiposADevolver.add(equipo)
                     }
                 }
@@ -95,6 +63,21 @@ class HomepageViewModel : ViewModel() {
         return equiposADevolver
     }
 
+    fun calcularPromedio(cantidad : Float, cantTotal : Float) : Float {
+
+        var promedio = 0F
+
+        if(cantTotal > 0) {
+
+            promedio = (((cantidad / cantTotal) * 100))
+
+        }
+
+        return promedio
+
+    }
+
+
     suspend fun generarProgressBar(tipoDeColeccion: String,textoCantidades: TextView, textPromedio: TextView, progreBarAsig : ProgressBar) {
         var promedio = 0F
         var cantEnCurso : Float
@@ -102,19 +85,22 @@ class HomepageViewModel : ViewModel() {
 
 
         if(tipoDeColeccion == "Asignaciones"){
-            cantTotal = obtenerColeccionEquipos2("A-PROFH", "inactivo").size.toFloat()
+
+            cantTotal = obtenerColeccionEquipos("A-PROFH", "inactivo").size.toFloat()
+
             cantEnCurso = obtenerColeccionEquiposEnCurso("Asignado").size.toFloat()
-            if(cantTotal > 0) {
-                promedio =(((cantEnCurso/cantTotal)* 100))
-            }
+
+            promedio = calcularPromedio(cantEnCurso, cantTotal)
+
             textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
 
         } else if(tipoDeColeccion == "Prestamos"){
-            cantTotal = obtenerColeccionEquipos2("A-NHG3", "inactivo").size.toFloat()
+
+            cantTotal = obtenerColeccionEquipos("A-NHG3", "inactivo").size.toFloat()
+
             cantEnCurso = obtenerColeccionEquiposEnCurso("En préstamo").size.toFloat()
-            if(cantTotal > 0){
-                promedio =(((cantEnCurso/cantTotal)* 100))
-            }
+
+            promedio = calcularPromedio(cantEnCurso, cantTotal)
 
             textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }
@@ -125,5 +111,6 @@ class HomepageViewModel : ViewModel() {
         textPromedio.text = "${(promedio).roundToInt()} %"
 
     }
+
 
 }

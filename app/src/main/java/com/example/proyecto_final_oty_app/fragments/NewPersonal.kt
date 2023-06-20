@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.entities.Personal
 import com.example.proyecto_final_oty_app.entities.PersonalABM
@@ -42,7 +43,7 @@ class NewPersonal : Fragment() {
         val confirmarCargaButton: Button = view.findViewById(R.id.confirmarCargaButton)
 
         fun camposValidos(nombre: String, apellido: String, dni: String, area: String): Boolean {
-            return nombre.isNotEmpty() && apellido.isNotEmpty() && dni.isNotEmpty() && area.isNotEmpty()
+            return nombre.isNotEmpty() && apellido.isNotEmpty() && dni.isNotEmpty() && dni.length in 7..9 && area.isNotEmpty()
         }
 
         confirmarCargaButton.setOnClickListener {
@@ -69,7 +70,7 @@ class NewPersonal : Fragment() {
                             if (!viewModel.existeDni(dni)) {
                                 val id = viewModel.agregarPersonal(nuevoPersonal)
                                 if (id != null) {
-                                    nuevoPersonal.id = id  //SE MODIFICO ACA PARA QUE FUNCIONE
+                                    nuevoPersonal.id = id
                                 }
                                 Toast.makeText(
                                     requireContext(),
@@ -82,6 +83,8 @@ class NewPersonal : Fragment() {
                                 dniEditText.text.clear()
                                 areaEditText.text.clear()
 
+                                findNavController().popBackStack()
+
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -90,6 +93,12 @@ class NewPersonal : Fragment() {
                                 ).show()
                             }
                         }
+                    } else if (dni.length !in 7..9) {
+                            Toast.makeText(
+                                requireContext(),
+                                "El DNI debe tener al menos 7 caracteres y no más de 9.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                     } else {
                         Toast.makeText(
                             requireContext(),

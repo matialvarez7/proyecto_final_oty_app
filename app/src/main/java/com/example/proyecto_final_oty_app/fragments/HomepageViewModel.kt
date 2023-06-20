@@ -22,17 +22,22 @@ class HomepageViewModel : ViewModel() {
         this.db = FirebaseFirestore.getInstance()
 
         var baseEquipos = db.collection("equipos").whereEqualTo("estado", estado).get().await()
+
         if(baseEquipos != null){
+
             equiposEnCurso = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
+
         } else {
+
             Log.d(ContentValues.TAG, "Error getting documents")
+
         }
+
         return equiposEnCurso
+
     }
 
-
-
-    suspend fun obtenerColeccionEquipos(tipoDeColeccion: String) : MutableList <Equipo>{
+    suspend fun obtenerColeccionEquipos(nomeclaturaNet : String, estadoNetNoDeseado : String) : MutableList <Equipo>{
 
         var equipos : MutableList<Equipo>
 
@@ -46,42 +51,57 @@ class HomepageViewModel : ViewModel() {
 
             equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
 
-            if(tipoDeColeccion == "Asignaciones"){
+             for (equipo in equipos){
 
-                for (equipo in equipos){
-
-                    if(equipo.nombre.contains("A-PROFH") && (!equipo.estado.equals("inactivo"))){
+                    if(equipo.nombre.contains(nomeclaturaNet) && (!equipo.estado.equals(estadoNetNoDeseado))){
                         equiposADevolver.add(equipo)
                     }
                 }
 
-            } else if (tipoDeColeccion == "Prestamos"){
-
-                for (equipo in equipos){
-
-                    if(equipo.nombre.contains("A-NHG3-OTYP") && (!equipo.estado.equals("inactivo"))){
-                        equiposADevolver.add(equipo)
-                    }
-                }
             }
-        }
 
         return equiposADevolver
     }
 
+    fun calcularPromedio(cantidad : Float, cantTotal : Float) : Float {
+
+        var promedio = 0F
+
+        if(cantTotal > 0) {
+
+            promedio = (((cantidad / cantTotal) * 100))
+
+        }
+
+        return promedio
+
+    }
+
+
     suspend fun generarProgressBar(tipoDeColeccion: String,textoCantidades: TextView, textPromedio: TextView, progreBarAsig : ProgressBar) {
-        var promedio : Float = 0F
-        var cantEnCurso : Float = 0F
-        var cantTotal : Float = obtenerColeccionEquipos(tipoDeColeccion).size.toFloat()
+        var promedio = 0F
+        var cantEnCurso : Float
+        var cantTotal : Float
 
 
-        if(tipoDeColeccion == "Asignaciones" && cantTotal > 0){
+        if(tipoDeColeccion == "Asignaciones"){
+
+            cantTotal = obtenerColeccionEquipos("A-PROFH", "inactivo").size.toFloat()
+
             cantEnCurso = obtenerColeccionEquiposEnCurso("Asignado").size.toFloat()
-            promedio =(((cantEnCurso/cantTotal)* 100))
+
+            promedio = calcularPromedio(cantEnCurso, cantTotal)
+
             textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
-        } else if(tipoDeColeccion == "Prestamos" && cantTotal > 0){
+
+        } else if(tipoDeColeccion == "Prestamos"){
+
+            cantTotal = obtenerColeccionEquipos("A-NHG3", "inactivo").size.toFloat()
+
             cantEnCurso = obtenerColeccionEquiposEnCurso("En préstamo").size.toFloat()
-            promedio =(((cantEnCurso/cantTotal)* 100))
+
+            promedio = calcularPromedio(cantEnCurso, cantTotal)
+
             textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }
 
@@ -91,5 +111,6 @@ class HomepageViewModel : ViewModel() {
         textPromedio.text = "${(promedio).roundToInt()} %"
 
     }
+
 
 }

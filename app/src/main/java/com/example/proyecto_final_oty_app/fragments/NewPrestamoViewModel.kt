@@ -174,6 +174,10 @@ class NewPrestamoViewModel : ViewModel() {
         return nombre
 
     }
+
+    fun noEsEquipoPrestamo() : Boolean {
+        return this.equipo.nombre.contains("prof", ignoreCase = true)
+    }
     fun equipoYaAgregado(nroInventario : String) : Boolean {
         return this.listaEquipos.find { it.inventario == nroInventario } != null
     }

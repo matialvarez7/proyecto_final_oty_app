@@ -80,7 +80,12 @@ class AniadirEquipoPrestamo : Fragment() {
                         Snackbar.make(v, "El número de inventario no existe", Snackbar.LENGTH_LONG).show()
                     }
                     else{
-                        mostrarDatos()
+                        if(sharedViewModel.noEsEquipoPrestamo()){
+                            Snackbar.make(v, "El equipo no es apto préstamo", Snackbar.LENGTH_LONG).show()
+                        }else{
+                            mostrarDatos()
+                        }
+
                     }
                 }
             }

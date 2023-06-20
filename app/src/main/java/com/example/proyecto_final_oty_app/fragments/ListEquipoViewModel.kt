@@ -18,14 +18,20 @@ class ListEquipoViewModel : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     private val equiposCollection = db.collection("equipos")
     lateinit var equipos : MutableList<Equipo>
+
     suspend fun obtenerColeccion () : MutableList<Equipo>{
         equipos = mutableListOf()
 
         var baseEquipos = equiposCollection.whereNotEqualTo("estado","inactivo").orderBy("estado").get().await()
+
         if(baseEquipos != null){
+
             equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
+
         }
+
         return equipos
+
     }
 
 }

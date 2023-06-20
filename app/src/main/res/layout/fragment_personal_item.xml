@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="#D9D9D9"
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
     app:cardMaxElevation="1dp">
@@ -53,7 +52,7 @@
 
             <TextView
                 android:id="@+id/areaPersonal"
-                android:layout_width="165dp"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
                 android:text="Biologia"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"

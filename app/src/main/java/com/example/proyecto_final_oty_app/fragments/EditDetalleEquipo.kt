@@ -66,15 +66,15 @@ class EditDetalleEquipo : Fragment() {
 
         if(equipo!=null) {
             bot.setOnClickListener {
-                builder.setMessage("¿Desea Confirmar?")
+                builder.setMessage("¿ Desea Confirmar ?")
                     .setCancelable(true)
-                    .setNegativeButton("no"){ dialogInterface, it ->
+                    .setNegativeButton("No"){ dialogInterface, it ->
                         dialogInterface.cancel()
                     }
                     .setPositiveButton("Si"){dialogInterface,it->
                         var eq = Equipo(equipo.id, inventario.text.toString(), nombre.text.toString(), anet.text.toString(), estado.text.toString())
                         viewModel.actualizarEquipo(eq)
-                        Snackbar.make(vista,"Se edito correctamente",1000).show()
+                        Snackbar.make(vista,"Se edito Correctamente al equipo.",1000).show()
                         findNavController().navigateUp()
                     }
 

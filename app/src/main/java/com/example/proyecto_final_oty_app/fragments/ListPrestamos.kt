@@ -92,7 +92,6 @@ class ListPrestamos : Fragment() {
                         }
                     }
 
-                    if(!filteredList.isEmpty()){
 
                         adapter = AdapterPrestamo(filteredList){
                                 position -> val action = ListPrestamosDirections.actionListPrestamosToDetallePrestamo(filteredList[position])
@@ -100,7 +99,7 @@ class ListPrestamos : Fragment() {
                         }
                         recyclerPrestamos.adapter = adapter
 
-                    }
+
                 }
 
             }

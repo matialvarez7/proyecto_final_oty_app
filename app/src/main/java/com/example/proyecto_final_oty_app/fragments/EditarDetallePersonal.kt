@@ -59,15 +59,15 @@ class EditarDetallePersonal : Fragment() {
         editArea.setText(personal.area.toString())
         if(personal!=null) {
             confirmarBtn.setOnClickListener {
-                builder.setMessage("¿Desea Confirmar?")
+                builder.setMessage("¿ Desea Confirmar ?")
                     .setCancelable(true)
-                    .setNegativeButton("no"){ dialogInterface, it ->
+                    .setNegativeButton("No"){ dialogInterface, it ->
                         dialogInterface.cancel()
                     }
                     .setPositiveButton("Si"){dialogInterface,it->
                         var personalNuevo = Personal(personal.id,editDNI.text.toString() , editNombre.text.toString(), editApellido.text.toString(), editArea.text.toString())
                         viewModel.actualizarPersonal(personalNuevo)
-                        Snackbar.make(v,"Se edito correctamente el usuario",1000).show()
+                        Snackbar.make(v,"Se edito correctamente el usuario.",1000).show()
                         findNavController().navigateUp()
                     }
 

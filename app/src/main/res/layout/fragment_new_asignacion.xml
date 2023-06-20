@@ -10,47 +10,45 @@
 
     <EditText
         android:id="@+id/editAreaAsig"
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="29dp"
 
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:inputType="number"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloAreaAsign" />
 
     <EditText
         android:id="@+id/editResponsable"
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="29dp"
 
+        android:layout_marginStart="50dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:inputType="number"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloResponsableAsig" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editInventario2"
-        android:layout_width="260dp"
+        android:layout_width="250dp"
         android:layout_height="29dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:inputType="text"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInventario" />
 
@@ -58,7 +56,7 @@
         android:id="@+id/tituloAsignacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         android:text="Nueva Asignacion"
         android:textColor="#000000"
         android:textSize="24dp"
@@ -70,32 +68,30 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editNombreEquipo"
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="29dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:inputType="text"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreEquipoText" />
 
     <EditText
         android:id="@+id/editDNI"
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="29dp"
 
+        android:layout_marginStart="50dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:inputType="number"
         android:minHeight="48dp"
         android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDNI" />
 
@@ -103,24 +99,25 @@
         android:id="@+id/confirmarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:backgroundTint="#138B00"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#0E6512"
         android:elegantTextHeight="true"
         android:text="CONFIRMAR"
+        app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline13" />
+        app:layout_constraintTop_toBottomOf="@+id/buscarDNIBtn" />
 
     <Button
         android:id="@+id/buscarInventarioBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#004A8B"
         android:elegantTextHeight="true"
         android:minHeight="48dp"
         android:text="BUSCAR"
+        app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,11 +127,12 @@
         android:id="@+id/buscarDNIBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#004A8B"
         android:elegantTextHeight="true"
         android:minHeight="48dp"
         android:text="BUSCAR"
+        app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editAreaAsig" />
@@ -143,26 +141,22 @@
         android:id="@+id/nombreEquipoText"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
         android:text="Nombre Equipo"
-        app:layout_constraintBottom_toTopOf="@+id/editNombreEquipo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editInventario2" />
 
     <ImageButton
-        android:id="@+id/lectorAsignacion"
-        android:layout_width="48dp"
+        android:id="@+id/scanInventarioAsignacion"
+        android:layout_width="40dp"
         android:layout_height="48dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="26dp"
-        android:src="@drawable/bcode"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="42dp"
         android:background="@color/white"
+        android:src="@drawable/bcode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editInventario2"
-        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
@@ -175,23 +169,19 @@
         android:id="@+id/textInventario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="-20dp"
-        android:text="Inventario"
-        app:layout_constraintBottom_toTopOf="@+id/editInventario2"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:text="Numero de Inventario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloAsignacion" />
 
     <TextView
         android:id="@+id/textDNI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="13dp"
         android:text="DNI"
-        app:layout_constraintBottom_toTopOf="@+id/editDNI"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buscarInventarioBtn" />
 
@@ -200,17 +190,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="578dp" />
+        app:layout_constraintGuide_begin="598dp" />
 
     <TextView
         android:id="@+id/tituloResponsableAsig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
         android:text="Responnsable"
-        app:layout_constraintBottom_toTopOf="@+id/editResponsable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDNI" />
 
@@ -218,11 +206,9 @@
         android:id="@+id/tituloAreaAsign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
         android:text="Area de Trabajo"
-        app:layout_constraintBottom_toTopOf="@+id/editAreaAsig"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editResponsable" />
 

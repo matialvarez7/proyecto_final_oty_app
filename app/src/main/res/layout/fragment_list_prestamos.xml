@@ -9,10 +9,12 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewPrestamos"
-        android:layout_width="386dp"
+        android:layout_width="368dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/custom_background"
         android:elegantTextHeight="true"
         android:paddingStart="10dp"
@@ -45,10 +47,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recPrestamos"
-        android:layout_width="395dp"
-        android:layout_height="462dp"
+        android:layout_width="370dp"
+        android:layout_height="460dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:isScrollContainer="true"
         android:windowSoftInputMode="adjustResize"

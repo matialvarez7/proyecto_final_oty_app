@@ -103,7 +103,6 @@ class ListPersonal : Fragment() {
                         }
                     }
 
-                    if(!filteredList.isEmpty()){
 
                         adapter = AdapterPersonal(filteredList){
                                 position -> val action =ListPersonalDirections.actionListPersonalToDetallePersonal(filteredList[position])
@@ -111,7 +110,7 @@ class ListPersonal : Fragment() {
                     }
                         recyclerPersonal.adapter = adapter
 
-                    }
+
                 }
 
             }

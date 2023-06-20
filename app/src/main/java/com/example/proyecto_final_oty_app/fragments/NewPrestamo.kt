@@ -67,8 +67,11 @@ class NewPrestamo : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        // Crea el ID del préstamo
         viewModel.setIdPrestamo()
 
+        /* Cada vez que ocurra ocurra una eliminación de un equipo que está en la lista
+        de equipos asignado se actualiza lo que muestra en el recyclerview*/
         viewModel.liveListaEquipos.observe(viewLifecycleOwner, Observer{ lista ->
             equiposPrestamoAdapter = AdapterCrearPrestamo(lista){position ->
                 viewModel.eliminarEquipoAniadido(position)
@@ -77,6 +80,9 @@ class NewPrestamo : Fragment() {
             recyclerEquiposPrestamos.adapter = equiposPrestamoAdapter
         })
 
+        /* Busca el responsable a asignar por número de DNI. Si el DNI no es válido o no existe informa
+        la situación.
+         */
         buscarResponsable.setOnClickListener(){
             if(viewModel.campoDniVacío(dniResponsable.text.toString())){
                 Snackbar.make(v, "El DNI no puede estar vacío", Snackbar.LENGTH_LONG).show()
@@ -99,12 +105,13 @@ class NewPrestamo : Fragment() {
 
         }
 
+        // Navega hacia el fragment para añadir equipos al préstamo
         aniadirEquipo.setOnClickListener(){
             val action = NewPrestamoDirections.actionNewPrestamo2ToAniadirEquipoPrestamo(viewModel.idPrestamo)
             findNavController().navigate(action)
         }
 
-
+        // Confirmación de un préstamo. Antes de confirmar el mismo solicita una confirmación
         confirmarPrestamo.setOnClickListener() {
             AlertDialog.Builder(context).setTitle("Confirmar préstamo").setMessage("¿Desea confirmar el nuevo préstamo?")
                 .setPositiveButton(android.R.string.ok) { _, _ ->
@@ -126,7 +133,7 @@ class NewPrestamo : Fragment() {
                 .show()
         }
 
-
+        // Cancela la creación del préstamo y redirige a la pantalla anterior
         cancelarPrestamo.setOnClickListener(){
             lifecycleScope.launch {
                 if(viewModel.cancelarPrestamo()){

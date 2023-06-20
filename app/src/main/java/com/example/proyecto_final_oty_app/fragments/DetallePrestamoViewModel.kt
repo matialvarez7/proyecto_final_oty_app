@@ -47,13 +47,13 @@ class DetallePrestamoViewModel : ViewModel() {
 
         val itemsPrestamo = itemsPrestamoSnapshot.toObjects(ItemPrestamo::class.java)
 
-        // Marcar todos los itemsPrestamo como devueltos si no lo están ya.
+        // Marca todos los itemsPrestamo como devueltos si no lo estan ya.
         itemsPrestamo.forEach { itemPrestamo ->
-            if(itemPrestamo.estadoItem != "Devuelto") {
-                val itemPrestamoDocument = itemsPrestamoCollection.document(itemPrestamo.id)
+            if(itemPrestamo.estadoItem != "Devuelto") {itemPrestamo.id
+                val itemPrestamoDocument = itemsPrestamoCollection.document()
                 itemPrestamoDocument.update("estadoItem", "Devuelto").await()
 
-                // También marcar el equipo asociado como disponible.
+                // marca el equipo asociado como disponible.
                 val equipoDocument = equiposCollection.document(itemPrestamo.idEquipo)
                 equipoDocument.update("estado", "Disponible").await()
             }

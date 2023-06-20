@@ -116,7 +116,8 @@ class NewEquipo : Fragment() {
                             nroAnet.text.toString()
                         )
                     ) {
-                        Snackbar.make(v, "Debe completar todos los campos", Snackbar.LENGTH_LONG)
+
+                        Snackbar.make(v, "Numero de inventario o nombre inválido", Snackbar.LENGTH_LONG)
                             .show()
                     } else {
                         lifecycleScope.launch {

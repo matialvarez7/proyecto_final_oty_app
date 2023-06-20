@@ -15,7 +15,8 @@ class NewEquipoViewModel : ViewModel() {
 
     fun formularioValido(nroInventario : String, nroEquipo : String, nroAnet : String) : Boolean{
         var esValido : Boolean = true
-        if(nroInventario.isEmpty() || nroEquipo.isEmpty() || nroAnet.isEmpty()){
+        val soloNumeros = Regex("\\d+")
+        if(nroInventario.isEmpty() || nroEquipo.isEmpty() || !soloNumeros.matches(nroInventario)){
             esValido = false
         }
         return esValido

@@ -62,7 +62,11 @@ class Login : Fragment() {
                     auth.signInWithEmailAndPassword(editEmail.text.toString(),editPassword.text.toString()).await()
                     val action = LoginDirections.actionLoginToMainActivity()
                     findNavController().navigate(action)
+                    editEmail.text.clear()
+                    editPassword.text.clear()
                     }catch (e: Exception){
+                    editEmail.text.clear()
+                    editPassword.text.clear()
                     Toast.makeText(requireContext(), "Revise los datos ingresados.", Toast.LENGTH_SHORT).show()
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.proyecto_final_oty_app.fragments
 
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Homepage : Fragment() {
@@ -38,6 +42,7 @@ class Homepage : Fragment() {
     lateinit var viewModel: HomepageViewModel
     lateinit var user : TextView
     private lateinit var auth: FirebaseAuth
+    private lateinit var builder : AlertDialog.Builder
 
 
           override fun onCreateView(
@@ -72,6 +77,7 @@ class Homepage : Fragment() {
     override fun onStart() {
         super.onStart()
         db = FirebaseFirestore.getInstance()
+        builder = AlertDialog.Builder(context)
 
         btnAsigDocent.setOnClickListener(){
             val action = HomepageDirections.actionHomepageToListAsignacionesDocentes()
@@ -94,8 +100,17 @@ class Homepage : Fragment() {
         }
 
         btnCerrarSesion.setOnClickListener(){
-            auth.signOut()
-            requireActivity().finish()
+            builder.setMessage("¿Estás seguro de que quieres cerrar sesión?")
+                .setCancelable(true)
+                .setPositiveButton("Cerrar sesión"){dialogInterface,it->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        auth.signOut()
+                        requireActivity().finish()
+                    }
+                }
+
+                .show()
+
 
         }
 

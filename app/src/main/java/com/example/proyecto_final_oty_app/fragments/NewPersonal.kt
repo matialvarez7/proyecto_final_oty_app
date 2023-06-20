@@ -93,10 +93,10 @@ class NewPersonal : Fragment() {
                                 ).show()
                             }
                         }
-                    } else if (dni.length !in 7..9) {
+                    } else if (dni.length !in 7..8) {
                             Toast.makeText(
                                 requireContext(),
-                                "El DNI debe tener al menos 7 caracteres y no más de 9.",
+                                "El DNI debe tener al menos 7 caracteres y no más de 8.",
                                 Toast.LENGTH_SHORT
                             ).show()
                     } else {

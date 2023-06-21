@@ -45,7 +45,7 @@ class Homepage : Fragment() {
     private lateinit var builder : AlertDialog.Builder
 
 
-          override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {

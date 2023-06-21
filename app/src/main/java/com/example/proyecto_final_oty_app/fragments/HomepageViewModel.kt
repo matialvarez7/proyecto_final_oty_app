@@ -37,7 +37,7 @@ class HomepageViewModel : ViewModel() {
 
     }
 
-    suspend fun obtenerColeccionEquipos(nomeclaturaNet : String, estadoNetNoDeseado : String) : MutableList <Equipo>{
+    suspend fun obtenerColeccionEquipos(nomeclaturaNet : String) : MutableList <Equipo>{
 
         var equipos : MutableList<Equipo>
 
@@ -51,14 +51,14 @@ class HomepageViewModel : ViewModel() {
 
             equipos = baseEquipos.toObjects<Equipo>() as MutableList<Equipo>
 
-             for (equipo in equipos){
+            for (equipo in equipos){
 
-                    if(equipo.nombre.contains(nomeclaturaNet) && (!equipo.estado.equals(estadoNetNoDeseado))){
-                        equiposADevolver.add(equipo)
-                    }
+                if(equipo.nombre.contains(nomeclaturaNet) && (!equipo.estado.equals("inactivo"))){
+                    equiposADevolver.add(equipo)
                 }
-
             }
+
+        }
 
         return equiposADevolver
     }
@@ -86,23 +86,23 @@ class HomepageViewModel : ViewModel() {
 
         if(tipoDeColeccion == "Asignaciones"){
 
-            cantTotal = obtenerColeccionEquipos("A-PROFH", "inactivo").size.toFloat()
+            cantTotal = obtenerColeccionEquipos("A-PROFH").size.toFloat()
 
             cantEnCurso = obtenerColeccionEquiposEnCurso("Asignado").size.toFloat()
 
             promedio = calcularPromedio(cantEnCurso, cantTotal)
 
-            textoCantidades.text = "Cantidad Asignada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
+            textoCantidades.text = "Equipos Asignados ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
 
         } else if(tipoDeColeccion == "Prestamos"){
 
-            cantTotal = obtenerColeccionEquipos("A-NHG3", "inactivo").size.toFloat()
+            cantTotal = obtenerColeccionEquipos("A-NHG3").size.toFloat()
 
             cantEnCurso = obtenerColeccionEquiposEnCurso("En préstamo").size.toFloat()
 
             promedio = calcularPromedio(cantEnCurso, cantTotal)
 
-            textoCantidades.text = "Cantidad Prestada ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
+            textoCantidades.text = "Equipos Prestados ${cantEnCurso.roundToInt()} / ${cantTotal.roundToInt()}"
         }
 
 

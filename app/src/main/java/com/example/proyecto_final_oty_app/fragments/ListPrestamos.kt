@@ -86,8 +86,8 @@ class ListPrestamos : Fragment() {
                 if(query != null){
                     val filteredList = mutableListOf<PrestamoFinal>()
                     for (prestamo in listaFinal){
-                        if(prestamo.nombre.lowercase(Locale.ROOT).contains(query) || prestamo.nombre.contains(query)
-                            || prestamo.apellido.contains(query) || prestamo.apellido.lowercase(Locale.ROOT).contains(query) ){
+                        if(prestamo.nombre.lowercase().contains(query) || prestamo.nombre.contains(query)
+                            || prestamo.apellido.contains(query) || prestamo.apellido.lowercase().contains(query) ){
                             filteredList.add(prestamo)
                         }
                     }

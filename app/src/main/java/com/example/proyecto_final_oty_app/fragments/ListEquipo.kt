@@ -96,7 +96,8 @@ class ListEquipo : Fragment() {
                 if(query != null){
                     val filteredList = mutableListOf<Equipo>()
                     for ( equipo in equipos){
-                        if(equipo.nombre.lowercase(Locale.ROOT).contains(query) || equipo.nombre.contains(query)){
+                        if(equipo.nombre.lowercase().contains(query) || equipo.nombre.contains(query)
+                            || equipo.inventario.contains(query)){
                             filteredList.add(equipo)
                         }
                     }

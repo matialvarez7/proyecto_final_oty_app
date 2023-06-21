@@ -1,6 +1,4 @@
 package com.example.proyecto_final_oty_app.fragments
-
-import android.content.ContentValues
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -10,18 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final_oty_app.R
 import com.example.proyecto_final_oty_app.adapters.AdapterAsignacion
-import com.example.proyecto_final_oty_app.adapters.AdapterPrestamo
 import com.example.proyecto_final_oty_app.entities.AsignacionDocente
-import com.example.proyecto_final_oty_app.entities.Equipo
-import com.example.proyecto_final_oty_app.entities.Personal
-import com.example.proyecto_final_oty_app.entities.PrestamoFinal
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
 class ListAsignacionesDocentes : Fragment() {
@@ -30,10 +26,6 @@ class ListAsignacionesDocentes : Fragment() {
     lateinit var v : View
     lateinit var recyclerAsignacionDocente : RecyclerView
     lateinit var adapter : AdapterAsignacion
-    lateinit var db : FirebaseFirestore
-    lateinit var equipos : MutableList<Equipo>
-    lateinit var asignaciones : MutableList<AsignacionDocente>
-    lateinit var personales : MutableList<Personal>
     lateinit var btnAltaAsignacion : Button
     lateinit var buscadorAsignaciones : SearchView
 
@@ -62,68 +54,32 @@ class ListAsignacionesDocentes : Fragment() {
         viewModel = ViewModelProvider(this).get(ListAsignacionesDocentesViewModel::class.java)
         // TODO: Use the ViewModel
     }
-    private fun registro(){
-        db.collection("asignaciones")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (equipo in snapshot) {
-                        asignaciones.add(equipo.toObject())
-                    }
 
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-        db.collection("personal")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (equipo in snapshot) {
-                        personales.add(equipo.toObject())
-                    }
-
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-        db.collection("equipos")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                if (snapshot != null) {
-                    for (equipo in snapshot) {
-                        equipos.add(equipo.toObject())
-                    }
-                    recyclerAsignacionDocente.adapter = adapter
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-    }
 
     override fun onStart() {
         super.onStart()
-        db = FirebaseFirestore.getInstance()
-        equipos = mutableListOf()
-        personales = mutableListOf()
-        asignaciones= mutableListOf()
+        runBlocking {
+            viewModel.registro()
+        }
+        var equipos=viewModel.equipos
+        var personales=viewModel.personales
+        var asignaciones=viewModel.asignaciones
+
         recyclerAsignacionDocente.setHasFixedSize(true)
         recyclerAsignacionDocente.layoutManager = LinearLayoutManager(context)
-
-
+        Log.e("personales"," "+personales.size)
+        Log.e("equipos"," "+equipos.size)
+        Log.e("asignaciones"," "+asignaciones.size)
 
 
         adapter = AdapterAsignacion(equipos, personales,asignaciones){
                 position ->
-            val posE=buscarEquipoPos(asignaciones[position].idEquipo)
-            val posP=buscarPersonalPos(asignaciones[position].idPersonal)
+            val posE=viewModel.buscarEquipoPos(asignaciones[position].idEquipo)
+            val posP=viewModel.buscarPersonalPos(asignaciones[position].idPersonal)
             val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToDetalleAsignacion(asignaciones[position].id,equipos[posE],personales[posP])
             findNavController().navigate(action)
         }
-        registro()
+        recyclerAsignacionDocente.adapter = adapter
 
         buscadorAsignaciones.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -139,22 +95,22 @@ class ListAsignacionesDocentes : Fragment() {
                 if(query != null){
                     val filteredList = mutableListOf<AsignacionDocente>()
                     for (asignacion in asignaciones){
-                        val pos = buscarPersonalPos(asignacion.idPersonal)
-                     if(personales[pos].nombre.lowercase(Locale.ROOT).contains(query) || personales[pos].nombre.contains(query)
-                         ||personales[pos].apellido.lowercase(Locale.ROOT).contains(query) || personales[pos].apellido.contains(query)  ){
+                        val pos = viewModel.buscarPersonalPos(asignacion.idPersonal)
+                        if(personales[pos].nombre.lowercase().contains(query) || personales[pos].nombre.contains(query)
+                            ||personales[pos].apellido.lowercase().contains(query) || personales[pos].apellido.contains(query)  ){
                             filteredList.add(asignacion)
                         }
                     }
 
 
-                        adapter = AdapterAsignacion(equipos, personales,filteredList){
-                                position ->
-                            val posE=buscarEquipoPos(filteredList[position].idEquipo)
-                            val posP=buscarPersonalPos(filteredList[position].idPersonal)
-                            val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToDetalleAsignacion(filteredList[position].id,equipos[posE],personales[posP])
-                            findNavController().navigate(action)
-                        }
-                        recyclerAsignacionDocente.adapter = adapter
+                    adapter = AdapterAsignacion(equipos, personales,filteredList){
+                            position ->
+                        val posE=viewModel.buscarEquipoPos(filteredList[position].idEquipo)
+                        val posP=viewModel.buscarPersonalPos(filteredList[position].idPersonal)
+                        val action = ListAsignacionesDocentesDirections.actionListAsignacionesDocentesToDetalleAsignacion(filteredList[position].id,equipos[posE],personales[posP])
+                        findNavController().navigate(action)
+                    }
+                    recyclerAsignacionDocente.adapter = adapter
 
 
                 }
@@ -172,30 +128,6 @@ class ListAsignacionesDocentes : Fragment() {
 
     }
 
-    fun buscarEquipoPos( equipoId: String): Int {
-        var indice = 0
-        var indiceUltimo = -1
-        while (indice < equipos.size) {
-            if (equipos[indice].id == equipoId) {
-                return indice
-            }
-            indiceUltimo = indice
-            indice++
-        }
-        return indiceUltimo
-    }
 
-    fun buscarPersonalPos( personaId: String): Int {
-        var indice = 0
-        var indiceUltimo = -1
-        while (indice < personales.size) {
-            if (personales[indice].id == personaId) {
-                return indice
-            }
-            indiceUltimo = indice
-            indice++
-        }
-        return indiceUltimo
-    }
 
 }

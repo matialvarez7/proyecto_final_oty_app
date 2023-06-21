@@ -161,7 +161,7 @@ class NewPrestamoViewModel : ViewModel() {
     // Setea el id del préstamo
     fun setIdPrestamo() {
         if(this.idPrestamo.isEmpty()){
-            val id = db.collection("personal").document()
+            val id = db.collection("prestamos").document()
             idPrestamo = id.id
         }
     }

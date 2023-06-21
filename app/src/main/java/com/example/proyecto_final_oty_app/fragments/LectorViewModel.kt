@@ -13,8 +13,6 @@ import com.google.zxing.integration.android.IntentIntegrator
 class LectorViewModel : ViewModel() {
 
     val valorEscaneadoInventario : MutableLiveData<String> = MutableLiveData()
-    //val valorEscaneado : LiveData<String> = _valorEscaneado
-
     val valorEscaneadoNombre : MutableLiveData<String> = MutableLiveData()
     val valorEscaneadoAnet : MutableLiveData<String> = MutableLiveData()
 

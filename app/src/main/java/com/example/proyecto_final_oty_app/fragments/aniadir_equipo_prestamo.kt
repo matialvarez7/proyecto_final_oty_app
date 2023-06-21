@@ -126,6 +126,6 @@ class AniadirEquipoPrestamo : Fragment() {
         nombreEquipo.text = ""
         nroAnetEquipo.text = ""
         estadoEquipo.text = ""
-    }
+    }//
 
 }

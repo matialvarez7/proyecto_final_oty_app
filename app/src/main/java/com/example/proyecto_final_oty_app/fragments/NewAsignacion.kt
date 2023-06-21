@@ -105,14 +105,6 @@ class NewAsignacion : Fragment() {
         confirmarBtn.setOnClickListener {
             val dniIngresado = editDNI.text.toString()
             val invenatrioIngresado = editInventario.text.toString()
-            /*
-            editDNI.text.clear()
-            editInventario.text.clear()
-            nombreCompletoText.text = ""
-            areaText.text = ""
-            nombreEquipoText.text = ""
-            estadoEquipoText.text = ""
-            */
 
             AlertDialog.Builder(context).setTitle("Confirmar asignacion").setMessage("¿Desea confirmar la asignación?")
                 .setPositiveButton(android.R.string.ok) { _, _ ->
@@ -126,7 +118,7 @@ class NewAsignacion : Fragment() {
                                 val idPersonalAsignar = personalEncontrado.id
                                 val idEquipoAsignar = equipoEncontrado.id
                                 val fechaDeCreacion = Calendar.getInstance().time
-                                if (equipoEncontrado.estado == "Disponible") {
+                                if (equipoEncontrado.estado == "Disponible" && equipoEncontrado.nombre.contains("PROFH",ignoreCase = true)) {
                                     viewModel.registrarAsignacion(
                                         idPersonalAsignar,
                                         idEquipoAsignar,

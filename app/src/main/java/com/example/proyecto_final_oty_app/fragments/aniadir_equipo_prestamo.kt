@@ -107,6 +107,11 @@ class AniadirEquipoPrestamo : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedScaner.clearValor()
+    }
+
     fun mostrarDatos() {
         if(sharedViewModel.equipo != null){
             nombreEquipo.text = sharedViewModel.equipo!!.nombre

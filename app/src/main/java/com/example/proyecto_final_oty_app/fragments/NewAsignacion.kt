@@ -154,4 +154,10 @@ class NewAsignacion : Fragment() {
                 .show()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedViewModel.clearValor()
+    }
+
 }

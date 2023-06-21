@@ -133,7 +133,7 @@ class NewEquipo : Fragment() {
                                     nroEquipo.text.toString(),
                                     nroAnet.text.toString()
                                 )
-                                sharedViewModel.clearValor()
+
                                 findNavController().popBackStack()
                             }
                         }
@@ -144,4 +144,10 @@ class NewEquipo : Fragment() {
                 .show()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedViewModel.clearValor()
+    }
+
 }
